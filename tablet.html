@@ -476,12 +476,11 @@
   });
 
   // Sayfa yeniden açıldığında: daha önce giriş yapılmışsa login formunu tekrar
-  // göstermeden devam eder, ama ARAÇ KİMLİĞİNİ OTOMATİK BAŞLATMAZ. Tablet başka bir
-  // araca/şoföre devredilmiş olabilir; önceki şoför "Araç kimliğini değiştir"e
-  // basmadıysa eski kimlikle sessizce konum göndermeye devam etmek, müşteri
-  // sayfasında YANLIŞ/ALAKASIZ bir aracın konumunun görünmesine yol açar (asıl
-  // şikayet buydu). Bu yüzden şoförün ekrandaki kimliği görüp "Başlat"a basarak
-  // onaylamasını (ya da değiştirip öyle başlatmasını) bekliyoruz.
+  // göstermeden devam eder VE kayıtlı bir araç kimliği varsa onay istemeden
+  // doğrudan konum göndermeyi başlatır (şoförün her açılışta "Başlat"a basmasına
+  // gerek kalmaz). Tablet başka bir araca/şoföre devredilirse, önceki şoförün
+  // ekrandaki "Araç kimliğini değiştir" bağlantısına basmış olması gerekir —
+  // aksi halde eski kimlikle göndermeye devam eder.
   auth.onAuthStateChanged((user) => {
     const saved = safeGet("vehicleId");
     if (saved) document.getElementById("vehicleIdInput").value = saved;
@@ -489,10 +488,9 @@
     if (user) {
       document.getElementById("signedOutBox").style.display = "none";
       document.getElementById("signedInBox").style.display = "block";
+      showLoginError("");
       if (saved) {
-        showLoginNotice('Bu tabletin son kullanıldığı araç: "' + saved + '". Doğruysa "Başlat"a basın, değilse önce değiştirip öyle başlatın.');
-      } else {
-        showLoginError("");
+        startTracking();
       }
     } else {
       document.getElementById("signedOutBox").style.display = "block";
