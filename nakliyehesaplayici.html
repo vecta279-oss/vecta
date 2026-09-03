@@ -1240,6 +1240,11 @@ if(el('gasTestBtn')) el('gasTestBtn').addEventListener('click', async ()=>{
 });
 loadGasSettings();
 // Kaydedilen teklifi Drive'a (PDF) ve Sheets'e (Müşteriler satırı) gönderir — kendi durum mesajını yönetir
+// Apps Script'ten dönen { errors: {adim: 'hata metni', ...} } nesnesini ekranda gösterilecek tek satır metne çevirir
+function gasErrorText_(errors){
+  if(!errors) return '';
+  try{ return Object.keys(errors).map(k=>k+': '+errors[k]).join(' | '); }catch(e){ return String(errors); }
+}
 async function sendQuoteToGoogleDrive(q){
   const s=getGasSettings(); const msg=el('quoteSaveMsg');
   if(msg){ msg.style.color='var(--muted)'; msg.textContent='☁ Teklif kaydedildi, Google Drive’a gönderiliyor…'; }
@@ -1255,13 +1260,19 @@ async function sendQuoteToGoogleDrive(q){
     });
     const j=await res.json().catch(()=>null);
     if(msg){
-      if(j && j.ok){ msg.style.color='var(--good)'; msg.textContent='✓ Teklif kaydedildi ve Google Drive’a gönderildi.'; }
-      else{ msg.style.color='var(--danger)'; msg.textContent='⚠ Teklif yerelde kaydedildi ama Drive’a gönderilemedi. Bağlantı ayarlarını kontrol edin.'; }
+      if(j && j.ok && !j.errors){ msg.style.color='var(--good)'; msg.textContent='✓ Teklif kaydedildi ve Google Drive’a gönderildi.'; }
+      else if(j && j.ok && j.errors){
+        // Müşteri satırı gitti ama Alıcı/PDF gibi bir yan adım başarısız oldu — gerçek hatayı göster
+        msg.style.color='var(--danger)'; msg.textContent='⚠ Kısmen gönderildi: '+gasErrorText_(j.errors);
+      }else{
+        msg.style.color='var(--danger)';
+        msg.textContent='⚠ Teklif yerelde kaydedildi ama Drive’a gönderilemedi: '+((j&&(j.error||gasErrorText_(j.errors)))||'Sunucudan geçerli bir yanıt alınamadı — bağlantı ayarlarını kontrol edin.');
+      }
     }
   }catch(err){
-    if(msg){ msg.style.color='var(--danger)'; msg.textContent='⚠ Teklif yerelde kaydedildi ama Drive’a gönderilemedi (bağlantı hatası).'; }
+    if(msg){ msg.style.color='var(--danger)'; msg.textContent='⚠ Teklif yerelde kaydedildi ama Drive’a gönderilemedi (bağlantı hatası): '+(err&&err.message?err.message:err); }
   }
-  setTimeout(()=>{ if(msg) msg.textContent=''; },5000);
+  setTimeout(()=>{ if(msg) msg.textContent=''; },9000);
 }
 // PDF olarak kaydet — teklifi "Verilen Teklifler"e kaydeder, numarayı bir artırır ve
 // bağlantı kuruluysa Google Drive/Sheets'e otomatik gönderir
@@ -1645,10 +1656,13 @@ function ykStart(){
             })
           });
           const j=await res.json().catch(()=>null);
-          ykFormOk.textContent = (j && j.ok) ? 'Kayıt eklendi ve Google Drive’a gönderildi.' : 'Kayıt eklendi, ancak Drive’a gönderilemedi. Bağlantı ayarlarını kontrol edin.';
+          if(j && j.ok && !j.errors){ ykFormOk.textContent='Kayıt eklendi ve Google Drive’a gönderildi.'; }
+          else{
+            ykFormOk.textContent='Kayıt eklendi, ancak Drive’a gönderilemedi: '+((j&&(j.error||gasErrorText_(j.errors)))||'Sunucudan geçerli bir yanıt alınamadı — bağlantı ayarlarını kontrol edin.');
+          }
         }catch(gasErr){
           console.error('Yük Kontrol Drive gönderimi başarısız:', gasErr);
-          ykFormOk.textContent='Kayıt eklendi, ancak Drive’a gönderilemedi (bağlantı hatası).';
+          ykFormOk.textContent='Kayıt eklendi, ancak Drive’a gönderilemedi (bağlantı hatası): '+(gasErr&&gasErr.message?gasErr.message:gasErr);
         }
       }
 
