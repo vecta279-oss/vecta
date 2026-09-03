@@ -237,8 +237,30 @@
     try { localStorage.removeItem(key); } catch (e) {}
   }
 
+  // Bu tarayıcıya/tablete özel, kalıcı bir tanı kimliği: aynı araç kimliği (plaka/kod)
+  // yanlışlıkla birden fazla tablette kullanılırsa, konum kaydına "cihaz" alanı olarak
+  // eklenir — böylece ileride "bu konum hangi tabletten geldi" diye bakılabilir.
+  function getOrCreateDeviceId() {
+    let id = safeGet("cihazId");
+    if (!id) {
+      id = "C-" + Math.random().toString(36).slice(2, 8).toUpperCase() + Date.now().toString(36).toUpperCase();
+      safeSet("cihazId", id);
+    }
+    return id;
+  }
+  const deviceId = getOrCreateDeviceId();
+
   function showLoginError(msg) {
-    document.getElementById("loginError").textContent = msg || "";
+    const el = document.getElementById("loginError");
+    el.style.color = "#c0392b";
+    el.textContent = msg || "";
+  }
+  // showLoginError ile AYNI alanı kullanır ama kırmızı değil, nötr renkte gösterir —
+  // bu bir hata değil, şoförün onaylaması gereken bir bilgi notudur.
+  function showLoginNotice(msg) {
+    const el = document.getElementById("loginError");
+    el.style.color = "var(--ink-mid)";
+    el.textContent = msg || "";
   }
 
   function resetVehicle() {
@@ -405,13 +427,16 @@
         const now = Date.now();
 
         // "simdi": her güncellemede üzerine yazılan, müşteri sayfasının okuduğu anlık konum.
+        // "cihaz" alanı tanı amaçlıdır: aynı araç kimliği yanlışlıkla iki farklı tablette
+        // kullanılırsa, hangi tabletin en son yazdığını görebilmek için eklendi.
         db.ref("araclar/" + vehicleId + "/simdi").set({
           lat: latitude,
           lng: longitude,
           dogruluk: Math.round(accuracy || 0),
           hiz: speed || 0,
           yon: heading || 0,
-          zaman: now
+          zaman: now,
+          cihaz: deviceId
         }).then(() => {
           setStatus("ok", "Konum gönderiliyor");
         }).catch((err) => {
@@ -450,8 +475,13 @@
     if (document.visibilityState === "visible") requestWakeLock();
   });
 
-  // Sayfa yeniden açıldığında: daha önce giriş yapılmışsa ve araç kimliği kayıtlıysa
-  // login formunu tekrar göstermeden otomatik devam et.
+  // Sayfa yeniden açıldığında: daha önce giriş yapılmışsa login formunu tekrar
+  // göstermeden devam eder, ama ARAÇ KİMLİĞİNİ OTOMATİK BAŞLATMAZ. Tablet başka bir
+  // araca/şoföre devredilmiş olabilir; önceki şoför "Araç kimliğini değiştir"e
+  // basmadıysa eski kimlikle sessizce konum göndermeye devam etmek, müşteri
+  // sayfasında YANLIŞ/ALAKASIZ bir aracın konumunun görünmesine yol açar (asıl
+  // şikayet buydu). Bu yüzden şoförün ekrandaki kimliği görüp "Başlat"a basarak
+  // onaylamasını (ya da değiştirip öyle başlatmasını) bekliyoruz.
   auth.onAuthStateChanged((user) => {
     const saved = safeGet("vehicleId");
     if (saved) document.getElementById("vehicleIdInput").value = saved;
@@ -459,8 +489,11 @@
     if (user) {
       document.getElementById("signedOutBox").style.display = "none";
       document.getElementById("signedInBox").style.display = "block";
-      showLoginError("");
-      if (saved) startTracking();
+      if (saved) {
+        showLoginNotice('Bu tabletin son kullanıldığı araç: "' + saved + '". Doğruysa "Başlat"a basın, değilse önce değiştirip öyle başlatın.');
+      } else {
+        showLoginError("");
+      }
     } else {
       document.getElementById("signedOutBox").style.display = "block";
       document.getElementById("signedInBox").style.display = "none";
