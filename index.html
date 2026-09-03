@@ -46,7 +46,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 
 /* ===== TOP BAR ===== */
 .topbar{background:var(--black);color:#EDEDED;font-size:13px}
-.topbar .wrap{display:flex;align-items:center;gap:20px;height:42px}
+.topbar .wrap{display:flex;align-items:center;gap:20px;height:42px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.topbar .wrap::-webkit-scrollbar{display:none}
+.topbar .wrap>*{flex-shrink:0}
 .topbar .live{display:inline-flex;align-items:center;gap:8px;color:var(--orange);font-weight:600}
 .topbar .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px rgba(245,130,32,.9);animation:beat 2.2s infinite}
 @keyframes beat{0%,100%{opacity:1}50%{opacity:.35}}
@@ -211,13 +213,20 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   .svc-grid,.steps{grid-template-columns:1fr 1fr}
   .stats .wrap{grid-template-columns:1fr 1fr;gap:32px 24px}
   .cta{grid-template-columns:1fr;padding:44px 34px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:32px}
 }
 @media(max-width:720px){
   .navlinks{display:none}.burger{display:flex}
-  .topbar a.tphone{display:none}
+  .topbar a.tphone,.topbar .tb-hide-md{display:none}
+  .topbar .tb-hide-sm{display:none}
   .svc-grid,.steps,.cov-grid,.stats .wrap{grid-template-columns:1fr}
   .sect{padding:60px 0}
   .cta{padding:36px 26px}
+}
+@media(max-width:480px){
+  .topbar .tb-hide-xs{display:none}
+  .foot-grid{grid-template-columns:1fr;gap:30px}
+  .foot-bot{justify-content:center;text-align:center}
 }
 
 /* ===== WHATSAPP ===== */
@@ -266,7 +275,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .ai-chips button{background:var(--card);border:1px solid var(--line-2);color:var(--ink-2);font-family:var(--font);font-weight:600;font-size:12.5px;padding:8px 12px;border-radius:20px;cursor:pointer;transition:.18s}
 .ai-chips button:hover{border-color:var(--orange);color:var(--orange-deep);background:var(--orange-soft)}
 .ai-input{display:flex;gap:9px;padding:13px 14px;border-top:1px solid var(--line);background:var(--card)}
-.ai-input input{flex:1;min-width:0;border:1.5px solid var(--line-2);border-radius:12px;padding:12px 14px;font-family:var(--font);font-size:14.5px;color:var(--ink);background:var(--bg);outline:none;transition:.18s}
+.ai-input input{flex:1;min-width:0;border:1.5px solid var(--line-2);border-radius:12px;padding:12px 14px;font-family:var(--font);font-size:16px;color:var(--ink);background:var(--bg);outline:none;transition:.18s}
 .ai-input input:focus{border-color:var(--orange)}
 .ai-input button{background:var(--orange);color:#fff;border:none;border-radius:12px;padding:0 18px;font-family:var(--font);font-weight:700;font-size:14.5px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.2s}
 .ai-input button:hover{background:var(--orange-deep)}
@@ -300,7 +309,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .lg-field{margin-bottom:15px}
 .lg-field label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.02em;color:var(--ink-2);margin-bottom:7px}
 .lg-field input{width:100%;border:1.5px solid var(--line-2);border-radius:11px;padding:12px 14px;
-  font-family:var(--font);font-size:15px;color:var(--ink);background:var(--bg);outline:none;transition:.18s}
+  font-family:var(--font);font-size:16px;color:var(--ink);background:var(--bg);outline:none;transition:.18s}
 .lg-field input:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft)}
 .lg-err{display:none;background:rgba(217,60,40,.08);border:1px solid rgba(217,60,40,.3);color:#c0392b;
   border-radius:10px;padding:10px 13px;font-size:13.5px;font-weight:600;margin-bottom:14px}
@@ -318,14 +327,14 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="wrap">
-    <span class="live"><span class="dot"></span> Sevkiyat aktif</span>
-    <span class="sep">·</span>
-    <span>Bursa &amp; Afyon, 7/24 açık</span>
+    <span class="live tb-hide-sm"><span class="dot"></span> Sevkiyat aktif</span>
+    <span class="sep tb-hide-sm">·</span>
+    <span class="tb-hide-sm">Bursa &amp; Afyon, 7/24 açık</span>
     <span class="push"></span>
     <a href="musteri.html" style="color:var(--orange);font-weight:700">📦 Sipariş Takip</a>
-    <span class="sep">·</span>
-    <a href="mailto:vectalojistik@gmail.com">vectalojistik@gmail.com</a>
-    <span class="sep">·</span>
+    <span class="sep tb-hide-xs">·</span>
+    <a class="tb-hide-xs" href="mailto:vectalojistik@gmail.com">vectalojistik@gmail.com</a>
+    <span class="sep tb-hide-md">·</span>
     <a class="tphone" href="tel:+905326804420">0532 680 44 20</a>
   </div>
 </div>
