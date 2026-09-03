@@ -100,21 +100,12 @@
   <div id="setupScreen" class="setup">
     <h1>Tablet Girişi</h1>
 
-    <div id="signedOutBox">
+    <div id="signedOutBox" style="display:none">
       <p class="row">Devam etmek için tablet şifresini girin.</p>
       <form id="pinForm">
         <input id="pinInput" type="password" inputmode="numeric" pattern="[0-9]*" placeholder="Şifre" autocomplete="off">
         <button type="submit">Giriş Yap</button>
       </form>
-    </div>
-
-    <div id="signedInBox" style="display:none">
-      <p class="row">Giriş yapıldı.</p>
-      <p class="row">Bu tablet hangi araca ait? (plaka veya sipariş kodu)</p>
-      <div>
-        <input id="vehicleIdInput" placeholder="34 ABC 123">
-        <button onclick="startTracking()">Başlat</button>
-      </div>
     </div>
 
     <div class="row" id="loginError" style="color:#c0392b; min-height: 1.2em;"></div>
@@ -140,7 +131,7 @@
       <div id="orderMsg"></div>
     </div>
 
-    <div class="change-link" onclick="resetVehicle()">Araç kimliğini değiştir</div>
+    <div class="change-link" onclick="resetVehicle()">Sıfırla (şifreyi tekrar gir)</div>
   </div>
 
   <div class="hint">
@@ -221,6 +212,11 @@
       .slice(0, 64);
   }
 
+  // Bu tablet tek bir araca sabittir — araç kimliği burada bir kere ayarlanır,
+  // sürücüye bir daha hiç sorulmaz. Farklı bir araç/plaka için sadece bu satırı
+  // değiştirip dosyayı yeniden kaydedin.
+  const FIXED_VEHICLE_ID = safeFirebaseKey("001");
+
   let vehicleId = null;
   let watchId = null;
   let ordersQuery = null; // watchOrders() ile açılan dinleyicinin tam referansı
@@ -269,9 +265,8 @@
     if (ordersQuery) ordersQuery.off(); // watchOrders()'ın açtığı tam sorguyu kapat
     ordersQuery = null;
     vehicleId = null;
-    safeRemove("vehicleId");
+    safeRemove("tabletPin");
     auth.signOut();
-    document.getElementById("vehicleIdInput").value = "";
     document.getElementById("trackingScreen").style.display = "none";
     document.getElementById("setupScreen").style.display = "block";
   }
@@ -365,6 +360,9 @@
       .then(() => {
         pinInput.value = "";
         showLoginError("");
+        // Şifreyi bu tablette hatırla: bir daha asla şifre/araç ekranı göstermeden
+        // doğrudan konum gönderme sayfasına geçmek için.
+        safeSet("tabletPin", pin);
       })
       .catch((err) => {
         if (err && (err.code === "auth/wrong-password" || err.code === "auth/invalid-credential" || err.code === "auth/invalid-login-credentials")) {
@@ -380,19 +378,14 @@
   });
 
   async function startTracking() {
-    const vehicleInput = document.getElementById("vehicleIdInput");
-    const id = safeFirebaseKey(vehicleInput.value);
-
     if (!auth.currentUser) {
       showLoginError("Önce şifreyle giriş yapmalısınız.");
       return;
     }
-    if (!id) { showLoginError("Geçersiz araç kimliği/plaka."); vehicleInput.focus(); return; }
 
     showLoginError("");
-    vehicleId = id;
-    safeSet("vehicleId", id);
-    document.getElementById("plakaLabel").textContent = id;
+    vehicleId = FIXED_VEHICLE_ID;
+    document.getElementById("plakaLabel").textContent = vehicleId;
     document.getElementById("setupScreen").style.display = "none";
     document.getElementById("trackingScreen").style.display = "block";
     requestWakeLock();
@@ -475,26 +468,37 @@
     if (document.visibilityState === "visible") requestWakeLock();
   });
 
-  // Sayfa yeniden açıldığında: daha önce giriş yapılmışsa login formunu tekrar
-  // göstermeden devam eder VE kayıtlı bir araç kimliği varsa onay istemeden
-  // doğrudan konum göndermeyi başlatır (şoförün her açılışta "Başlat"a basmasına
-  // gerek kalmaz). Tablet başka bir araca/şoföre devredilirse, önceki şoförün
-  // ekrandaki "Araç kimliğini değiştir" bağlantısına basmış olması gerekir —
-  // aksi halde eski kimlikle göndermeye devam eder.
-  auth.onAuthStateChanged((user) => {
-    const saved = safeGet("vehicleId");
-    if (saved) document.getElementById("vehicleIdInput").value = saved;
+  // Daha önce bu tablette başarıyla giriş yapılmışsa şifre bu cihazda hatırlanır
+  // (bkz. pinForm submit) ve otomatik olarak, hiçbir ekran göstermeden tekrar
+  // giriş yapılır. Sadece hiç kayıtlı şifre yoksa (ilk kurulum) ya da kayıtlı
+  // şifre artık geçersizse (yönetici değiştirmiş) form gösterilir.
+  let autoLoginInFlight = false;
+  function tryAutoLogin() {
+    const savedPin = safeGet("tabletPin");
+    if (!savedPin || autoLoginInFlight) return false;
+    autoLoginInFlight = true;
+    document.getElementById("signedOutBox").style.display = "none";
+    auth.signInWithEmailAndPassword(VECTA_FIXED_EMAIL, pinToPassword(savedPin))
+      .catch(() => {
+        // Kayıtlı şifre artık geçersiz — formu göster, tekrar girmesi gereksin.
+        safeRemove("tabletPin");
+        document.getElementById("signedOutBox").style.display = "block";
+        showLoginError("Kayıtlı giriş artık geçerli değil. Şifreyi tekrar girin.");
+      })
+      .finally(() => { autoLoginInFlight = false; });
+    return true;
+  }
 
+  // Sayfa yeniden açıldığında: giriş yapılmışsa (otomatik ya da daha önceden),
+  // araç sabit olduğu için hiçbir ekran/onay göstermeden doğrudan konum
+  // göndermeyi başlatır.
+  auth.onAuthStateChanged((user) => {
     if (user) {
       document.getElementById("signedOutBox").style.display = "none";
-      document.getElementById("signedInBox").style.display = "block";
       showLoginError("");
-      if (saved) {
-        startTracking();
-      }
-    } else {
+      startTracking();
+    } else if (!tryAutoLogin()) {
       document.getElementById("signedOutBox").style.display = "block";
-      document.getElementById("signedInBox").style.display = "none";
     }
   });
 </script>
