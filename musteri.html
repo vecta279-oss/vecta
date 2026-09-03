@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VECTA — Aracınızı Canlı Takip Edin</title>
+<meta name="theme-color" content="#474C53">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAzQElEQVR42u2deZxcVZn3f88599bW1fuadMhCFiEhYQkCMkiHRcWFV1S6nRlHGVwAUVBRR5SlugKOMqAOKrsj48K8Y9eoqIyi4CStOAQkLIGEAJ2EdJJOpzud7vRS253nPO8fdatzu9Ld6fSSBN7z/XzuJ52qW7fO8pznPM9znnMKMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMhsPj/wGJd1Q+59xRxgAAAABJRU5ErkJggg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root {
+    color-scheme: light;
+    --orange:#F58220; --orange-deep:#D96A00;
+    --black:#474C53;
+    --ink:#2C3037; --ink-2:#5C616A; --ink-3:#8A8F98;
+    --bg:#FFFFFF; --bg-2:#F1F2F4;
+    --line:rgba(44,48,55,.10); --line-2:rgba(44,48,55,.16);
+    --err:#c0392b;
+    --font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --sh-m:0 2px 6px rgba(20,20,20,.06), 0 26px 50px -26px rgba(20,20,20,.34);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; font-family: var(--font); background: var(--bg); color: var(--ink); }
+  #map { position: absolute; inset: 0; }
+  .panel {
+    position: absolute; top: 14px; left: 14px; right: 14px; z-index: 1000;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px;
+    box-shadow: var(--sh-m); max-width: 360px;
+    font-size: .95rem;
+  }
+  .eyebrow {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--orange-deep); margin-bottom: 6px;
+  }
+  .eyebrow .bar { width: 18px; height: 2px; background: var(--orange); border-radius: 2px; }
+  .panel h1 { font-size: 1rem; font-weight: 700; letter-spacing: -.01em; margin: 0 0 6px; color: var(--ink); }
+  .panel .plaka { font-weight: 800; font-size: 1.15rem; color: var(--ink); }
+  .freshness { display: flex; align-items: center; gap: 7px; margin-top: 8px; }
+  @keyframes beat { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-3); }
+  .dot.live { background: var(--orange); box-shadow: 0 0 10px rgba(245,130,32,.8); animation: beat 2.2s infinite; }
+  .dot.stale { background: #d9a441; }
+  .dot.dead { background: var(--err); }
+  #freshText { color: var(--ink-2); }
+  .msg {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 24px; font-size: 1.05rem; color: var(--ink-2); z-index: 900;
+    font-family: var(--font); background: var(--bg-2);
+  }
+  #lookupScreen {
+    position: fixed; inset: 0; z-index: 2000; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+  #lookupScreen .card {
+    max-width: 420px; width: 100%; text-align: center;
+  }
+  #lookupScreen .eyebrow { justify-content: center; }
+  #lookupScreen h1 { font-size: 1.5rem; margin: 6px 0 8px; }
+  #lookupScreen p { color: var(--ink-2); font-size: .98rem; margin: 0 0 22px; }
+  #lookupForm { display: flex; gap: 10px; }
+  #lookupInput {
+    flex: 1; font-family: var(--font); font-size: 1.05rem; padding: 13px 16px; border-radius: 12px;
+    border: 1.5px solid var(--line-2); background: var(--bg); color: var(--ink); text-align: center;
+  }
+  #lookupInput:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; border-color: var(--orange); }
+  #lookupForm button {
+    font-family: var(--font); font-weight: 600; font-size: 1rem; padding: 13px 22px;
+    border-radius: 12px; border: none; background: var(--orange); color: #fff; cursor: pointer;
+    box-shadow: 0 14px 30px -14px rgba(245,130,32,.9); transition: .2s;
+  }
+  #lookupForm button:hover { background: var(--orange-deep); }
+  #lookupError { color: var(--err); font-size: .9rem; min-height: 1.2em; margin-top: 14px; }
+
+  #deliveredScreen {
+    position: fixed; inset: 0; z-index: 2000; background: var(--bg);
+    display: none; align-items: center; justify-content: center; padding: 24px;
+  }
+  #deliveredScreen .card { max-width: 420px; width: 100%; text-align: center; }
+  #deliveredScreen .eyebrow { justify-content: center; }
+  #deliveredScreen .check {
+    width: 60px; height: 60px; border-radius: 50%; background: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    margin: 6px auto 18px; font-size: 28px; color: #fff;
+  }
+  #deliveredScreen h1 { font-size: 1.4rem; margin: 0 0 10px; }
+  #deliveredScreen p { color: var(--ink-2); font-size: .98rem; }
+
+  #recenterBtn {
+    position: absolute; right: 14px; bottom: 24px; z-index: 1000;
+    width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line);
+    background: var(--bg); box-shadow: var(--sh-m); font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; padding: 0;
+  }
+  #recenterBtn.hidden-follow { opacity: .5; }
+</style>
+</head>
+<body>
+
+<div id="lookupScreen">
+  <div class="card">
+    <div class="eyebrow"><span class="bar"></span>VECTA Taşımacılık &amp; Lojistik</div>
+    <h1>Siparişinizi Takip Edin</h1>
+    <p>Teklif/sipariş numaranızın son 3 hanesini ya da tarafınıza iletilen tam takip kodunu girin.</p>
+    <form id="lookupForm">
+      <input id="lookupInput" placeholder="Örn. 001" autofocus autocapitalize="characters">
+      <button type="submit">Sorgula</button>
+    </form>
+    <div id="lookupError"></div>
+  </div>
+</div>
+
+<div id="deliveredScreen">
+  <div class="card">
+    <div class="eyebrow"><span class="bar"></span>VECTA Taşımacılık &amp; Lojistik</div>
+    <div class="check">✓</div>
+    <h1>Kargonuz Teslim Edildi</h1>
+    <p id="deliveredTime"></p>
+  </div>
+</div>
+
+<div class="panel" style="display:none" id="trackingPanel">
+  <div class="eyebrow"><span class="bar"></span>VECTA Taşımacılık &amp; Lojistik</div>
+  <h1>Sipariş / Araç Takibi</h1>
+  <div class="plaka" id="plakaLabel">—</div>
+  <div class="freshness">
+    <span class="dot" id="freshDot"></span>
+    <span id="freshText">Bağlanıyor...</span>
+  </div>
+</div>
+
+<div id="map"></div>
+<button id="recenterBtn" type="button" style="display:none" title="Aracı haritada ortala">📍</button>
+<div class="msg" id="emptyMsg" style="display:none">Bu araç için henüz konum verisi yok.</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+<script>
+  // Tablet.html ile AYNI Firebase proje bilgilerini buraya yapıştırın.
+  const firebaseConfig = {
+    apiKey: "AIzaSyAGEdGOcgDDR2jTeX0FsnmGmT5iy44Nst4",
+    authDomain: "aractakip-252d3.firebaseapp.com",
+    databaseURL: "https://aractakip-252d3-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "aractakip-252d3",
+    storageBucket: "aractakip-252d3.firebasestorage.app",
+    messagingSenderId: "988984484156",
+    appId: "1:988984484156:web:4d8693379ef502613d7e39"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  // Linkteki ?arac=KOD parametresi artık iki şekilde okunabilir:
+  // 1) "siparisler" tablosunda kayıtlı bir sipariş kodu (önerilen yöntem —
+  //    müşteriye gerçek plaka değil, bu kod verilir).
+  // 2) Bulunamazsa doğrudan bir araç kimliği/plakası olarak kabul edilir
+  //    (eski/basit kullanım, geriye dönük uyumluluk için).
+  const params = new URLSearchParams(window.location.search);
+  // Firebase Realtime Database anahtarlarinda ".", "#", "$", "[", "]" karakterleri
+  // gecersizdir ve ref() bu karakterlerle senkron bicimde hata firlatir; ayrica "/"
+  // karakteri istemeden ic ice (nested) bir yola erisime yol acabilir. Kullanicidan
+  // gelen degeri her zaman bu karakterlerden aritiyoruz. Buyuk/kucuk harf ve
+  // ardisik bosluklari da normalize ediyoruz (tablet.html ile AYNI kural) —
+  // aksi halde "34ABC123" ile "34 abc 123" iki farkli Firebase anahtarina
+  // ayrilir ve arac, oldugundan farkli/eski bir yerde gorunur.
+  function safeFirebaseKey(v){
+    return String(v == null ? "" : v)
+      .trim()
+      .replace(/[.#$\[\]\/]/g, "")
+      .replace(/\s+/g, " ")
+      .toUpperCase()
+      .slice(0, 64);
+  }
+  const rawCode = safeFirebaseKey(params.get("arac"));
+
+  let vehicleId = null; // sipariş kodu çözüldükten sonra belirlenir
+
+  const plakaLabel = document.getElementById("plakaLabel");
+  const freshDot = document.getElementById("freshDot");
+  const freshText = document.getElementById("freshText");
+  const emptyMsg = document.getElementById("emptyMsg");
+  const lookupScreen = document.getElementById("lookupScreen");
+  const lookupForm = document.getElementById("lookupForm");
+  const lookupInput = document.getElementById("lookupInput");
+  const lookupError = document.getElementById("lookupError");
+  const trackingPanel = document.getElementById("trackingPanel");
+  const deliveredScreen = document.getElementById("deliveredScreen");
+  const deliveredTime = document.getElementById("deliveredTime");
+  const recenterBtn = document.getElementById("recenterBtn");
+
+  lookupForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const code = (lookupInput.value || "").trim().replace(/\s+/g, "");
+    if (!code) {
+      lookupError.textContent = "Lütfen takip kodunu/plakayı girin.";
+      lookupInput.focus();
+      return;
+    }
+    // Aynı sayfayı ?arac= parametresiyle yeniden yükle
+    window.location.search = "?arac=" + encodeURIComponent(code);
+  });
+
+  let map, marker, routeLine;
+  let routeCoords = [];
+  let firstFix = true;
+  let followMode = true; // true iken harita her konum güncellemesinde aracı otomatik takip eder
+  let lastPos = null; // en son bilinen [lat, lng] — "benim konumuma dön" butonu için
+
+  function showDelivered(ts) {
+    lookupScreen.style.display = "none";
+    trackingPanel.style.display = "none";
+    emptyMsg.style.display = "none";
+    deliveredScreen.style.display = "flex";
+    deliveredTime.textContent = ts
+      ? "Teslim zamanı: " + new Date(ts).toLocaleString("tr-TR")
+      : "";
+  }
+
+  function showTracking(resolvedVehicleId, displayCode) {
+    vehicleId = resolvedVehicleId;
+    lookupScreen.style.display = "none";
+    deliveredScreen.style.display = "none";
+    trackingPanel.style.display = "block";
+    plakaLabel.textContent = displayCode || rawCode; // müşteriye kendi koduysa onu göster, plakayı değil
+    if (!map) initMap();
+  }
+
+  function watchOrderDelivery(kod) {
+    // Sayfa açık kalırken teslim işaretlenirse anında yansıt.
+    db.ref("siparisler/" + kod).on("value", (s) => {
+      const o = s.val();
+      if (o && o.durum === "teslim_edildi") showDelivered(o.teslimZamani);
+    });
+  }
+
+  function handleOrder(kod, order) {
+    if (order.durum === "teslim_edildi") {
+      showDelivered(order.teslimZamani);
+    } else {
+      showTracking(safeFirebaseKey(order.arac), kod);
+    }
+    watchOrderDelivery(kod);
+  }
+
+  if (!rawCode) {
+    // Kod linkte yoksa (örn. sitenin üst barındaki "Sipariş Takip" linkinden gelindiyse)
+    // müşterinin kendi kodunu girebileceği arama ekranını göster.
+    lookupScreen.style.display = "flex";
+  } else {
+    try {
+      db.ref("siparisler/" + rawCode).once("value").then((snap) => {
+        const order = snap.val();
+        if (order && order.arac) {
+          handleOrder(rawCode, order);
+          return;
+        }
+
+        // Tam kod olarak bulunamadı: girilen değer (örn. teklif/sipariş
+        // numarasının SON 3 HANESİ) kayıtlı sipariş kodlarından birinin
+        // sonuna denk geliyor mu diye bakılır. "siparisler" düğümü herkese
+        // açık okunabilir (bkz. database.rules.json) ve sadece durum + araç
+        // kimliği içerir — kişisel veri yoktur, bu yüzden bu tarama güvenli.
+        db.ref("siparisler").once("value").then((allSnap) => {
+          const all = allSnap.val() || {};
+          const upper = rawCode.toUpperCase();
+          const matches = Object.entries(all).filter(([kod, o]) =>
+            o && o.arac && kod.toUpperCase().endsWith(upper)
+          );
+          if (matches.length === 1) {
+            handleOrder(matches[0][0], matches[0][1]);
+          } else if (matches.length > 1) {
+            lookupScreen.style.display = "flex";
+            lookupError.textContent = "Bu kod birden fazla siparişle eşleşiyor. Lütfen firmamızla iletişime geçin.";
+          } else {
+            // Sipariş kodu olarak bulunamadı: doğrudan araç kimliği/plaka olarak dene.
+            showTracking(rawCode, rawCode);
+          }
+        }).catch(() => {
+          showTracking(rawCode, rawCode);
+        });
+      }).catch(() => {
+        showTracking(rawCode, rawCode);
+      });
+    } catch (e) {
+      // Geçersiz karakter vb. nedenlerle ref() senkron hata verirse sayfa çökmesin.
+      lookupScreen.style.display = "flex";
+      lookupError.textContent = "Geçersiz kod. Lütfen tekrar deneyin.";
+    }
+  }
+
+  function initMap() {
+    if (!vehicleId) { emptyMsg.style.display = "flex"; return; }
+    map = L.map("map").setView([41.015, 28.979], 12); // varsayılan: İstanbul
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap katkıda bulunanlar"
+    }).addTo(map);
+
+    const carIcon = L.divIcon({
+      html: '<div style="width:36px;height:36px;border-radius:50%;background:#F58220;' +
+            'display:flex;align-items:center;justify-content:center;font-size:17px;' +
+            'box-shadow:0 6px 16px rgba(217,106,0,.45);border:2.5px solid #fff;">🚚</div>',
+      className: "",
+      iconSize: [36, 36],
+      iconAnchor: [18, 18]
+    });
+    marker = L.marker([41.015, 28.979], { icon: carIcon });
+    routeLine = L.polyline([], { color: "#F58220", weight: 4, opacity: 0.7 }).addTo(map);
+
+    // Kullanıcı haritayı elle sürüklerse otomatik takibi durdur — aksi halde
+    // her konum güncellemesinde harita onun altından "kayar". "📍" butonuyla
+    // tekrar açılabilir.
+    map.on("dragstart", () => {
+      followMode = false;
+      recenterBtn.classList.remove("hidden-follow");
+    });
+
+    recenterBtn.addEventListener("click", () => {
+      followMode = true;
+      recenterBtn.classList.add("hidden-follow");
+      if (lastPos) map.setView(lastPos, Math.max(map.getZoom(), 16));
+    });
+
+    // Anlık konum (her güncellemede üzerine yazılan tek kayıt)
+    db.ref("araclar/" + vehicleId + "/simdi").on("value", (snap) => {
+      const data = snap.val();
+      if (!data) {
+        emptyMsg.style.display = "flex";
+        return;
+      }
+      emptyMsg.style.display = "none";
+
+      const pos = [data.lat, data.lng];
+      lastPos = pos;
+      recenterBtn.style.display = "flex";
+      if (!map.hasLayer(marker)) marker.addTo(map);
+      marker.setLatLng(pos);
+
+      if (firstFix) {
+        map.setView(pos, 16);
+        firstFix = false;
+      } else if (followMode) {
+        // Araç hareket ettikçe haritayı onunla birlikte kaydır — böylece
+        // marker her zaman görünür alanda, "aracın konumumun üstünde" kalır.
+        map.panTo(pos);
+      }
+
+      updateFreshness(data.zaman);
+    });
+
+    // Rota geçmişi: son 500 noktayı çizgi olarak çiz, yenileri geldikçe ekle
+    db.ref("araclar/" + vehicleId + "/gecmis").limitToLast(500).on("child_added", (snap) => {
+      const d = snap.val();
+      if (!d) return;
+      routeCoords.push([d.lat, d.lng]);
+      routeLine.setLatLngs(routeCoords);
+    });
+  }
+
+  function updateFreshness(ts) {
+    if (!ts) return;
+    const secondsAgo = Math.round((Date.now() - ts) / 1000);
+
+    let cls = "live", text;
+    if (secondsAgo < 30) {
+      cls = "live"; text = "Canlı — az önce güncellendi";
+    } else if (secondsAgo < 180) {
+      cls = "stale"; text = secondsAgo + " saniye önce güncellendi";
+    } else {
+      cls = "dead"; text = "Bağlantı kesilmiş olabilir (" + Math.round(secondsAgo/60) + " dk önce)";
+    }
+    freshDot.className = "dot " + cls;
+    freshText.textContent = text;
+  }
+
+  // Panel metnini her saniye tazele (son güncellemeden bu yana geçen süre için)
+  setInterval(() => {
+    if (!vehicleId) return;
+    db.ref("araclar/" + vehicleId + "/simdi").once("value", (snap) => {
+      const data = snap.val();
+      if (data) updateFreshness(data.zaman);
+    });
+  }, 5000);
+</script>
+</body>
+</html>

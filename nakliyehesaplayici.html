@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>VECTA · Nakliye Teklif Hesaplayıcı</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAzQElEQVR42u2deZxcVZn3f88599bW1fuadMhCFiEhYQkCMkiHRcWFV1S6nRlHGVwAUVBRR5SlugKOMqAOKrsj48K8Y9eoqIyi4CStOAQkLIGEAJ2EdJJOpzud7vRS273nPO8fdatzu9Ld6fSSBN7z/XzuJ52qW7fO8pznPM9znnMKMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDEcKBogZdFTLwCDG0S2DYUahmepjK/9HLAbRvAxETVAggGMQAEBx6CNVy1gMohkAUe47mSHQPLIMDBBiDRLLWvmIFGpjAwGtejLtwAxKNDWKxqVdBLQCy8DTVqbmVkV04HktjZCNS0HT9h1TLM+YgtwCIZqgyBPlGZEz/0j54he/WPTQ9X9f7u+UI6WV839/J3ZZ2Ze//PHiUd47alp7ou3ADFoTa7DyHTXTs+mR7KOJaN4Jlly0xBorbhu9j6emoZlBROAnYw3zF9t7bwF+8zahEer956XPb8pUf4modXMsBhGfQU3NMQgi6HWxhjkLre5/BT95FhXr7PW3nrh+m1NzE1Hr5pZGyKYEVOzqxujHa1/5B6j0MlZsSQLPRIcSgRlAIBjYucstbiFa15ZvqzGFq6VRECUU0OoCQMtXL6peZHUurRbqLS671cSoJHaDxFpgMvJOGhpCCxnYtjk56z/o9sc7Yl7bvXLTaW8PW+l36WymUpBgHAEhJwIrgKUdfOXJvtk/bfrOH/aN1kbMIDSDVq2Nif+44OexoFh8MRTVoBjpK2494ZVXk8U3Ef31GY5BTFVTEzNobfPKyhVycF1FkbvQSWtoZgRDAj2pwOvPDdWffmHwj71oBk9gSpmclmmB+Pf/vsy++Ph1T1ZG3VMyKQVBBDso0Jey9mxNV5x5mvXkjt/tu8g+tfL1R+pK3QuR1cOtCvZ0A/v0ROFro+kPHuc1PmCU7U/K7q2Z8r859Zan2tAMKmx0f0c8dN37qs4ubr80LDIfCJA6PSC4oihIyA2PAz08/MXk+14UlP/g3sq9bhH2DsjXXuJZ566Kt+7ZHDvlQ/NDQ4mQ1AeeTQV1wjhtQ6O0xaHaZvjzDNgC3YPy6bWddRc03tU65H398LdyS6OkpoRqv3nZt46ryF6nki60BpiAQBDoSwW6X06Vn/o2e93uqZofFhH4lZvdD1WE1cLBQZVhUIBAcIa0UxnJzj9R7/4OxfAxXtYogYSa9mHe0iioKaFejz1zW2XEPWVwSGXBZANAxlXZsiLUVrv9H6U4bt1wY/cFtSH3wmS/42gSlNNCM2wyEjulEVTX6cHLifA1jjVIoFX7bVeKQy1tjAV+t/zhL5TL164ptlU9WCPraDiaeCjFyisqjS5lh4tyq6K0ePFAzyUE3LtXpL8SEi4GUpwlkMSRNqPTjqqO4IzTqnvfSYRfrIk1WIjnZilugaSmhHopdtr5NYH9X0j1K0eBBBiCAWQUO2VBp3q+6v8+NdMH1sTOtfzte7gIAAiQngVoTQQpCEQEIqLAUFKr2kD2o5tvOuX91JRQ3AI5rbLsjdyNN53x9tpA5vOpjHIBsskrAwgSgAoItw4AKu3MIpLQmogoNxjlTF9gsqGYtevOBwA0jxTmpgTUmusbFv3l5J/9z9zI0DeDnKkfSLlqMM0qqyivLq3pLC9ISIC1IDUPIBBUuXKJieiItMlB5YGQYNasneMBYBVaD5gaG8EPf/ns4lnW4L0WaXJBkgBJBBIEEqDAUEa7deHsJa/cfPJl58Vb3anImQCAvnRgrXKFKJiowETEWnGdPXT3r697XxU2gmPT5Owwgxo3JvjHX/yHojqr7z6blHQ1jSwDM0GR7FdFT3r/VWASR1T75OYBLQTnBDnhOWKxmGhKQK376jlLVxZ3rimzs38zOOQ4GUUsiPKdPVN2LHvxVQUwhICGYD7y4Y0R5SELws39tyH3T3ODpDj0qaH936gIqcVJh9VozoNmko7r6ho7+e3HvnLhXDRCx2KxSfWz4FhMnHrbM63dGevhSFBIzVA+c0ukXejSoJp9Wsnrd1IcunlZ4/R0klfZVUXP31oRdk9MZjGisgxWRSEpu9PWEw/RwoRnL6txBggj56NM60XMBFvKrAg9nQ9RMTMBcTz1z5dULgl3P1Iss3MG0uwSCVsUCDHnrFrFDMXMCjy18jBYEWsLJMR+BJ8BgKyyN8kACWLWh/EcPY5fw4dTHknaYhANidAzuSes0twISfFWd8NNK99RE858JplSimh0ZSQIlHGJywJuxfLwru8TgZuXxWkyUS0LiIMQ583JhmvCVsfbw5ZTnnGJ8x0jCDKZ1e6sUPrvN998ysPUlEjkjfxJD+fc590XbzrjvKpg7+eTaa2Er7IMsCVAg45MbXMqr1p9ayJ7qGfaksiWUrLnJ07DDAIASClG94D9qw275v6AeQMRtSoGEcWhd8ZeubM86iwYSMIVdCCm73uGkgIyHCCZa00JZoLWPKky5suUUVC7huwHW3ef+d8ce0FsEGVfsVP7FoVtd1kg7yPTeM8gMGtkXD2GYwUKWJY8lDix56M6zNkdmfB3T4o/+wTHIJoRR/NS8G9jHympl8/ca0MhBSIaR0AFQQ5ltFsbdi5+9cYVH6emDT+cjJzRAcMd6rWbV3x0UdHQjwfTShGR9AmYDgimFNudT7nzT3ln82Pdzc2g+CQXG9AMugsNkb+THetLLWdJ0iVdoJ3daEhaWwfDX1q4+qVv8Z2LgvS5tszO+Iqr6sOpewbTjksgyyubCgdI9mRDa10R+qbjuLYLMS0hRksw7dfh3SfH1z17YGEg58S+eMPpZy+K9D6hldIMkjgoqMAcDQranxFpRfIv/Y74iybrFZLWIDnsKHH42kcKMIFFl45sPyP+5Ev59iQCNzRcFrrn/I1nRnS2eLz6WxDCtiibdTJvnx1M3Zh1NedNI2ZwyGLqd63X9zjl14RtR2mXBQsa05ohwbR70G475/ZnXmEv5pSXpx2xpXfPiWY+PZDUShAK20iDPV9p2PQAByVzFoG+Dan6087++pp2xA6OKh1ypZCaoNbEYC2Ov/iTjualH5wVSV0ykOLhQhAgMopUadidtdTd8V0i/C3HGmR8Mt5oAoLiUNub936jIqyXDCQxorKaoYtDZO1JB1oX0oe+wy0nyvWPb9XjDREpBDTotfobn/39jC2qDIeictZPpTV4bchmGnRphDZkBkvBEFJSZyZ0/y5V8p3T409unokyEeVCqbl1gh+ll7Z63tgEePqGU/Rswo0g5mF9TmApiFyWvUtv/esjh72WEIfOa9UXbzrtXdXB/k8nU0oJKhjwDC4KCJFVGo46MJsIAmUVdDTkVsx3d99DoPfwsktFvs0nLNA5zxSamWltc9U1keyuc0LSrXQUDY9eQZBDKVazIu6HN8dO+gXFW1vyI/Gwoxo3nH5hTaDvM15lR5gatmQMOXKwPVt+Jd0a14hBrJzVwIdanCKoEN+30sagbSHquNMmOeXH69xiybAQqd9+9aLqiGh7ZzbDAI1wclgIZhKS29PhTy1Z/dKDvuVdsRYNWLWsZuq+28YE59MDACAeh2aA0Ngo0HhoRQ9AbdrwapTGjhTINbE11qpld/PajV10yDJvTDDly7AxwS1fubB0tt1+lwWXnZyp4fcedVFQiG3J6B1lMvXe0oBzQsoBkzdDE5EcTGs1O+K++7XmFZ+ipsQDa2IN1nleGHDCAk1xaF7WKM+LJ3a+fPPJn19SNPRTpV2Xvak9H/VQjsu1VvZ7v/vau/6Mxt93TnQVMWdqJPi3sYtKauW2ey24lC6wqwisQgFpbRmM3HjGrf/7Sn60j7+MzN5nRZauXO8AcKZXF64/sHCSaBRAQs2XHW+PBlGezLAeMSAZuigk5Y5U5BtLVr/4IN+30kbHeuVNmRoTV6CTWXNmJBLqUMqMWxpBTQn10o2njtdnfF58lQLO43GWecZcU2hv7vhmRVgtHByCInFg9mWGioaE7M4E/7Jw9Qtf3hI7rbUY/b8huNpvXhMRZbOurrVSt7fe8PbHz21ufZ0xsVXEEY5MPtZMTS88tKv5hEtmh/Wlg2k9bE/nTY+ykKpZodq/S0SN3MIiPoG6rm1ukOfFW90dzTu/URlyFg6kaISpkassWXuSgbWLVm/4LreQpKbEoU0aJtIMgLi667YzF/cnVVBJpYAAgCxy/8L3t9+/LPx/7rUssiDFZEHqB7ZU7KD4Y0O5AdlFABAR6q1SaAginQ99MoODFmRvWnb+LnnCbRx7UTR3rFfxI5jcdTThxpzyeemGUy+qCQxclUwpRYL8/cu2BIayYmhLtuRTOSXx3CPbYyc8OLeILx9IaiUOCL/IKFLFIbd0ibvnHiK6iFtYTGRwHeSZN2/M5Uas/XLtNVHZcW7Y0lUZBZ2fEgRBJjPKnRV2Ln315hUfoaYXHjqUN9rS2CjPiyfcF2844501gX1Xe1GNgsoyDbrW4HauvJJAnEg0AkgcUjMQQaYyGkXI/B+V2XtxjZx6jIO9iZnBOn5if/sVN5/yNaLn/y/fN0gAUGypxaN8Rtu2kGlHPnLlbYn9V7RAxg/DHHsjk1ubSPCDn3t/2ezQy/dYUAeZGgDrYMCSOwfCN77t1qde5jUNFqMVa7Hkumj65fNLbD03XSBnQxnt1kX0u9puXnElNb1w30RM3IOm8rg3tZ53R2tnhxO8zrIsQQUxe8UkXVfpukDy249/7fx6NCb0WAsuzKDGpQn+SeyiktnBvnsEFFRBUIkIKhiQojMTvv7M+BOv6hbIpsThhgUZEooEXEz1kvmLFRVJd36NNfSDdf90xhxcud4FCK5yK6BHZilSzrmCy/xUzpZs+P8mn7vZMwfeUdH2L+UhNT/pHBBMz9FX0RDJPSlr7aJbPvhdboGk81pdLGuk8+K/6uvMFl+thSRJemSODEhms66utVO3PXHD2QtFE9ShshhHfZOaEmpNrME6cfXGhzpSgV8UhaXUzMofCE+74OKArllqd36PiHisBZe13gLKubzj9oqQe3yqYLWIGaooSFZXMvDY4tUv3ZXT9pPVbDStFxHRYJbdqK0jxYHkCgIYDf9jMYlSzgd0fW3pKkZGRrsIYEyH8/dGMDVaICkOd+NNp7+7OpD5VM7R90WtALYlKJmVA9tTxVcS4hobc5Ng3sRdduv63+5JBe8Ph6TllzMCKKuIowG3dHFg370MAg6xsDemtK9Cq2Zm2pI97rP9abEnKCE0H7BfBEEOppSqi2Q/8NrNyz+aK1yjLKzsefFWd/NNp7+7LpS94iBTA56pkaX+nenSq4kY2Jg41gRBEKAZFCmMrBQOJcWELE+3U3oMC7OXq/HI9e8tr7P33y20Yl04+zLrUECIDidyw5nf/OurOjcADmjiRmiOQazLzPqn3pTYGrZJMA68T57pURN2LnwttuKzo8nZhAQ659VDNPzz73d3qujnLdsmooLlUiJyXFfXBFLfXvNPDXPQmND5KcFf2Vqr/x7BbkFlGcSsgwEpdjtF16/85ro2/bOCyh4GmsEMdqf3giuINUMIRxe1AwBaVymA0wd5Jwy2BaMIKgIAazd2vflNjkSjoDj0yeFtt1eE1PyUO9LUYGYVDZHcnQysWbz6he+viTVYaBrZv0RgbAI13fb4/l1OydWaJAlwQT41yXRW6To7+Y0/XX/OEtGUUDxGrse49gg1QXEL5Fviz/1nZ0q2REMjTQ8CRMYlLgmoqhOK9nyPiNibEiifq3FycNvtZRF3XsrlgsqSKgoJuTsZ+MOS1S/e4xn8epKaAmELFA1La1qvkLQiEdvam7UTD9vveianGYgtQh+EAPlmLCawkASb03MYoFVv+qhGLi30xRtXvK8mkP1EMqUVjYxasS2JBhyrfzeXXkEgXoVVerR8X0pArYk1WMtvefb3ezLheyOhgpwiArmKOGqp6FtCe+9lxASWxUfdk2gdOoifi3q80HzcNUXZ188NW6o2W+iNprVbG3IuefXmUy6npsSDr16zKEjx1sym2Gnvqwv1f2IoddDSp7Ytpn7H2r+RKz/NzIRmMCaRyMuADtok9jtyI2vxa9ZsATQNoTINzYL6dWjDHZ1nttx/f1w3XwEbgIKw9oEURmx4YCJoDQIaCLiTj9Sex6MW1QD/8nPvL6sPvHy3YJcLM4+IWAUDltU+UPTVlbesa8v5RvExfaNVza2KAfFTrv/Ke9Lb3lFqZxamXNIHFlwgBzNa1USc89pu/sU11IQ7OQYLcbiHJdC5BRfIU+KPdW2+8aTPLY7yzxzXHWE9aJB0XKXrAgN3PBlrWLMYre2/vq6hapbcfRez6y2w+TUqc9CWsmMw9OV3rH5i6xpMfCVoFJHWti1EVll/mX3Ty1+bmS58IffPrJwADzq0oTLIYGYarhlBZLKai6R7YS4F8vEd+XzpN11UY1kjUVNC7Wp+5VvlIXVc4ZqCZqjikLD2JO0/LLnlhbsnkmREBOYWiI82Pdq/MXb6VRFL/UHCZT1CCZPIZJWuDaRueeHG0x8V8WdeKdy2ZU2kArlcjwbrhHhry67Y0g/OLtIf9ud6CICyLnRxSFcs0N13083iPbviXXeUhdTcgRQKFlBydlXnkP2741e/9EA+826Ka2QQzGGONVhenaZv6XtZDaMpkZsqlzUykMAAW8+k3QNpAXmP3NGkSkKqeFm443YifJhj4DWxBmtVvFUR8KbQ2AdyNU6/uDrU9/FURrmCfKvJAAck04Bj97dz5acJE3f08yYuNT3z+I7Ysu/PifI1A8kDuSBEIEdBR0OquNYduI9jsfORSzPFYQk0AKxFq+YYxFpUfz6S6WiIWE6tP82UiORQhrkY6XfvjJ3wX1GkLkmmwYULKAELNOjIfa+nS6/OmRqJY7qj127solX5BWBv5fK55PKnZ8l1O0tsmpNxMSzYRJCDaa1rQ5mm9viyXaRf+hLilNuKFIMAGsS0DbLGhJ6JPZ6HjGo0J/jR2Dsr6q3X74ZyWTGJkQnguQWU9qGir5wRf2JrfjEkFoNYhQZxKN9i48ZuwXdmrYf3Vd0cTnW+rzLICwayB3YV5+QMbm2R07Bl8JefpyZ82z8DTFig43Ho5pZGeV5TonPzzSuvXRTZ3yJcRwHCbxuTBnN9OP2hoexoG49ZB2wptw9G/ulttz31Oq9slBSfhn2KBDBkinJmizvtPRk/kN2Wa7yfDu1sXvrzykDm8xmlXPjyXYhIpLJKHxdKf6Erc8JZvbEVd6xNv+WPFE/sn8peuTH8Bzqimr+5QVK81d0R2/Xt8qCakzM1WOZ9s5ypQbIzaf1uSfz5e9fEYFET3Hy+z+FlZ7Zl/hQ755KVqvMvEm5R7lya4TRXmUlrVRtI3bLuq+c8Sk2JTXnTwzosuWlKKI41WBRvTXTET/y/s8L8d4OpkbnTBNBglhXhoJRBFQ0LuTsZeGTJ6g3/lt88OR1xYsdh2Mie1XPLic2uVtPkFOakMykC23YMlfyG6InufDYZAWjnkrtKM3uvsAhBl8Ejk9dJDKaVrg7qt5Wz+/Na+fzOi+MnPi8ZbSR1ivXkB52GhSTZm18cmPsbuv3XA0dKqPM7UDbfdMr768KDlw2l85mSw8LMQYtpIGv3vp4qvTrXJLkMPIpD/+5zZ84/oSL5nig5s/SEdouRkNSdSjnUXWpTNOWC81MBESirCcW2iiwMdd8DxM7zTA+yDnuQolUzg/78tXmfi9CWhoilZ/lzPTyhPij/NWgx9Wesfa85VVczg5qbp6cTCBAZh1FiuSvsAK8Y1l0H7c0f61wDHmWJhH0fcVCJTPtTsXPegfgTrwGAboGkpnVt22PLbp9bzLHBIeWAcjvV/Zp6IAtNUCiSek6p5c6BEDj4HAAaXfeO9Tq7AGVQSq+9+OzXL7oANzy6d7zzQqYtqhGHfuz6Cypr7B13sRp29OnA6hOrgGVZ24eKvvy22556nVsaZSKRQCPAL9608m+OD/U+ErF1GcbcKzDKuQoEZNMaGZVbnS5Y7ZKDWe1WRdxzt9788BepCbdzS6M8bIGOx6Gbl0Ge+41HuzfduOKaJdHkz6kg6jFaJMKyLNkzEP5Cw9f/vINPhozHp8/7JwIyCjqTcqc/s42hiqM0t97Z+1kCrmU0SDS1Km6EbMalt149mDinpihzwUBSOaJAqHN2HyHlgsmFBqnpETpmXVmM5QP9HR8j4Fvc3GDlD7eZEUujGaA48a5w5x3lIbd+9KgGWbtT9iNLVr/wb8Npvy2QlADvkYNfjQTcssGUzuKwTtjJ7Vsbc+sWQ2YySlcFks3/e/1Zv6SmRNuknJS8N7r01g2/2J22/6MoLEYsuIxcwWMVDQm5OxX89fG3vvjjKeVqsKLxNDWBrOm+QGTB0dqGPinXu7mIRXMC3ByPq9/2Vl/akwn+ubhI2uDcZtiDbKLcsQxyusrEEBKu1pZKL8s5iYcf81Zwc1u1R5EV/8NaGhsFEfRTN56+rFhkLktmlC5I++WgBRp0rJ7XnKqcqZGLauTOSbziPluA56usZhx2XWGNtw+RiMhV0MUBHamz918CYPJHEjRvBHMM4mme84W+jNURtkEaBScKATpogfZnZfcOrvoM83BlJ2c/snBwVHfrj/ATdXMMdPmdrX0/bz/+oq5U6P5gQMpokCUzMwMuA5p5hkwBJgBy8lET18KoZePcyQ15Gr0dMMFs/5yAUFBKFGRKsgrYUuzMRr7c8PU/70BL43BcmACgt1wDcDFDp08wiEHQklE8JYGOx6GxqZE+FH+sa7dbdI2UlpDMSjOU15FKgN2ALcVuJ/KFs+KtO739hJMwC3Le8V4dfMFRRDJXbpeZ1cxeyB07ECDhkv1c3tP3twEz6Mr7H0nW3rTxys3J8ov2ueG1UloUDQkrakMEJJMn4BrAtJSLwBo2CYesXJkOJ1XVUyiOsLuIBIG1Zq/PwOyQBBTQCxBzDAIblzIAZAIlOxVbZAkevl8zZ4tCwtqdDPzqxNUbHixYQGHdAolEk1KgLTIIArSbP85hui5bsK21EAMceeywwnajqvxEfofLc7/Y3rz07rkluBpZldMexEDQkh39gZ+cuHp4E8CkbFyK5zKyKL7+rzual909J8RXa7AQRyD9hwHZN2Rv3pqadSdjIzVj1YitVN6hjpTbnfzX3wP0+2dvOOvsGqf//0Rk9nxmXhCWXGUJTRYRSIgpFwgEuXfQ/t9d2bk/Zn6RQK3qMKYW5hjEd/dVPHdcaGBNTQnOQ0blnitlULFEWgTvypkyjURNccWxmKD46o274svuml2MzyCrcvkQARHYn7LbX8vm0heam5eO0PiJRE7hb+Dyr4fTfWdHA9k6QdPXaS4DSovkjlSo+aSvr3+CY5gWkSCOgShOelvz8k+HpHMhKV3NEj1ZFfrTD/mS7zU3x1XhAX6TC2jkvu75G5afE7Fw0nCgWyCn/8RwbGv813xe20Hzhe81DRaKxK4nk/P++MkJhMhaGiEbW+Bb8CD86qvvq11CO4/L6IE62wqVWUxhkmQdVL6RsbmDX9c5A0MpJg1su0mc8MdEPJGdTNgu/5mfXHNRyTtqOz6nlXOGJF0Moi29bjhxQvy5RwsiJ97ecOJtzadcHpHpi0npGkVyQ5uuuOPt8Se2jrW3NP9dv7r2/NrF5XvPs5krOR9W9be/GKePRmkfzUwsZN/eTHTd27/5xNYZDl/STGrMo5KWeThH9rY0NkqONVgzfW7z9LYFHWZdJ37/jLdDbETIePpaZE2sQa5Cq0YzGM0goEFgBvIYWhohq5cemS1Oq6a4zJw/WAfLQGunaVvWKn9+yVQHRP401WYwEhBINILG2f62JtZgrfLd37wRPOFd/4lGMZ154quW1XD+CAUYDAaDwWAwGAwGg8FApv6Fjv+E7uU3cTuwGRZvTOQEXxOjCL58EwmyGKVu5ld8fQ1keY0kfH8fkxqJiLBo0aLq448/vsa3jZdGu++EE06oXLBgQW0sFrOO0dkt397W4QrlokWLSubNm1e3dOnS6CEUQL4/5ZtoUE9QYgoO0DnGOh6zZs16V3l5+dMlJSVdJSUlXeXl5evr6ure7btHAEBdXd3p5eXla/L3lZWVvVxdXX2Z/1nHsOk43us0b968svLy8h+WlpbuKSkp6S4tLd1VXl7+nYaGhtBoA3uUfn3T2tAEgFeuXBnZvn37Va7rvpWIQkS0NRQK3d/R0fEKRs+cOBrCrOvr6+cMDAxs1loXDRuOzLAsa7CysnLZ1q1b2wHQypUrw21tbc8rNfK0USEEIpHIGZ2dnX/1NJU6yn3IdXV1b81msxcKISqY+bmqqqrfvPLKKwMYfVuOBKAqKirucxznCn9GrhACtm1f39PTc5t3nwbAtbW152cymQ8TUS2A/ZZlPb53796f5H5A6c1nd4vGxkZZUVHxq5KSEo5GoxyNRrm4uJhLS0t3L1y48DgcOAXxqNvNNTU1HyguLuZoNOpEo1HtXU5xcTFXVVW9J3/z3LlzTysuLlbRaNSNRqPKuy9TXFysKyoqvuDdZh3t+lRVVV1XUlLCxcXFw1d5efkLJ5xwQuUo7U4A0NjYKEtLS1/06uZ6dctGo1G3pKTkv717bQCorq5+p79fo9Eol5SUcGVl5ZeONZ9CTJfW+9Of/jTXcZz3aq0VcjuvFTNntNZ1fX19q7xRfKxUPIQDuV3kc440Mw9vo3IcJ+wdCCR89woAUEod7boQALV8+fLybDb7Va01mNlhZpeZs67rruju7r50nHaXvvf8bSCJKOCZFgwA2Wz2Y54Wz3izUVZrrV3X/QfvPv1mEmgAQCaTKeHcNizpuywArLWOHGMzStJnAuWPIFMABPl+C5GIkt57/vvynaePAYFGb29vJYAS32yRd9y04zgLx/pwS0uLm9t3AOWrnwagtNau3wxh5iLvXsvvHDKz/NnPfpYfGPSmEuhxKnUseREMAJZlPesJq+XTTrYQIhmNRl/Ml7uqqupVItpWoMUCRETBYPBJ/zOPovPN4/Qtj9EGkoi0bdvrvSMoLF8bSNu2/1QgH3qsvt24ceMx5SUeiyG1mUQDEB0dHTvC4fCHpZTPAOgF0CulfMq27Utff/317XnzYsOGDUOhUOjvLctaS0R7AewXQmwIh8Of6OrqetK7T71B24GCweCXLcv6MRHtBDBARNssy7pj+fLl3/EE2D1GQ5RjYh2DZfI7MRNpSPZdE+7MPXv2PBKLxX77/e9/vw4A9u7du9vTduQzJ2jPnj1PEdF5VVVVdUopuWDBgq7169c7BfeNVYepCgKP8h3kt+kPYcv7Y8ZcYD6ho6OjB8Bls2fPrkylUpHKysr9bW1t/a2trUdidhUYuU9FTcdsdywJdL5jJluxvFkwkc8zAMTjcQ2gw5u6xzSjmJm7u7s7AWDfvn2H6iSars4ZK0TnPV8BQCgU6hscHBy9kswp/71+J97/tyfYPb29vaPdMxOCTD7b3e+PTDkEeCwIdL7xFAA0NDRY27Ztm5vNZiuIqFJKGVFK+W243JkPRMpxnJ5IJLLPtu2Otra2/gLhVuMJxfLly8t37tz5SWZ+KxEJZl5fVVX1g7a2tm7/d8ViMXnXXXddrpQ6F0AxgE2RSOTBXbt2vVbQAcNCsGDBgtp0Oj2HmWuIKDhJzSyklLt27dr1tO/3XHjlypV2R0fHWcxcI4RwkslkPTMXamliZti2veK444672HGcADOnpZQbOjo6dvjqp2tra9+byWTeJ4SYw8zbbdt+uKur6/EZ0M5+QUZ9ff3Jg4ODHxRCnATgxfLy8ru3bt3aNVWhto4BrayICNXV1Re6rvvh55577gwAJ/rDZ4eIrmhmbi8vL3/BsqyHZ82aldiwYcPQeFrmrLPOCm/evPkRpdTZeW+eiD7U09Nz6dKlSxs2bdo05HnxurKy8oeu635Uez/QRETvHxwcvLy+vv6tu3bt2uUzAdSsWbNOS6VSX+np6TmfmaumweFDeXn5f1ZUVPxjW1ubM3fu3LKtW7f+Wil1TkEUotBEkADguu77+/r63u973v6amprLurq6fgUAtbW1n0in0z9QSg1/n1LqMzU1NZd491jToKkPEuRkMnldf3//3wIIKKVARB/s6em5dMmSJateffXVnqkItTjawjxnzpzlpaWlj6fT6cey2ewntdYrtNY2M4Nz6HEuVkoJZp7vOM770+n0g9u3b3+hqqrq77yOkKPFXrds2XKqJ8xufkrWWjtKqdN6enremp/WFy1aNMdxnKaC2Hpaa12XTCbf691ne8L8gaGhob+4rtukta7yyq+nciml2HXdv92/f//pAHQqlfqIUuocL6w2fN+Yan5k+7la69JsNhvLm1fpdPoTSilG7tdH8+sGyGazH5smjZxfaVR1dXVLKyoqHujv73/acZyPMXMg3/7MnGHmZb29vZdjiusVR0ughVfJ9/T39z/huu4FOqcC/THRQgdotIs8R469hlGu6y7MZrP/UVlZeYv3PDlKR5fmp/W800REkpnZdd0Sn/Yv9Q2Ewth6sfeee/zxx88dGhr6d611CLmfZuYCx2dSFxFpZlZEtAAAlFLH8YEj1/z3jmdz++9jpVT5woULSwr8Dn98mZm5eAoLJuQX5Pr6+sUVFRV3J5PJZxzH+aTWOuDzMYa/l5lVOp1eMNVQqDhKmlnPnj37lGQymdBal3gVzAuX/4hOfYiLfdGEvGBqrbXrOM6N1dXVnx1NqH3RjIM6Q0o5ofvEgQNjdF9f3+XMXOJpcbvgM3ntPplLe3HiTq88aV9EwN8Oh4qSjGiz+vr6bO6w61GPVZtsdIZ80RQ1b968+ZWVlXf29/c/5zjOp7XWYW9w+lcn87gApJSyf6rRlaMh0ByLxUQymbzbW0F0CwQu78XTBLQYjdKpAoDUWutMJvPNuXPnLvANmOmOOICIoLV+hycco3WEJCJrkpdNRC/Mnz//aQAIh8P/I3LnRQUnoaEtIpKBQKC1tbU1rbWeFqdv9+7dIzTywoULj6uoqLijt7d3QyaTudZbZVQYuczu72cACAohekpLS390iHDoMecUSgDufffd926l1Nu8ClkH+0IkAfRJKTuJKMnMmg6Oq4WVUqXMXO8pGi6IXytmLkomk58B8CWMvXI2Jc4991zrueeeKx5FszERaSHEz5VSO/LT+YQ1jRCwLKuroqLiB08//XQ/ALFz587WqqqqD0spL2fmas88CLmuuwwH7zohIUSXlHK7N6jSAP5SXl5+a09PDwkhuLi4eMqD+oEHHnAAYPHixfU9PT3XdHV1XcHM5b7ZSYyisLRvRnUty/pNUVHRzdu3b3/5jSbQedv0b0eZ7tiT5qxt2/FQKPTTXbt27RRCjCkEc+fOLRsaGnpnNpu9TWs9v0CoBTOz4ziXLFq06Ia2trbMTNS3u7tbjDJzu0Rk2bb94L59+z41led7ce98J9PevXtbiKgl//6SJUvm7969+xXPNs3XXxGRJYR4sK+v73qtNQkhmJkPFUc/XNwVK1bUt7e3X9XV1XWVUqrqEIKcV2CSiDKWZf0sGAx+r7Oz8xkvBv6Gi0O7DQ0NlheaG02jiVAodGV3d/ePxlnsGGb79u19AFoWLlz4bHd395Na60pfpwpPg81zHOdEAM/PxMrXxo0bnfLycu267lgLG1MxaQKek6l9QiF9yoCTyeSYEQGtNXk/PSd9QqanYaYS3vMXbNu2bT0z13pFGk2Q89+XN732Syl/UlJSctf27ds3F5i+U17MOdICrbq7u+cCmM250wDJVxEhhHhm7969P/LFP/VEOn3Lli1tFRUVP3Ac53ovFGT5nmulUqkFnkBPdzIWiIjLyspeAbACB5ZxpTc7fKKyspK01tsmaHJoItpHRK9XVVU94yXoH9SGPiHgiZazwGadLoq9aM9ogjws/EQEItpjWdaD0Wj0gfb29q2eRpYYfXn/DSPQ2L9/fzkRlRSYB5qIhBDiz94OiImOVvacSmHb9v86jnOQh8zMcF23fCbrZFnWj7XWH1ZKKSLynx0ayWQyn53MtqXOzs4d1dXV3+vq6rrD9/ljbWcI+xdyRnlPCSF2BgKBf49EIve3t7fv9kweOUMD7MgLtJRj/66LECI1iU5jb9Fht8+THhFxcF13JvOx7Z6ent+WlZX9kJk/7k29/rCi8g3S8epAvigAKaWOS6fT/1JRUXESM/+jN5sdawI9Vr00AAoEAk8uXry48amnntqTj2Z4CmjGMhSPeNgunU47vtyEQptzMlvoyWu8Ioz901IzmozPzHTttdd+KhAIrBZC9BCR8IXdQkQUPMQV8nI+LF8sXmutHdd1P1ZTU3Np3nzCsQePJVeO45y9efPmx6uqqq49+eSTy3Bgx4uFGcrkO+INVFpaOphOp5NEFPEJHzEzlFInTUIL5fNBlvtsTKtA8++f4Q7leDzOAGILFiy4e2BgYKUQ4lRmrtZai4mNCQ5ls9kmAGXeMwURMTNr13U/BSABHJPHxubzpguVETGzVEqdpLW+c9u2bddVV1ffW15e/oNXX311r6/v3tA2NFVWVu7es2fPHgALCiMSWusL6uvrT961a9cLh1G2bEtLi/zkJz+Zn+5FoUNSVFTU0dfXh6VLl/KmTZtmcraztm3btgfAb73rsKiurl6XTqd/6OVnDK+auq57/Lx580Lbt29PT0doa9o6kyhJRI7WOp8iMJpgay+nZF46nf5GZ2fntZWVlT8sKyu7b8uWLTumW7CPtMlhr1u3LkVEGzEyKZ/yWmpwcLClrq7urUQ0oeXhefPm1V111VUPaa1Pxcgfc8jnMu8rKip6EQA2bdo0kzm+Grkkn0kTCAS2j2GbVkspaw5htx5JtDfztdXV1Z0aCAS+JYTo95kS/nzwfPSDmVlprWdls9kburu7n62qqrqjvr5+MQ4s5U9ZHo+0hhYAYNv2b7TW7ytYkMgnzyxJJpNPlpaW/pGINmmtO3Q+d3Nk51copRb19fWtUkrVjNIgmoiEZVl/9qY4gZlLutezZ8+uBHDK4QocM5NlWVBKhQYHB28cLb2CiOzxnOmjZjwzW6+99to2Zv7SnDlz7k0mk19wHOcyZi7ymX/S107Dgs3MVZlM5ovZbPbKioqKh4qLi//Vi0tPaXPBEY9DA6BQKPRf2Wx2tbd86xdE8pwhqbV+JxG9k/M/wltoZ2Sz/jzg0bLqmIjItu27ZlizOTU1NRcMDg7+GMDsKam9A+NWFAhOl23bXcdg6I4vvfTSQCKRUDt37mwD8Jm5c+feNTAwcJ3ruh8BEPItuPgF2/IJdtRxnCt7e3s/UlNT89Gurq6HpyLUR9rkYORyEvaFw+GviVzKWuF2JeELd+XzZUe7XN9nC4XZISLLsqyfdXV1PYaZ2cxKeQ2bzWa/rrWerZRylFJ6kpcapRM1AG1ZVvvLL788OIOzzKRZunSp9gmsbG9v39Tb2/vJ4uLit1mW9ZB3LIR/ex1GEWxHax1Np9PfXrlyZQRTOBZBzIDATkRLyz179vzQsqy76cDvY7sFNrX0hbFGuwoPJRzea0dEthDiybKysiunQQjG/eyZZ55ZzMwVnokjvZDdZC5Z0B/s1UVIKX88TqiTZri/Jvr5vGALALKjo+P53t7ef4hEImfbtv1zb5YdbUGFkMuHZiKat3///vnHhEALIRyM3L3r32GsRtE8ore39zPBYPBGIUSWiPIORb5hDvfK/VZw7lyJ/6ysrHz31q1b92P0HeFjdqS3gyP/t+Mrf2GdGAAqKioyvv+7kyx74eV6tnNASvn7efPm/cjnbBWWN8vMzihl1P5DcwpnF8+U8+dW+w+aUf4BRESu96wRB/MQkWhubh6tb4cFe8+ePU/39vZeGo1Gz7Us67feApH03TdcZmYetCyrdyqDTUyTVqa6urodlmXtRC6PQXiawyYiKioqeqGgkPkK0N69e78eDodPt237ASFEpxAir60mdHlaURLRkGVZj4bD4Yt7e3v/zhNm4avn8AYCKWXxWI0mhEjnQ0lz587dIaVsx8iNBwEiolAo9CQAPProoxnLsv7glTkw0XIfoj6WEEJZlvVgbW1to3dswmiRBlqyZEmHlPLVgnYPEJEIBoP/M0Y9BQBIKZ/NHzST7y9PIfzFF06DlPIJ7z7bu08SkbQs66++hH0eR7DF7t27/7x///73hsPhd1iW9bg3mPIzrBBCSCnlLzdv3rx7KrPqdDlK+VM9zxoaGrpDa31ybmDTdtu2v713795/Gyd+OrxDe+7cueWO45yeTqcXAThRCFHNzOExypkB0MfMrxLRlrKysvXeqaEoCN0d9J3l5eUPOY7z935nhZlZSkklJSVn7ty582nkdp44c+bMeevQ0NAdruueRjnaA4HA97q7u+/JN/xFF10UePrpp68EcP5U2pSIFDN3M/Oz0Wj0iR07dmz0hzXHafeTk8nkHUqpMzxh22Xb9r09PT3fGeN0UPLau2xgYOBOpdS7ABQhd6roL+fMmfOVDRs2JPM3L1q0KNDT0/MNpdQHAVQB6Lcsa20oFLqmo6Nj3wQ16nCsmYhQV1f3rnQ6fbVS6m2ev/Or0tLSz2/durV/Khp6Wn9404ss4LjjjpultRYLFy7c09ra6k5gMUCMNaVOYmCNeM5b3vKW2YODg0VExEqpWel0+h8dx/l4gZ2Wz/bbvXjx4hPXr1+/32+b++tUW1vrP2hmph00gUMfojNcjnnz5tUppeRJJ52099FHH81M9EvmzJlTwcyRYDA44M1so7JixYqiffv2lUkph7zU3ckgfaYLZs+eXRmJRIR3fMT0eOoz3AGHc34yYeRPQPBhlD+fEEQAsGTJksru7u4fuK57rqdtASA6yu6WvKMqLMv6r76+vqaCMk+kTjTGtDul2PZhhK4m2+40SgRohMCNc99EBtuENPY433vU49D+E3AIh58iOB0phQK5vOvrXNd9f8FChX/7z4jXhRAUCoXummSd8g7h0WKy7e7fvzne50a7b6qrrqpAKU1LWHWmFlYYRy9eqr2E8nMKtvz7Nam/nI4XTXiws7OzdZyY9dGs00y3+0Q/NxNtMK3Pe9OePuotvBQ2GPu8b9dzXAOWZf3mzDPP/PSxuHBhMAItvBjrGiGEZGaLmSl/IZeBlw+N7Q0GgzdceOGFH/CcKDYC/caG3qx1WrRoUXFPT8+/aq3fh1yOMQFIMvN2IUSbbduPh8PhX7a3t+8+RGjMYAT62GHJkiVVRBTNZDIciUQy55xzTs/999/vHMKrNxiOycE6lknl/xkGg9HQb7g6Fsa1jTY2GAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMhsPj/wGJd1Q+59xRxgAAAABJRU5ErkJggg==">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#eef0f0; --surface:#ffffff; --surface-2:#f6f7f8; --ink:#16202c; --muted:#5c6773;
+  --line:#e0e4e9; --line-strong:#c9d0d8;
+  --accent:#F58220; --accent-ink:#D96A00; --accent-soft:#FCEBDA;
+  --navy:#15243a; --navy-ink:#eaeef4;
+  --good:#1f7a45; --good-soft:#e3f2e8;
+  --danger:#c0392b; --danger-soft:#fbe6e3;
+  --shadow:0 1px 2px rgba(16,28,44,.06),0 8px 24px rgba(16,28,44,.06);
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d131b; --surface:#161f2b; --surface-2:#1b2634; --ink:#e7ecf2; --muted:#93a2b4;
+    --line:#26313f; --line-strong:#354456;
+    --accent:#F79A46; --accent-ink:#F9B074; --accent-soft:#2a2118;
+    --navy:#0f1a2b; --navy-ink:#e7ecf2;
+    --good:#3fa76a; --good-soft:#16281d;
+    --danger:#e0685a; --danger-soft:#2a1815;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d131b; --surface:#161f2b; --surface-2:#1b2634; --ink:#e7ecf2; --muted:#93a2b4;
+  --line:#26313f; --line-strong:#354456;
+  --accent:#F79A46; --accent-ink:#F9B074; --accent-soft:#2a2118;
+  --navy:#0f1a2b; --navy-ink:#e7ecf2;
+  --good:#3fa76a; --good-soft:#16281d;
+  --danger:#e0685a; --danger-soft:#2a1815;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Barlow","Segoe UI",system-ui,sans-serif;
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.disp{font-family:"Barlow Semi Condensed","Barlow",sans-serif;}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* Header */
+header{background:var(--navy);color:var(--navy-ink)}
+.hbar{max-width:1180px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto}
+.logo{width:40px;height:40px;border-radius:8px;background:var(--accent);display:grid;place-items:center;flex:0 0 auto;
+  font-family:"Barlow Semi Condensed";font-weight:700;font-size:22px;color:#fff;letter-spacing:.5px}
+.brand .co{font-family:"Barlow Semi Condensed";font-weight:700;font-size:19px;letter-spacing:.6px;line-height:1}
+.brand .sub{font-size:12px;color:#a9b6c8;letter-spacing:.4px;text-transform:uppercase;margin-top:3px}
+.theme-btn{background:rgba(255,255,255,.08);color:var(--navy-ink);border:1px solid rgba(255,255,255,.16);
+  border-radius:8px;padding:8px 12px;font-family:inherit;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.theme-btn:hover{background:rgba(255,255,255,.14)}
+
+/* Tabs */
+.tabs{background:var(--navy);border-top:1px solid rgba(255,255,255,.08)}
+.tabrow{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;gap:2px}
+.tab{background:none;border:none;color:#aebccd;font-family:"Barlow Semi Condensed";font-weight:600;
+  font-size:15px;letter-spacing:.4px;padding:13px 18px;cursor:pointer;border-bottom:3px solid transparent;position:relative;top:1px}
+.tab:hover{color:#fff}
+.tab.active{color:#fff;border-bottom-color:var(--accent)}
+
+main{padding:26px 0 60px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.card-h{display:flex;align-items:center;gap:10px;padding:15px 18px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.card-h .tag{font-family:"Barlow Semi Condensed";font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;
+  color:#fff;background:var(--accent);border-radius:5px;padding:3px 8px;line-height:1.2}
+.card-h h2{margin:0;font-size:18px;font-weight:600;letter-spacing:.3px}
+.card-b{padding:18px}
+
+.field{margin-bottom:15px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:12.5px;font-weight:600;letter-spacing:.3px;color:var(--muted);
+  text-transform:uppercase;margin-bottom:6px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.row4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+@media(max-width:520px){.row2,.row3{grid-template-columns:1fr}}
+@media(max-width:640px){.row4{grid-template-columns:1fr 1fr}}
+@media(max-width:380px){.row4{grid-template-columns:1fr}}
+input,select,textarea{
+  width:100%;font-family:inherit;font-size:15px;color:var(--ink);background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:9px;padding:10px 11px;transition:border-color .12s,box-shadow .12s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+textarea{resize:vertical;min-height:44px}
+input.num-in{font-variant-numeric:tabular-nums;text-align:right}
+/* Sayı kutularındaki artır/azalt (spinner) oklarını kaldır */
+input[type=number]{-moz-appearance:textfield;appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.hint{font-size:12px;color:var(--muted);margin-top:5px}
+.inline-toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-top:8px;cursor:pointer}
+.inline-toggle input{width:auto}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+.chip{background:var(--surface-2);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:13px;
+  display:flex;align-items:center;gap:6px}
+.chip b{font-variant-numeric:tabular-nums}
+.chip .k{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+.chip.dom{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
+
+/* Results */
+.result-list{display:flex;flex-direction:column}
+.rline{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.rline .lbl{color:var(--muted);font-size:14px}
+.rline .lbl small{display:block;color:var(--muted);font-size:11.5px;opacity:.85}
+.rline .val{font-variant-numeric:tabular-nums;font-weight:600;font-size:15px;white-space:nowrap}
+.rline.sub .lbl{color:var(--ink);font-weight:600}
+.rline.disc .val{color:var(--danger)}
+.rline.disc .lbl{color:var(--ink)}
+.total-box{margin-top:16px;background:var(--navy);color:#fff;border-radius:12px;padding:16px 18px;
+  display:flex;justify-content:space-between;align-items:center;gap:12px}
+.total-box .t-l{font-family:"Barlow Semi Condensed";font-weight:600;font-size:16px;letter-spacing:.4px}
+.total-box .t-l small{display:block;color:#a9b6c8;font-size:11.5px;letter-spacing:.5px;text-transform:uppercase}
+.total-box .t-v{font-family:"Barlow Semi Condensed";font-weight:700;font-size:30px;font-variant-numeric:tabular-nums;line-height:1;color:#fff}
+.mini-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.metric{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.metric .m-k{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600}
+.metric .m-v{font-family:"Barlow Semi Condensed";font-weight:700;font-size:21px;font-variant-numeric:tabular-nums;margin-top:2px}
+.metric.accent .m-v{color:var(--accent-ink)}
+.metric.good .m-v{color:var(--good)}
+.warnbox{margin-top:14px;background:var(--danger-soft);border:1px solid var(--danger);color:var(--danger);
+  border-radius:10px;padding:10px 12px;font-size:13px;display:none}
+.warnbox.show{display:block}
+
+/* Section subheads inside cards */
+.subhead{font-family:"Barlow Semi Condensed";font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--accent-ink);margin:20px 0 12px;padding-top:14px;border-top:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.subhead:first-child{margin-top:0;padding-top:0;border-top:none}
+
+/* Quote letter */
+.letter-actions{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.btn{font-family:"Barlow Semi Condensed";font-weight:600;font-size:14px;letter-spacing:.4px;border-radius:9px;
+  padding:10px 16px;cursor:pointer;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;gap:7px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-ink);border-color:var(--accent-ink)}
+
+.letter{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+  max-width:820px;margin:0 auto;overflow:hidden}
+.l-top{background:var(--accent);color:#fff;padding:22px 30px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.l-top .co{font-family:"Barlow Semi Condensed";font-weight:700;font-size:26px;letter-spacing:1px;text-shadow:0 1px 2px rgba(0,0,0,.18)}
+.l-top .doc{font-size:12.5px;font-weight:700;color:#fff;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
+.l-top .meta{text-align:right;font-size:13px;font-weight:600;line-height:1.7;color:#fff}
+.l-top .meta .lab{color:#fff;font-weight:700}
+.l-body{padding:26px 30px}
+.parties{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:22px}
+@media(max-width:600px){.parties{grid-template-columns:1fr}}
+.party h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-ink);
+  border-bottom:2px solid var(--accent);padding-bottom:5px;display:inline-block}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:14px}
+.kv .k{color:var(--muted)}
+.kv .v{font-weight:500}
+.op-title{font-family:"Barlow Semi Condensed";font-weight:600;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--muted);margin:6px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.op-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+@media(max-width:600px){.op-grid{grid-template-columns:repeat(2,1fr)}}
+.op{background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+.op .k{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600}
+.op .v{font-family:"Barlow Semi Condensed";font-weight:600;font-size:16px;margin-top:3px;word-break:break-word}
+.fin-table{width:100%;border-collapse:collapse;margin-bottom:6px}
+.fin-table td{padding:9px 4px;border-bottom:1px solid var(--line);font-size:14.5px}
+.fin-table td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.fin-table tr.disc td{color:var(--danger)}
+.fin-table tr.grand td{border-top:2px solid var(--navy);border-bottom:none;padding-top:13px;
+  font-family:"Barlow Semi Condensed";font-weight:700;font-size:20px}
+.fin-table tr.grand td.r{color:var(--accent-ink)}
+.amount-words{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:6px;padding:9px 13px;
+  font-size:13.5px;color:var(--accent-ink);margin:4px 0 20px}
+.terms h4{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-ink);margin:22px 0 10px}
+.terms p{margin:0 0 9px;font-size:12.5px;line-height:1.55;color:var(--muted)}
+.terms p b{color:var(--ink)}
+.terms .t-sub{font-family:"Barlow Semi Condensed";font-weight:700;font-size:12px;letter-spacing:.8px;text-transform:uppercase;
+  color:var(--accent-ink);margin:16px 0 10px;padding:7px 11px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:5px}
+.terms-summary .ts-t{font-weight:700;color:var(--ink);font-size:12.5px;margin:11px 0 3px}
+.terms-summary ul{margin:0 0 7px;padding-left:20px}
+.terms-summary li{font-size:12.5px;line-height:1.55;color:var(--muted);margin-bottom:3px}
+.sign{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:13px}
+.sign .box{min-height:70px}
+.l-foot{background:var(--surface-2);border-top:1px solid var(--line);padding:14px 30px;font-size:12.5px;color:var(--muted);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* Params */
+.pcols{columns:2;column-gap:22px}
+@media(max-width:760px){.pcols{columns:1}}
+.pgroup{break-inside:avoid;background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow);margin-bottom:18px;overflow:hidden}
+.pgroup h3{margin:0;font-size:14px;font-weight:600;letter-spacing:.4px;padding:12px 15px;background:var(--surface-2);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.pgroup h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.pgroup .pb{padding:6px 15px 12px}
+.prow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.prow:last-child{border-bottom:none}
+.prow label{font-size:13.5px;color:var(--ink);flex:1}
+.prow .unit{font-size:12px;color:var(--muted)}
+.prow input{width:118px;text-align:right;padding:7px 9px;font-size:14px}
+.prow.derived{opacity:.85}
+.prow.derived .dval{width:118px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;font-size:14px;
+  color:var(--accent-ink);background:var(--surface-2);border:1px dashed var(--line-strong);border-radius:7px;padding:7px 9px}
+.params-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.params-bar p{margin:0;font-size:13.5px;color:var(--muted);max-width:640px}
+
+.view{display:none}
+.view.active{display:block}
+
+/* Kayıtlı müşteri / teklif sayfası */
+.cust-page-head{max-width:640px;margin-bottom:20px}
+.cust-page-head h2{font-size:22px;font-weight:700;letter-spacing:.3px}
+.cust-page-head .cust-count{color:var(--muted);font-weight:600;font-size:16px}
+.cust-page-head p{margin:8px 0 0;font-size:14px;color:var(--muted)}
+.cust-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);background:var(--surface)}
+.cust-table{width:100%;border-collapse:collapse;font-size:14px;min-width:820px}
+.cust-table th{text-align:left;font-family:"Barlow Semi Condensed";font-weight:700;font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:2px solid var(--line-strong);background:var(--surface-2);white-space:nowrap}
+.cust-table td{padding:12px 16px;border-bottom:1px solid var(--line);white-space:nowrap;color:var(--ink)}
+.cust-table td.cc-name{font-weight:700}
+.cust-table tbody tr{cursor:pointer;transition:background .12s}
+.cust-table tbody tr:hover{background:var(--accent-soft)}
+.cust-table tbody tr:last-child td{border-bottom:none}
+.cust-table .cc-del{border:none;background:transparent;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;border-radius:6px;width:28px;height:28px}
+.cust-table .cc-del:hover{background:var(--danger-soft);color:var(--danger)}
+.cust-empty{font-size:14px;color:var(--muted);padding:20px 2px}
+.q-actions{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px}
+.seg .seg-btn{border:none;background:transparent;font-family:"Barlow Semi Condensed","Barlow",sans-serif;font-weight:600;
+  font-size:12px;letter-spacing:.2px;padding:7px 12px;border-radius:999px;cursor:pointer;color:var(--muted);white-space:nowrap;transition:.15s}
+.seg .seg-btn:hover:not(.active){color:var(--ink)}
+.seg .seg-btn.active[data-status="bekleme"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.seg .seg-btn.active[data-status="alindi"]{background:var(--good);color:#fff}
+.seg .seg-btn.active[data-status="red"]{background:var(--danger);color:#fff}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;background:var(--muted)}
+.status-dot.alindi{background:var(--good)}
+.status-dot.red{background:var(--danger)}
+#quoteDetail .letter{max-width:820px;margin:0 auto}
+.save-cust-row{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}
+.cust-entry-card input[readonly]{background:var(--surface-2);color:var(--muted);cursor:not-allowed}
+.cust-locked-hint{font-size:12.5px;color:var(--good);margin-top:10px;text-align:right;font-weight:600}
+.foot-note{text-align:center;color:var(--muted);font-size:12.5px;margin-top:34px;padding-top:16px;border-top:1px solid var(--line)}
+
+@media print{
+  @page{margin:0;margin-top:14mm}
+  @page:first{margin-top:0}
+  header,.tabs,.letter-actions,.theme-btn,.foot-note{display:none!important}
+  body{background:#fff;color:#000;font-size:12px}
+  main{padding:0}
+  .wrap{max-width:none;padding:0}
+  .letter{box-shadow:none;border:none;border-radius:0;max-width:none}
+  .l-top{background:#F58220!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .view:not(#view-letter){display:none!important}
+  #view-letter{display:block!important}
+  .amount-words,.party h4,.op,.l-top{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  /* İçerik sayfalara doğal biçimde akar (zorla sayfa atlatılmaz) — böylece sayfalarda gereksiz boşluk kalmaz.
+     Sadece bir paragraf/madde ortasından bölünmesin diye break-inside:avoid tek tek öğelere uygulanır;
+     büyük kapsayıcılara (ör. .terms-summary, #fullTerms) uygulanmaz — aksi halde tüm blok boş yer varken
+     bir sonraki sayfaya atlar ve önceki sayfada büyük boşluk bırakır. Sol/sağ kenar boşluğu her sayfada
+     .l-body'den miras alınır (tekrar eklenmez); üst boşluk @page margin-top ile her sayfada tutarlıdır. */
+  #view-letter #fullTerms p,#view-letter #fullTerms .t-sub{break-inside:avoid;page-break-inside:avoid}
+  #view-letter #fullTerms h4{break-after:avoid;page-break-after:avoid}
+  /* Ara başlıkla (ör. "OPERASYONEL ZAMAN...") başlayan blok, altındaki tüm maddeleriyle birlikte
+     tek parça kabul edilir: sayfaya sığmıyorsa tamamı bir sonraki sayfaya geçer, başlık tek başına
+     bir sayfada, maddeleri başka bir sayfada kalmaz. Tarayıcının yazdırma başlığı/altbilgisi açıkken
+     sayfa yüksekliği azaldığında bile bu garantiyi korur. */
+  #view-letter #fullTerms .term-group{break-inside:avoid;page-break-inside:avoid}
+  #view-letter .terms-summary .ts-t{break-after:avoid;page-break-after:avoid;break-inside:avoid;page-break-inside:avoid}
+  #view-letter .terms-summary ul{break-inside:avoid;page-break-inside:avoid}
+  #view-letter .sign{break-inside:avoid;page-break-inside:avoid}
+  #view-letter .l-foot{padding-left:30px;padding-right:30px;break-inside:avoid;page-break-inside:avoid}
+}
+.admin-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(245,130,32,.15);color:#F79A46;
+  border:1px solid rgba(245,130,32,.35);border-radius:8px;padding:6px 11px;font-family:"Barlow Semi Condensed";
+  font-weight:700;font-size:12px;letter-spacing:.5px;text-transform:uppercase}
+.hbar .head-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.admin-logo{height:38px;width:auto;display:block}
+
+
+/* Yük Kontrol */
+.yk-photo-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.yk-photo-preview{width:84px;height:84px;border-radius:12px;background:var(--surface-2);border:1.5px dashed var(--line-strong);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;color:var(--muted);font-size:1.4rem}
+.yk-photo-preview img{width:100%;height:100%;object-fit:cover}
+.yk-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:520px){.yk-compare-grid{grid-template-columns:1fr}}
+.yk-compare-box{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.yk-compare-box .yk-cb-label{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:8px}
+.yk-compare-box .yk-cb-vals{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.yk-compare-box .yk-cb-vals .v{font-family:"Barlow Semi Condensed",sans-serif;font-weight:700;font-size:18px;color:var(--ink)}
+.yk-compare-box .yk-cb-vals .lab{font-size:12px;color:var(--muted)}
+.yk-badge{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px;letter-spacing:.2px}
+.yk-badge.yk-ok{background:var(--good-soft);color:var(--good)}
+.yk-badge.yk-warn{background:var(--accent-soft);color:var(--accent-ink)}
+.yk-badge.yk-bad{background:var(--danger-soft);color:var(--danger)}
+.yk-history-item{display:flex;gap:13px;padding:13px 0;border-top:1px solid var(--line)}
+.yk-history-item:first-child{border-top:none;padding-top:4px}
+.yk-history-thumb{width:62px;height:62px;border-radius:10px;background:var(--surface-2);flex-shrink:0;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.2rem}
+.yk-history-thumb img{width:100%;height:100%;object-fit:cover}
+.yk-history-body{flex:1;min-width:0}
+.yk-history-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:3px}
+.yk-history-kod{font-weight:700;font-size:15px;color:var(--ink)}
+.yk-history-date{font-size:12px;color:var(--muted);white-space:nowrap}
+.yk-history-line{font-size:13.5px;color:var(--muted);margin:2px 0}
+.yk-history-badges{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.yk-del-btn{background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;padding:2px 0;margin-top:6px;font-family:inherit}
+.yk-del-btn:hover{color:var(--danger);text-decoration:underline}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hbar">
+    <div class="brand">
+      <img class="admin-logo" src="data:image/png;base64,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" alt="VECTA Lojistik">
+      <div>
+        <div class="sub">Nakliye Maliyet &amp; Teklif Modeli</div>
+      </div>
+    </div>
+    <div class="head-actions">
+      <a class="theme-btn" href="index.html" title="Ana sayfaya geri dön">← Ana Sayfa</a>
+    </div>
+  </div>
+  <div class="tabs">
+    <div class="tabrow">
+      <button class="tab" data-view="custentry" type="button">Müşteri Bilgileri</button>
+      <button class="tab" data-view="alicientry" type="button">Alıcı Bilgileri</button>
+      <button class="tab active" data-view="calc" type="button">Hesaplayıcı</button>
+      <button class="tab" data-view="letter" type="button">Teklif Mektubu</button>
+      <button class="tab" data-view="quotes" type="button">Verilen Teklifler</button>
+      <button class="tab" data-view="yukkontrol" type="button">Yük Kontrol</button>
+      <button class="tab" data-view="cust" type="button">Kayıtlı Müşteriler</button>
+      <button class="tab" data-view="alicicust" type="button">Kayıtlı Alıcılar</button>
+      <button class="tab" data-view="params" type="button">Parametreler</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <!-- ============ MÜŞTERİ BİLGİLERİ (ayrı sekme, Hesaplayıcı'nın solunda) ============ -->
+  <section class="view" id="view-custentry">
+    <div class="card cust-entry-card" id="custEntryCard">
+      <div class="card-h"><span class="tag">1. Adım</span><h2>Müşteri Bilgileri</h2></div>
+      <div class="card-b">
+        <div class="field"><label>Müşteri</label><input type="text" id="cName" value="" placeholder="Müşteri adı"></div>
+        <div class="row2">
+          <div class="field"><label>İlgili Kişi</label><input type="text" id="cContact" value="" placeholder="İlgili kişi"></div>
+          <div class="field"><label>İletişim</label><input type="text" id="cPhone" value="" placeholder="0532 000 00 00" inputmode="numeric" maxlength="14"></div>
+        </div>
+        <div class="field"><label>E-posta</label><input type="email" id="cEmail" value="" placeholder="ornek@firma.com" autocomplete="off"></div>
+        <div class="row2">
+          <div class="field"><label>Vergi Dairesi</label><input type="text" id="cVergiD" value="" placeholder="Vergi dairesi" autocomplete="off"></div>
+          <div class="field"><label>Vergi Numarası</label><input type="text" id="cVergiNo" value="" placeholder="Vergi numarası" autocomplete="off"></div>
+        </div>
+        <div class="field"><label>Yükün İçeriği</label><input type="text" id="cCargo" value="" placeholder="Yükün içeriği"></div>
+        <div class="save-cust-row">
+          <button class="btn" id="editCustBtn" type="button" style="display:none">✏️ Bilgileri Değiştir</button>
+          <button class="btn primary" id="saveCustBtn" type="button">💾 Müşteri Kaydet</button>
+        </div>
+        <div class="cust-locked-hint" id="custLockedHint" style="display:none">🔒 Müşteri bilgileri kaydedildi ve kilitlendi. Teklife bu bilgiler otomatik işlenir — değiştirmek için "✏️ Bilgileri Değiştir"e basın.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ALICI BİLGİLERİ (Müşteri Bilgileri gibi ayrı sekme) ============ -->
+  <section class="view" id="view-alicientry">
+    <div class="card cust-entry-card" id="aliciEntryCard">
+      <div class="card-h"><span class="tag">2. Adım</span><h2>Alıcı Bilgileri</h2></div>
+      <div class="card-b">
+        <div class="field"><label>Alıcı</label><input type="text" id="aName" value="" placeholder="Alıcı adı"></div>
+        <div class="row2">
+          <div class="field"><label>İlgili Kişi</label><input type="text" id="aContact" value="" placeholder="İlgili kişi"></div>
+          <div class="field"><label>İletişim</label><input type="text" id="aPhone" value="" placeholder="0532 000 00 00" inputmode="numeric" maxlength="14"></div>
+        </div>
+        <div class="field"><label>E-posta</label><input type="email" id="aEmail" value="" placeholder="ornek@firma.com" autocomplete="off"></div>
+        <div class="row2">
+          <div class="field"><label>Vergi Dairesi</label><input type="text" id="aVergiD" value="" placeholder="Vergi dairesi" autocomplete="off"></div>
+          <div class="field"><label>Vergi Numarası</label><input type="text" id="aVergiNo" value="" placeholder="Vergi numarası" autocomplete="off"></div>
+        </div>
+        <div class="save-cust-row">
+          <button class="btn" id="editAliciBtn" type="button" style="display:none">✏️ Bilgileri Değiştir</button>
+          <button class="btn primary" id="saveAliciBtn" type="button">💾 Alıcı Kaydet</button>
+        </div>
+        <div class="cust-locked-hint" id="aliciLockedHint" style="display:none">🔒 Alıcı bilgileri kaydedildi ve kilitlendi. Değiştirmek için "✏️ Bilgileri Değiştir"e basın.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CALCULATOR ============ -->
+  <section class="view active" id="view-calc">
+    <div class="grid">
+      <!-- INPUTS -->
+      <div class="card">
+        <div class="card-h"><span class="tag">Girdi</span><h2>Sefer &amp; Yük Bilgileri</h2></div>
+        <div class="card-b">
+
+          <div class="subhead">Rota</div>
+          <div class="row2">
+            <div class="field">
+              <label>Çıkış Noktası</label>
+              <input type="text" id="fromInput" placeholder="ör. Bursa" autocomplete="off">
+            </div>
+            <div class="field">
+              <label>Varış Noktası</label>
+              <input type="text" id="toInput" placeholder="ör. Ankara" autocomplete="off">
+            </div>
+          </div>
+          <div class="field"><label>Net Mesafe (km)</label><input class="num-in" type="number" id="netKm" min="0" step="1" value="" placeholder="—"></div>
+
+          <div class="subhead">Yük</div>
+          <div class="row2">
+            <div class="field"><label>Yükün Ağırlığı (kg)</label><input class="num-in" type="number" id="wKg" min="0" step="1" value="" placeholder="—"></div>
+            <div class="field"><label>Yükün Hacmi (m³)</label><input class="num-in" type="number" id="vM3" min="0" step="0.1" value="" placeholder="—"></div>
+          </div>
+          <div class="chips" id="capChips"></div>
+
+          <div class="subhead">Ticari Koşullar</div>
+          <div class="row2">
+            <div class="field">
+              <label>Ödeme Şekli</label>
+              <select id="paySel">
+                <option value="Nakit">Nakit</option>
+                <option value="7 Gün">7 Gün Vadeli</option>
+                <option value="10 Gün">10 Gün Vadeli</option>
+                <option value="15 Gün">15 Gün Vadeli</option>
+                <option value="Kredi Kartı">Kredi Kartı</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Ödemeyi Kim Yapacak</label>
+              <select id="payerSel">
+                <option>Yükü Alan</option>
+                <option>Yükü Veren</option>
+              </select>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field"><label>Teslimat Noktası Sayısı</label><input class="num-in" type="number" id="delivPts" min="1" step="1" value="" placeholder="—"></div>
+            <div class="field"><label>Özel İndirim (₺)</label><input class="num-in" type="number" id="specialDisc" min="0" step="1" value="" placeholder="—"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="card">
+        <div class="card-h"><span class="tag">Sonuç</span><h2>Maliyet &amp; Fiyat Dökümü</h2></div>
+        <div class="card-b">
+          <div class="mini-metrics">
+            <div class="metric accent"><div class="m-k">Kar Oranı</div><div class="m-v num" id="mProfitPct">–</div></div>
+            <div class="metric good"><div class="m-k">İndirim Sonrası Kâr</div><div class="m-v num" id="mProfitNet">–</div></div>
+          </div>
+
+          <div class="result-list">
+            <div class="rline"><div class="lbl">Taban Maliyet <small>Baskın kapasite oranı × hedef taban (kâr dahil)</small></div><div class="val num" id="rTaban">–</div></div>
+            <div class="rline"><div class="lbl">Yakıt Bedeli <small>Yakıt tutarı × mesafe × baskın oran</small></div><div class="val num" id="rYakit">–</div></div>
+            <div class="rline sub"><div class="lbl">Toplam Fiyat (KDV Hariç)</div><div class="val num" id="rToplamKdvHaric">–</div></div>
+            <div class="rline"><div class="lbl">Teslimat Noktası Bedeli</div><div class="val num" id="rTeslimat">–</div></div>
+            <div class="rline sub"><div class="lbl">Ara Toplam</div><div class="val num" id="rAraToplam1">–</div></div>
+            <div class="rline disc"><div class="lbl">Özel İndirim</div><div class="val num" id="rIndirim">–</div></div>
+            <div class="rline sub"><div class="lbl">Ara Toplam (KDV Hariç)</div><div class="val num" id="rAraToplam2">–</div></div>
+            <div class="rline"><div class="lbl">KDV %20</div><div class="val num" id="rKdv">–</div></div>
+          </div>
+
+          <div class="total-box">
+            <div class="t-l">GENEL TOPLAM<small>KDV Dahil</small></div>
+            <div class="t-v num" id="rGenelToplam">–</div>
+          </div>
+
+          <div class="warnbox" id="capWarn"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUOTE LETTER ============ -->
+  <section class="view" id="view-letter">
+    <div class="letter-actions">
+      <button class="btn primary" id="printBtn" type="button">🖨 Yazdır</button>
+      <button class="btn primary" id="savePdfBtn" type="button">📄 PDF olarak kaydet</button>
+      <div class="field" style="margin:0"><input type="text" id="teklifNo" value="VCT-2026-001" style="width:180px" aria-label="Teklif No"></div>
+    </div>
+    <div id="quoteSaveMsg" style="font-size:13px;font-weight:600;min-height:1.1em;margin:-10px 0 16px"></div>
+    <div class="letter" id="letter">
+      <div class="l-top">
+        <div>
+          <div class="co">VECTA LOJİSTİK</div>
+          <div class="doc">Taşıma ve Lojistik Teklif Mektubu</div>
+        </div>
+        <div class="meta">
+          <div><span class="lab">Teklif Tarihi:</span> <span id="lDate"></span></div>
+          <div><span class="lab">Teklif No:</span> <span id="lNo"></span></div>
+        </div>
+      </div>
+      <div class="l-body">
+        <div class="parties">
+          <div class="party">
+            <h4>Müşteri Bilgileri</h4>
+            <div class="kv">
+              <span class="k">Müşteri:</span><span class="v" id="lcName"></span>
+              <span class="k">Vergi Dairesi:</span><span class="v" id="lcVergiD"></span>
+              <span class="k">Vergi No:</span><span class="v" id="lcVergiNo"></span>
+              <span class="k">İlgili Sn:</span><span class="v" id="lcContact"></span>
+              <span class="k">İletişim:</span><span class="v" id="lcPhone"></span>
+              <span class="k">E-posta:</span><span class="v" id="lcEmail"></span>
+            </div>
+          </div>
+          <div class="party">
+            <h4>Taşıyıcı Bilgileri</h4>
+            <div class="kv">
+              <span class="k">Taşıyıcı:</span><span class="v">VECTA LOJİSTİK</span>
+              <span class="k">İlgili Sn:</span><span class="v">Melih KÖKEN</span>
+              <span class="k">İletişim:</span><span class="v">0532 379 44 20</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="op-title">Sefer ve Operasyon Detayları</div>
+        <div class="op-grid">
+          <div class="op"><div class="k">Rota</div><div class="v" id="lRoute"></div></div>
+          <div class="op"><div class="k">Teslimat Noktası</div><div class="v" id="lPts"></div></div>
+          <div class="op"><div class="k">Ödeme Yöntemi</div><div class="v" id="lPay"></div></div>
+          <div class="op"><div class="k">Ödemeyi Kim Yapacak</div><div class="v" id="lPayer"></div></div>
+          <div class="op"><div class="k">Yükün İçeriği</div><div class="v" id="lCargo"></div></div>
+          <div class="op"><div class="k">Yük (kg / m³)</div><div class="v" id="lLoad"></div></div>
+        </div>
+
+        <div class="op-title">Finansal Teklif Özeti</div>
+        <table class="fin-table">
+          <tbody>
+            <tr><td>Lojistik ve Taşımacılık Bedeli</td><td class="r num" id="fLoj"></td></tr>
+            <tr><td>Teslimat Noktası Bedeli</td><td class="r num" id="fPts"></td></tr>
+            <tr class="disc"><td>İndirimler Toplamı</td><td class="r num" id="fDisc"></td></tr>
+            <tr><td>Ara Toplam</td><td class="r num" id="fSub"></td></tr>
+            <tr><td>Hesaplanan KDV Tutarı (%20)</td><td class="r num" id="fKdv"></td></tr>
+            <tr class="grand"><td>GENEL TOPLAM (KDV Dahil)</td><td class="r num" id="fGrand"></td></tr>
+          </tbody>
+        </table>
+        <div class="amount-words" id="fWords"></div>
+
+        <div class="terms terms-summary">
+          <h4>TEKLİF ŞARTLARI ve İSTİSNALAR (ÖZET)</h4>
+          <div id="summaryBox"></div>
+        </div>
+
+        <div class="terms" id="fullTerms">
+          <h4>TEKLİF ŞARTLARI ve İSTİSNALAR</h4>
+          <div id="termsBox"></div>
+        </div>
+
+        <div class="sign">
+          <div class="box"><b>Onay Tarihi</b><br>…../..../….....</div>
+          <div class="box" style="text-align:right"><b>Kaşe / İmza</b><br>…...............................</div>
+        </div>
+      </div>
+      <div class="l-foot">
+        <span>0532 - 379 44 20 &nbsp;·&nbsp; info@vectalojistik.com</span>
+        <span>Enpara Bank TR 33 0000 0000 0000 0000 0000 00</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VERİLEN TEKLİFLER ============ -->
+  <section class="view" id="view-quotes">
+    <div class="cust-page-head">
+      <h2>Verilen Teklifler <span class="cust-count" id="quoteCount"></span></h2>
+      <p>Teklif Mektubu'nda “📄 PDF olarak kaydet”e bastığında teklif buraya kaydedilir. Bir satıra tıklayınca teklif Hesaplayıcı'ya geri yüklenir.</p>
+    </div>
+    <div id="quoteList"></div>
+    <div id="quoteDetail" style="display:none">
+      <div class="q-actions">
+        <button class="btn" id="quoteBack" type="button">← Listeye dön</button>
+        <button class="btn primary" id="quotePrint" type="button">🖨 Yazdır</button>
+        <button class="btn" id="quoteYkBtn" type="button">📦 Yük Kontrol</button>
+        <div class="seg" id="quoteDetailSeg" style="margin-left:auto">
+          <button type="button" class="seg-btn" data-status="bekleme">Beklemede</button>
+          <button type="button" class="seg-btn" data-status="alindi">✅ Sipariş Alındı</button>
+          <button type="button" class="seg-btn" data-status="red">❌ Reddedildi</button>
+        </div>
+      </div>
+      <div class="letter" id="quoteLetter"></div>
+    </div>
+  </section>
+
+
+  <!-- ============ YÜK KONTROL ============ -->
+  <section class="view" id="view-yukkontrol">
+    <div class="cust-page-head">
+      <h2>Yük Kontrol <span class="cust-count" id="ykCount"></span></h2>
+      <p>Teslim aldığınız yükün fotoğrafını çekin, gerçek ölçü ve ağırlığını girin; sistem bunu teklifte verilen hacim ve ağırlık bilgisiyle otomatik karşılaştırır. Kayıtlar bu sekmede, "Verilen Teklifler"in hemen yanında tutulur.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <div class="card-h"><span class="tag">Yeni</span><h2>Yeni Kontrol Ekle</h2></div>
+      <div class="card-b">
+        <form id="ykForm">
+          <div class="field">
+            <label for="ykKod">Sipariş Kodu / Plaka</label>
+            <input type="text" id="ykKod" placeholder="Örn. 34ABC123" autocapitalize="characters" required>
+          </div>
+
+          <div class="subhead">Teklifte Verilen</div>
+          <div class="row2">
+            <div class="field">
+              <label for="ykTeklifHacim">Hacim (m³)</label>
+              <input class="num-in" type="number" id="ykTeklifHacim" step="0.01" min="0" placeholder="Örn. 2.40" required>
+            </div>
+            <div class="field">
+              <label for="ykTeklifAgirlik">Ağırlık (kg)</label>
+              <input class="num-in" type="number" id="ykTeklifAgirlik" step="0.1" min="0" placeholder="Örn. 480" required>
+            </div>
+          </div>
+
+          <div class="subhead">Teslim Alınca Ölçülen</div>
+          <div class="row4">
+            <div class="field"><label for="ykEn">En (cm)</label><input class="num-in" type="number" id="ykEn" step="0.1" min="0" placeholder="cm"></div>
+            <div class="field"><label for="ykBoy">Boy (cm)</label><input class="num-in" type="number" id="ykBoy" step="0.1" min="0" placeholder="cm"></div>
+            <div class="field"><label for="ykYukseklik">Yükseklik (cm)</label><input class="num-in" type="number" id="ykYukseklik" step="0.1" min="0" placeholder="cm"></div>
+            <div class="metric" style="margin-bottom:15px">
+              <div class="m-k">Hesaplanan Hacim</div>
+              <div class="m-v" id="ykHesaplananHacim">— m³</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="ykOlculenAgirlik">Tartılan Ağırlık (kg)</label>
+            <input class="num-in" type="number" id="ykOlculenAgirlik" step="0.1" min="0" placeholder="Örn. 505" required>
+          </div>
+
+          <div class="field">
+            <label for="ykTolerans">Tolerans (%) — bu farkın altı "uyumlu" sayılır</label>
+            <input class="num-in" type="number" id="ykTolerans" step="1" min="0" value="5">
+          </div>
+
+          <div class="subhead">Yük Fotoğrafı</div>
+          <div class="yk-photo-row">
+            <div class="yk-photo-preview" id="ykPhotoPreview">📷</div>
+            <label class="btn" for="ykPhotoInput">Fotoğraf Çek / Seç</label>
+            <input type="file" id="ykPhotoInput" accept="image/*" capture="environment" style="display:none">
+          </div>
+
+          <button type="submit" class="btn primary" id="ykSubmitBtn" style="margin-top:18px;width:100%;justify-content:center">Kaydet ve Karşılaştır</button>
+          <div id="ykFormError" style="color:var(--danger);font-size:.88rem;min-height:1.2em;margin-top:10px"></div>
+          <div id="ykFormOk" style="color:var(--good);font-size:.88rem;min-height:1.2em;margin-top:10px"></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="card" id="ykResultCard" style="display:none;margin-bottom:22px">
+      <div class="card-h"><h2>Karşılaştırma Sonucu</h2></div>
+      <div class="card-b">
+        <div class="yk-compare-grid">
+          <div class="yk-compare-box">
+            <div class="yk-cb-label">Hacim</div>
+            <div class="yk-cb-vals">
+              <span class="v" id="ykResHacimTeklif">—</span><span class="lab">teklif</span>
+              <span style="color:var(--muted)">→</span>
+              <span class="v" id="ykResHacimOlculen">—</span><span class="lab">ölçülen</span>
+            </div>
+            <span class="yk-badge" id="ykResHacimBadge">—</span>
+          </div>
+          <div class="yk-compare-box">
+            <div class="yk-cb-label">Ağırlık</div>
+            <div class="yk-cb-vals">
+              <span class="v" id="ykResAgirlikTeklif">—</span><span class="lab">teklif</span>
+              <span style="color:var(--muted)">→</span>
+              <span class="v" id="ykResAgirlikOlculen">—</span><span class="lab">ölçülen</span>
+            </div>
+            <span class="yk-badge" id="ykResAgirlikBadge">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><h2>Geçmiş Kontroller</h2></div>
+      <div class="card-b">
+        <div class="field"><input type="text" id="ykSearchInput" placeholder="Sipariş kodu / plaka ile filtrele..."></div>
+        <div id="ykHistoryList"><div class="cust-empty">Yükleniyor...</div></div>
+      </div>
+    </div>
+  </section>
+  <!-- ============ PARAMETERS ============ -->
+  <section class="view" id="view-params">
+    <div class="card" style="margin-bottom:22px">
+      <div class="card-h"><span class="tag">Entegrasyon</span><h2>☁️ Google Drive / Sheets Bağlantısı</h2></div>
+      <div class="card-b">
+        <p class="hint" style="margin:0 0 14px">Bir teklifi <b>"📄 PDF olarak kaydet"</b>e bastığında, teklif mektubunun PDF'i Drive'daki <b>Teklifler</b> klasörüne, müşteri + <b>alıcı</b> ve teklif bilgileri de aynı klasördeki <b>Müşteriler</b> Google E-Tablosuna otomatik eklenir. <b>Yük Kontrol</b>'de bir kayıt kaydedildiğinde ise çekilen fotoğraf yine <b>Teklifler</b> klasörü içindeki <b>Yük Kontrol Fotoğrafları</b> alt klasörüne, ölçüm bilgileri de aynı E-Tablonun <b>Yük Kontrol</b> sayfasına eklenir. Bunun çalışması için önce ücretsiz bir Google Apps Script bağlantısı kurmanız gerekir — kod ve adım adım talimat ayrıca verildi.</p>
+        <div class="field">
+          <label for="gasUrl">Google Apps Script Web App URL'si</label>
+          <input type="text" id="gasUrl" placeholder="https://script.google.com/macros/s/…/exec">
+        </div>
+        <label class="inline-toggle"><input type="checkbox" id="gasAuto" checked>Teklif kaydedilince otomatik gönder</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+          <button class="btn primary" id="gasSaveBtn" type="button">💾 Bağlantıyı Kaydet</button>
+          <button class="btn" id="gasTestBtn" type="button">🔌 Bağlantıyı Test Et</button>
+        </div>
+        <div id="gasMsg" style="font-size:13px;font-weight:600;min-height:1.1em;margin-top:12px"></div>
+      </div>
+    </div>
+    <div class="params-bar">
+      <span class="hint" id="saveMsg" style="margin:0"></span>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-left:auto">
+        <button class="btn primary" id="saveParamsBtn" type="button">💾 Kaydet</button>
+      </div>
+    </div>
+    <div class="pcols" id="paramCols"></div>
+  </section>
+
+  <!-- ============ KAYITLI TEKLİFLER ============ -->
+  <section class="view" id="view-cust">
+    <div class="cust-page-head">
+      <h2>Kayıtlı Müşteriler <span class="cust-count" id="custCount"></span></h2>
+      <p>Kaydettiğin müşteri bilgileri burada listelenir. Bir karta tıklayınca bilgiler Hesaplayıcı'ya yüklenir.</p>
+    </div>
+    <div id="custList"></div>
+  </section>
+
+  <!-- ============ KAYITLI ALICILAR ============ -->
+  <section class="view" id="view-alicicust">
+    <div class="cust-page-head">
+      <h2>Kayıtlı Alıcılar <span class="cust-count" id="aliciCount"></span></h2>
+      <p>Kaydettiğin alıcı bilgileri burada listelenir. Bir karta tıklayınca bilgiler Hesaplayıcı'ya yüklenir.</p>
+    </div>
+    <div id="aliciList"></div>
+  </section>
+
+  <div class="foot-note">VECTA LOJİSTİK</div>
+</div>
+</main>
+
+<script>
+"use strict";
+
+// Şartlar: {t}=başlık (kalın), {b}=metin, {h}=ara başlık. {MESAFE}/{NOKTA}/{ODEME} form değerleriyle doldurulur.
+const TERMS = [
+{t:"Mesafe ve Güzergah Değişikliği", b:"İşbu teklif, formda belirtilen güzergah için geçerlidir. Mücbir sebepler dışında müşteri talebiyle güzergahın değiştirilmesi veya mesafenin aşılması durumunda, km başına güncel spot fiyat üzerinden \"Mesafe Fark Bedeli\" fatura edilir."},
+{t:"Çoklu Teslimat / Adres Farkı", b:"Fiyatlandırma, yukarıda beyan edilen {NOKTA} adet teslimat noktası baz alınarak yapılmıştır. Teklif onayından sonra talep edilecek her ilave uğrak/indirme noktası için tanımlı olan \"İlave Dağıtım Noktası Bedeli\" fiyata eklenir."},
+{t:"Bekleme ve Demoraj Süreleri", b:"Araçların yükleme ve boşaltma noktalarında, lojistik standartları gereği makul bekleme süresi maksimum 1 saattir. Bu süreyi aşan durumlarda, saatlik veya günlük Demoraj (Bekleme) Ücreti ayrıca yansıtılır."},
+{t:"Ödeme Şartları", b:"Teklif formunda seçilen {ODEME} yöntemine göre finansal süreç işletilir. Nakit ödeme yöntemine göre verilen fiyat tekliflerinde ödeme yöntemi \"Kredi Kartı İle Ödeme\" yöntemi ile değiştirilmek istenirse cari komisyon tutarı KDV ile birlikte Toplam tutara ilave edilerek tahsil edilir. Ödeme yöntemi değişiklikleri teklif fiyatını doğrudan bağlar. Ödeme Şekli \"Karşı Taraf\" yani Yükü alan taraf ödeyecek şeklinde bildirilmiş, ancak yük teslimi sırasında yükü alan kişi ya da kuruluş ödeme yapmaz ise taşıma bedeli yükü veren kişi ya da kurumdan tahsil edilir. Bu konudaki sorumluluk yükü verendedir."},
+{t:"Geçerlilik Süresi", b:"Yakıt fiyatlarındaki anlık dalgalanmalar ve piyasa koşulları sebebiyle işbu teklif mektubu, hazırlanan tarihten itibaren 3 (üç) iş günü geçerlidir."},
+{t:"Yük Kapasitesi, Hacim ve Beyan Doğruluğu", b:"İşbu fiyat teklifi, müşterinin beyan ettiği tonaj/hacim sınırları dahilinde verilmiştir. Taşınacak yükün, taşıma yapacak aracın yasal/teknik istiap haddini (taşıma kapasitesini) veya hacimsel sınırlarını aşması ya da beyan edilenden farklı (fazla) çıkması durumunda, aracın yükü kabul etmeme veya fazla yükü indirtme hakkı saklıdır. Yükün taşınmasının kabul edilmesi halinde, saptanan fazla ağırlık/hacim oranında \"Kapasite Aşım Primi\" fiyata yansıtılır. Beyan dışı fazla yüklemeden ya da yükleme sırasında araca verilen hasar sorumluluğu ve tazmini, trafik cezaları, rampa gecikmeleri ve araç hasar sorumluluğu tamamen yük sahibine (müşteriye) aittir."},
+{t:"Yük Sigortası, Emtia Güvencesi ve Sorumluluklar", b:"Taşınan yükün yasal Emtia Nakliyat Sigortası (Yük Sigortası), yükleme yapılmadan önce aksi yazılı olarak kararlaştırılmadıkça Müşteri (Yük Sahibi) tarafından yaptırılır. Sigorta poliçesinin bir nüshası sefer öncesinde tarafımıza iletilmelidir. Taşınan emtianın sigorta poliçesinde belirtilen şartlara ve muafiyet sınırlarına uygun olarak yüklenmesi esastır. Şirketimizin yasal taşıma sorumluluğu (CMR veya Yurtiçi Taşıyıcı Sorumluluk limitleri), nakliye esnasında meydana gelebilecek ve tamamen kusurumuzdan kaynaklanan hasarlarla sınırlı olup; doğal afetler, mücbir sebepler, eksik/hatalı ambalajlama veya müşteri tarafından yanlış beyan edilen emtia türü/değeri nedeniyle oluşabilecek zararlardan şirketimiz sorumlu tutulamaz."},
+{h:"Operasyonel Zaman, Yasal Sürüş Sınırı ve Ekstra Ücretlendirme Şartları"},
+{t:"Yasal Sürüş Sınırı ve Sürücü Mesaisi", b:"Yasal ve insani düzenlemeler gereği, bir sürücünün günlük aktif direksiyon (sürüş) sınırı 9 saat ile sınırlıdır. Operasyon esnasında (yol durumu, trafik, güzergâh zorunlulukları vb. nedenlerle) saf sürüş süresinin 9 saati aşması durumunda, aşan her saat için \"Mesai Ücreti\" toplam teklif bedeline ilave edilir."},
+{t:"Operasyon Süresi ve Araç Bağlama (Kayıp Gün) Bedeli", b:"Sürüş ve yükleme/boşaltma/bekleme süreleri dahil olmak üzere toplam operasyon süresinin 12 saati aşması durumunda; aracın bir sonraki günkü iş potansiyeli (fırsat maliyeti) ortadan kalktığı için, fiyata sabit + KDV olacak şekilde \"Araç Bağlama / Kayıp Gün Bedeli\" yansıtılır."},
+{t:"Süre Tespiti", b:"Sürüş ve operasyon sürelerinin hesaplanmasında, araç takip sistemi (GPS) verileri ve/veya gişelerden geçiş zamanları esas alınmaktadır."},
+{t:"Yükleme, boşaltma ve/veya taşıma sürücünün görevi değildir", b:"Ücreti ödenmesi teklif edilse bile sürücü yükleme, boşaltma ve/veya taşıma yapmaz. Herhangi bir nedenden dolayı yükün teslim alınmaması ya da yükü veren tarafından yükün geri çağrılması durumunda, anlaşmaya bağlanmış bedelin iki (2) katı fatura edilir."},
+{b:"Yükü veren kişi ya da kuruluş yükü verdiğinde bu koşulları kabul etmiş sayılır. İş bu taşıma Teklif Mektubunda yazan koşullar ve uygulamalar ile ilgili itilaf oluşması halinde Bursa Mahkemeleri yetkilidir."}
+];
+
+// Kısa özet şartlar (tutar yazısının altında, mektup gövdesinde)
+const TERMS_SUMMARY = [
+{t:"Mesafe ve Güzergah Değişikliği", b:"Fiyatımız formda belirtilen detaylar çerçevesinde geçerlidir. Müşteri talebi ile güzergah değişikliği, belirtilen mesafenin aşılması ya da teslimat noktalarının artırılması durumunda Km başına güncel spot masraflar +KDV olarak ücrete yansıtılır."},
+{t:"Bekleme Süreleri", b:"Aracın yükleme ve boşaltma noktalarında, lojistik standartları gereği makul bekleme süresi 1 saattir. Bu süreyi aşan durumlarda saatlik ya da günlük Demoraj (Bekleme) ücreti ayrıca yansıtılır."},
+{t:"Ödeme Şartları", b:"Teklifte belirtilen ödeme yöntemine göre finansal süreç yürütülür. Nakit ödeme yöntemi kredi kartı ödeme yöntemi ile değiştirilmek istenirse cari komisyon tutarı KDV ile birlikte genel toplama ilave edilir."},
+{t:"Geçerlilik Süresi", b:"Yakıt fiyatlarının değişkenlik göstermesi nedeni ile işbu teklif mektubu, hazırlanan tarihten itibaren 3 (üç) gün geçerlidir."},
+{t:"Yük Kapasitesi, Hacim ve Beyan Doğruluğu", b:"İşbu fiyat teklifi müşterinin beyan ettiği ağırlık/hacim sınırları dahilinde verilmiştir. Taşınacak yükün, taşınacak aracın yasal/teknik istiap haddini/hacmini aşması ya da beyan edilenden farklı çıkması durumunda aracın yükü kabul etmeme ya da fazla yükü indirme hakkı saklıdır."},
+{t:"Yük Sigortası", b:"Taşınan yükün yasal Emtia Nakliyat Sigortası (yük sigortası) yükleme yapılmadan önce aksi yazılı olarak kararlaştırılmadıkça Müşteri (yük Sahibi) tarafından yaptırılır."}
+];
+
+// ---------- Parametre tanımları (Model 2 — Maliyet ve Teklif Hesaplama Modeli) ----------
+const DEF = {
+  yakitBaz:14,        // ₺/km  yakıt - lastik - bakım maliyeti (baz)
+  yakitCarpani:1.7,   // ×     yakıt çarpanı
+  gunlukSabit:13300,  // ₺/gün günlük sabit gider
+  konaklamaYemek:3100,// ₺/gün konaklama ve yemek
+  hedefKar:25000,     // ₺/gün günlük hedeflenen kâr
+  kapKg:1500,         // kg    taşıma kapasitesi
+  kapM3:15,           // m³    taşıma kapasitesi
+  hedefDoluluk:75,    // %     hedef doluluk oranı (min)
+  fazlaTeslimat:0     // ₺     ilave teslimat noktası ücreti
+};
+let P = Object.assign({}, DEF);
+
+// Parametre panel yapısı — Model 2 (Sabit Parametreler2 sayfası) ile birebir
+const PARAM_GROUPS = [
+  {t:"Yakıt", items:[
+    {k:"yakitBaz",l:"Yakıt - Lastik - Bakım Maliyeti",u:"₺/km"},
+    {k:"yakitCarpani",l:"Yakıt Çarpanı",u:"×"},
+    {d:"yakitTutari",l:"Kullanılacak Yakıt Tutarı",u:"₺/km",fn:P=>P.yakitBaz*P.yakitCarpani},
+  ]},
+  {t:"Günlük Giderler", items:[
+    {k:"gunlukSabit",l:"Günlük Sabit Gider",u:"₺/gün"},
+    {k:"konaklamaYemek",l:"Konaklama ve Yemek",u:"₺/gün"},
+    {d:"maliyetTabani",l:"Maliyet Tabanı (Yakıt Hariç)",u:"₺/gün",fn:P=>P.gunlukSabit+P.konaklamaYemek},
+    {k:"hedefKar",l:"Günlük Hedeflenen Kâr",u:"₺/gün"},
+    {d:"hedefTaban",l:"Hedef Taban (Yakıt Hariç)",u:"₺/gün",fn:P=>(P.gunlukSabit+P.konaklamaYemek)+P.hedefKar},
+  ]},
+  {t:"Kapasite & Doluluk", items:[
+    {k:"kapKg",l:"Taşıma Kapasitesi",u:"kg"},
+    {k:"kapM3",l:"Taşıma Kapasitesi",u:"m³"},
+    {k:"hedefDoluluk",l:"Hedef Doluluk Oranı (Min)",u:"%"},
+    {d:"hedefKg",l:"Hedeflenen Ağırlık",u:"kg",fn:P=>P.kapKg*P.hedefDoluluk/100},
+    {d:"hedefM3",l:"Hedeflenen Hacim",u:"m³",fn:P=>P.kapM3*P.hedefDoluluk/100},
+  ]},
+  {t:"Diğer Ücretler", items:[
+    {k:"fazlaTeslimat",l:"Teslimat Noktası Ücreti (ilave)",u:"₺"},
+  ]},
+];
+
+// ---------- Yardımcılar ----------
+const trFmt = new Intl.NumberFormat('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const trFmt0 = new Intl.NumberFormat('tr-TR',{minimumFractionDigits:0,maximumFractionDigits:0});
+const trFmt1 = new Intl.NumberFormat('tr-TR',{minimumFractionDigits:0,maximumFractionDigits:2});
+function tl(x){return trFmt.format(x||0)+' ₺';}
+function pct(x){return trFmt1.format(x||0)+' %';}
+function el(id){return document.getElementById(id);}
+
+// ---------- State ----------
+function getDist(){
+  const net=parseFloat(el('netKm').value)||0;
+  return {net:net};
+}
+
+// Model 2 — Maliyet ve Teklif Hesaplama Modeli (Parsiyel Yük Hesaplama sayfası ile birebir):
+//   Hedeflenen Ağırlık/Hacim = Kapasite × Hedef Doluluk Oranı  (Sabit Parametreler2!B27,B28)
+//   Baskın Oran %            = MAX(Ağırlık Kapasite %, Hacim Kapasite %)
+//   Taban Maliyet             = Hedef Taban (Yakıt Hariç) × Baskın Oran%              (B22)
+//   Yakıt Bedeli               = (Yakıt Tutarı × Mesafe) × Baskın Oran%                (C22)
+//   Toplam Fiyat (KDV Hariç)  = Taban Maliyet + Yakıt Bedeli                           (E22)
+//   Teslimat Noktası Bedeli   = (Nokta Sayısı - 1) × Teslimat Noktası Ücreti           (E23)
+//   Ara Toplam → Özel İndirim → Ara Toplam → KDV %20 → GENEL TOPLAM                    (E24…E28)
+let lastCalc=null;
+function calc(){
+  const dist=getDist();
+  const wKg=parseFloat(el('wKg').value)||0;
+  const vM3=parseFloat(el('vM3').value)||0;
+
+  const hedefKg = P.kapKg*P.hedefDoluluk/100;
+  const hedefM3 = P.kapM3*P.hedefDoluluk/100;
+  const capW = hedefKg? 100*wKg/hedefKg : 0;
+  const capV = hedefM3? 100*vM3/hedefM3 : 0;
+  const dom = Math.max(capW, capV);
+
+  const yakitTutari = P.yakitBaz*P.yakitCarpani;
+  const maliyetTabani = P.gunlukSabit + P.konaklamaYemek;
+  const hedefTaban = maliyetTabani + P.hedefKar;
+
+  const tabanMaliyet = hedefTaban * dom/100;
+  const yakitBedeli = (yakitTutari * dist.net) * dom/100;
+  const toplamKdvHaric = tabanMaliyet + yakitBedeli;
+
+  const delivPts = Math.max(1, parseInt(el('delivPts').value,10)||1);
+  const teslimatBedeli = delivPts>1 ? (delivPts-1)*P.fazlaTeslimat : 0;
+  const araToplam1 = toplamKdvHaric + teslimatBedeli;
+
+  const pay = el('paySel').value;
+  const indirim = parseFloat(el('specialDisc').value)||0;
+  const araToplam2 = araToplam1 - indirim;
+  const kdv = araToplam2 * 0.20;
+  const genelToplam = araToplam2 + kdv;
+
+  // Bu seferin günlük hedef kârdan aldığı pay (bilgi amaçlı — müşteri teklifinde ayrı satır olarak görünmez)
+  const profitPortion = P.hedefKar*dom/100;
+  const costPortion = maliyetTabani*dom/100 + yakitBedeli;
+  const profitPct = costPortion? 100*profitPortion/costPortion : 0;
+  const profitNet = profitPortion - indirim;
+
+  lastCalc = {dist,wKg,vM3,capW,capV,dom,tabanMaliyet,yakitBedeli,toplamKdvHaric,teslimatBedeli,araToplam1,indirim,araToplam2,kdv,genelToplam,profitPortion,profitPct,profitNet,delivPts,pay};
+  renderCalc();
+  renderLetter();
+}
+
+function renderCalc(){
+  const c=lastCalc;
+  // capacity chips
+  const domW = c.capW>=c.capV;
+  el('capChips').innerHTML =
+    `<span class="chip${domW?' dom':''}"><span class="k">Ağırlık</span> <b class="num">${pct(c.capW)}</b></span>`+
+    `<span class="chip${!domW?' dom':''}"><span class="k">Hacim</span> <b class="num">${pct(c.capV)}</b></span>`;
+
+  el('rTaban').textContent=tl(c.tabanMaliyet);
+  el('rYakit').textContent=tl(c.yakitBedeli);
+  el('rToplamKdvHaric').textContent=tl(c.toplamKdvHaric);
+  el('rTeslimat').textContent = c.teslimatBedeli? tl(c.teslimatBedeli) : '—';
+  el('rAraToplam1').textContent=tl(c.araToplam1);
+  el('rIndirim').textContent = c.indirim? '− '+tl(c.indirim) : '—';
+  el('rAraToplam2').textContent=tl(c.araToplam2);
+  el('rKdv').textContent=tl(c.kdv);
+  el('rGenelToplam').textContent=tl(c.genelToplam);
+  el('mProfitPct').textContent=trFmt0.format(c.profitPct)+' %';
+  el('mProfitNet').textContent=tl(c.profitNet);
+
+  const w=el('capWarn');
+  if(c.dom>100){ w.classList.add('show'); w.textContent='⚠ Baskın kapasite oranı %100\'ü aşıyor ('+pct(c.dom)+'). Yük, hedeflenen doluluk kapasitesinin üzerinde — araç istiap haddi kontrol edilmeli.'; }
+  else { w.classList.remove('show'); }
+}
+
+// Rakamı yazıya çevir (Teklif Mektubu için)
+const ONES=["","Bir","İki","Üç","Dört","Beş","Altı","Yedi","Sekiz","Dokuz"];
+const TENS=["","On","Yirmi","Otuz","Kırk","Elli","Altmış","Yetmiş","Seksen","Doksan"];
+function words3(n){ // 0-999
+  let s="";
+  const h=Math.floor(n/100), t=Math.floor((n%100)/10), o=n%10;
+  if(h){ s += (h===1?"Yüz":ONES[h]+"Yüz"); }
+  s += TENS[t] + ONES[o];
+  return s;
+}
+function numToWords(num){
+  const intPart=Math.floor(num);
+  const kurus=Math.round((num-intPart)*100);
+  let tl="";
+  const milyon=Math.floor(intPart/1000000);
+  const bin=Math.floor((intPart%1000000)/1000);
+  const yuz=intPart%1000;
+  if(milyon){ tl += words3(milyon)+"Milyon"; }
+  if(bin){ tl += (bin===1?"Bin":words3(bin)+"Bin"); }
+  if(yuz){ tl += words3(yuz); }
+  if(!tl) tl="Sıfır";
+  let kr = kurus? words3(kurus) : "Sıfır";
+  return "Yalnız "+tl+" TL, "+kr+" Krş.";
+}
+
+function renderLetter(){
+  const c=lastCalc;
+  const d=new Date();
+  el('lDate').textContent=d.toLocaleDateString('tr-TR');
+  el('lNo').textContent=el('teklifNo').value||'—';
+  el('lcName').textContent=el('cName').value||'—';
+  el('lcVergiD').textContent=el('cVergiD').value||'—';
+  el('lcVergiNo').textContent=el('cVergiNo').value||'—';
+  el('lcContact').textContent=el('cContact').value||'—';
+  el('lcPhone').textContent=el('cPhone').value||'—';
+  el('lcEmail').textContent=el('cEmail').value||'—';
+  const f=(el('fromInput').value||'—').trim(), t=(el('toInput').value||'—').trim();
+  el('lRoute').textContent = f+' → '+t;
+  el('lPts').textContent=c.delivPts;
+  el('lPay').textContent=c.pay;
+  el('lPayer').textContent=el('payerSel').value;
+  el('lCargo').textContent=el('cCargo').value||'—';
+  el('lLoad').textContent=trFmt0.format(c.wKg)+' kg / '+trFmt1.format(c.vM3)+' m³';
+
+  el('fLoj').textContent=tl(c.toplamKdvHaric);
+  el('fPts').textContent=tl(c.teslimatBedeli);
+  el('fDisc').textContent= c.indirim? '− '+tl(c.indirim) : tl(0);
+  el('fSub').textContent=tl(c.araToplam2);
+  el('fKdv').textContent=tl(c.kdv);
+  el('fGrand').textContent=tl(c.genelToplam);
+  el('fWords').textContent=numToWords(c.genelToplam);
+  renderTerms(c);
+}
+
+function renderTerms(c){
+  const payFull={"Nakit":"Nakit","7 Gün":"7 Gün Vadeli","10 Gün":"10 Gün Vadeli","15 Gün":"15 Gün Vadeli","Kredi Kartı":"Kredi Kartı"};
+  const rep = s => s
+    .replace(/\{MESAFE\}/g, trFmt0.format(c.dist.net))
+    .replace(/\{NOKTA\}/g, c.delivPts)
+    .replace(/\{ODEME\}/g, payFull[c.pay]||c.pay);
+  const itemHtml = it=>{
+    if(it.h) return `<div class="t-sub">${it.h}</div>`;
+    const lead = it.t ? `<b>${rep(it.t)}:</b> ` : '';
+    return `<p>${lead}${rep(it.b)}</p>`;
+  };
+  // {h} ile başlayan bir ara başlık, bir sonraki {h}'e (ya da listenin sonuna) kadarki tüm
+  // maddeleriyle birlikte tek bir kapsayıcıya (.term-group) sarılır; böylece yazdırırken bu
+  // blok sayfalar arasında bölünmez, sığmadığında bütün olarak bir sonraki sayfaya geçer.
+  let html = '', inGroup = false;
+  TERMS.forEach(it=>{
+    if(it.h){
+      if(inGroup) html += '</div>';
+      html += '<div class="term-group">' + itemHtml(it);
+      inGroup = true;
+    } else {
+      html += itemHtml(it);
+    }
+  });
+  if(inGroup) html += '</div>';
+  el('termsBox').innerHTML = html;
+  el('summaryBox').innerHTML = TERMS_SUMMARY.map(it=>
+    `<div class="ts-t">${it.t}:</div><ul><li>${it.b}</li></ul>`
+  ).join('');
+}
+
+// ---------- Kurulum ----------
+function buildParams(){
+  const cont=el('paramCols'); cont.innerHTML="";
+  PARAM_GROUPS.forEach(g=>{
+    const box=document.createElement('div'); box.className='pgroup';
+    let rows="";
+    g.items.forEach(it=>{
+      if(it.d){
+        rows+=`<div class="prow derived"><label>${it.l}</label><div class="dval num" data-derived="${it.d}"></div><span class="unit">${it.u}</span></div>`;
+      }else{
+        rows+=`<div class="prow"><label>${it.l}</label><input class="num num-in" type="number" step="any" data-param="${it.k}" value="${P[it.k]?P[it.k]:''}" placeholder="—"><span class="unit">${it.u}</span></div>`;
+      }
+    });
+    box.innerHTML=`<h3><span class="dot"></span>${g.t}</h3><div class="pb">${rows}</div>`;
+    cont.appendChild(box);
+  });
+  cont.querySelectorAll('input[data-param]').forEach(inp=>{
+    inp.addEventListener('input',()=>{
+      const k=inp.dataset.param; const v=parseFloat(inp.value);
+      P[k]=isNaN(v)?0:v;
+      updateDerived(); calc();
+    });
+  });
+  updateDerived();
+}
+function updateDerived(){
+  document.querySelectorAll('[data-derived]').forEach(nd=>{
+    const key=nd.dataset.derived;
+    for(const g of PARAM_GROUPS){ for(const it of g.items){ if(it.d===key){ nd.textContent=trFmt.format(it.fn(P)); return; } } }
+  });
+}
+
+// Telefon numarası kuralları: yalnızca rakam, başında 0 zorunlu, toplam 11
+// haneyi (0 dahil) aşan fazladan rakam yazdırılmaz. Yazarken 0XXX XXX XX XX
+// biçiminde otomatik gruplanır. calc()'ı tetikleyen input dinleyicilerinden
+// ÖNCE bağlanır ki calc() her zaman biçimlenmiş güncel değeri okusun.
+function formatTRPhone(digits){
+  let d=String(digits||'');
+  if(d.length){
+    if(d[0]!=='0') d='0'+d; // başına 0 koyma zorunluluğu
+    d=d.slice(0,11); // fazladan rakam yazdırma: 0 dahil en fazla 11 hane
+  }
+  const p1=d.slice(0,4), p2=d.slice(4,7), p3=d.slice(7,9), p4=d.slice(9,11);
+  return [p1,p2,p3,p4].filter(Boolean).join(' ');
+}
+// Yapıştırılan tam numaralarda (ör. rehberden kopyalanan "+90 532 680 44 20")
+// başındaki ülke kodunu atıp yerel biçime çeviriyoruz. Bu, sadece tek seferde
+// gelen yapıştırma işleminde güvenli (yazarken hane hane uygulanırsa hatalı
+// sonuç verir), o yüzden yalnızca paste olayında kullanılıyor.
+function stripTRCountryCode(rawDigits){
+  let d=String(rawDigits||'');
+  if(d.length>10 && d.startsWith('90')) d=d.slice(2);
+  return d;
+}
+function bindPhoneField(id){
+  const input=el(id); if(!input) return;
+  input.addEventListener('input',(e)=>{
+    const onlyDigits=input.value.replace(/\D/g,'');
+    const d = (e.inputType==='insertFromPaste') ? stripTRCountryCode(onlyDigits) : onlyDigits;
+    input.value=formatTRPhone(d);
+  });
+  input.addEventListener('blur',()=>{ input.value=formatTRPhone(input.value.replace(/\D/g,'')); });
+}
+bindPhoneField('cPhone');
+bindPhoneField('aPhone');
+
+// events
+['paySel','payerSel'].forEach(id=>el(id).addEventListener('change',calc));
+['fromInput','toInput','netKm','wKg','vM3','delivPts','specialDisc','cName','cVergiD','cVergiNo','cContact','cPhone','cEmail','cCargo','teklifNo']
+  .forEach(id=>el(id).addEventListener('input',calc));
+
+// Parametreleri kaydet / geri yükle (yalnızca Kaydet butonuyla)
+const PARAM_KEY='vecta_params_v3';
+function saveParams(){ try{ localStorage.setItem(PARAM_KEY, JSON.stringify(P)); }catch(e){} }
+function loadParams(){ try{ const s=localStorage.getItem(PARAM_KEY); if(s){ Object.assign(P, JSON.parse(s)); } }catch(e){} }
+// Eski sürümlerden kalan kayıtları temizle (yanlış sayıların gelmemesi için)
+try{ localStorage.removeItem('vecta_params'); localStorage.removeItem('vecta_teklifNo'); }catch(e){}
+el('saveParamsBtn').addEventListener('click',()=>{
+  saveParams();
+  const m=el('saveMsg');
+  m.style.color='var(--good)'; m.textContent='✓ Değerler kaydedildi. Bundan sonra bu değerlerle açılır.';
+  setTimeout(()=>{ m.textContent=''; },4000);
+});
+// Teklif numarası: sondaki rakam grubunu 1 artırır (sıfır dolgusunu korur)
+function bumpTeklifNo(no){
+  const m=String(no).match(/^(.*?)(\d+)(\D*)$/);
+  if(!m) return no;
+  const w=m[2].length;
+  return m[1]+String(parseInt(m[2],10)+1).padStart(w,'0')+m[3];
+}
+// Yazdır — yalnızca yazdırma penceresini açar
+el('printBtn').addEventListener('click',()=>{
+  const orig=document.title;
+  const no=(el('teklifNo').value||'Teklif').trim();
+  document.title='VECTA LOJİSTİK - '+no; // tarayıcı PDF başlığı/dosya adı
+  window.print();
+  setTimeout(()=>{ document.title=orig; },600);
+});
+
+// ===== Verilen Teklifler =====
+const QUOTE_KEY='vecta_quotes';
+function loadQuotes(){ try{ return JSON.parse(localStorage.getItem(QUOTE_KEY)||'[]'); }catch(e){ return []; } }
+function saveQuotes(l){
+  try{
+    const json=JSON.stringify(l);
+    localStorage.setItem(QUOTE_KEY, json);
+    // Bazı tarayıcılarda (gizli sekme, dolu depolama vb.) yazma sessizce başarısız olabilir — geri okuyup doğrula
+    return localStorage.getItem(QUOTE_KEY)===json;
+  }catch(e){
+    console.error('Teklif kaydedilemedi:', e);
+    return false;
+  }
+}
+function currentQuote(){
+  return {
+    type:'teklif',
+    no:el('teklifNo').value||'', date:new Date().toLocaleDateString('tr-TR'),
+    name:el('cName').value||'', contact:el('cContact').value||'', phone:el('cPhone').value||'',
+    email:el('cEmail').value||'', vergiD:el('cVergiD').value||'', vergiNo:el('cVergiNo').value||'', cargo:el('cCargo').value||'',
+    // Alıcı bilgileri (Alıcı Bilgileri sekmesi) — teklif kaydıyla birlikte Drive/Sheets'e de gönderilsin diye buraya eklendi
+    aName:el('aName').value||'', aContact:el('aContact').value||'', aPhone:el('aPhone').value||'',
+    aEmail:el('aEmail').value||'', aVergiD:el('aVergiD').value||'', aVergiNo:el('aVergiNo').value||'',
+    from:el('fromInput').value||'', to:el('toInput').value||'', netKm:el('netKm').value||'',
+    wKg:el('wKg').value||'', vM3:el('vM3').value||'', delivPts:el('delivPts').value||'', specialDisc:el('specialDisc').value||'',
+    pay:el('paySel').value, payer:el('payerSel').value, total:el('rGenelToplam').textContent||'',
+    letterHtml:el('letter').innerHTML  // teklif mektubunun tamamı (anlık görüntü)
+  };
+}
+function renderQuotes(){
+  const list=loadQuotes(); const cont=el('quoteList'); if(!cont) return;
+  if(!list.length){ cont.innerHTML='<div class="cust-empty">Henüz kaydedilmiş teklif yok. Teklif Mektubu&rsquo;nda “📄 PDF olarak kaydet”e basın.</div>'; }
+  else{
+    const rows=list.map((q,i)=>{
+      const st=q.durum||'bekleme';
+      return `<tr class="quote-row" data-i="${i}" title="Teklifi Hesaplayıcı'ya yüklemek için tıklayın">`+
+        `<td class="cc-name">${escHtml(q.no||'—')}</td>`+
+        `<td>${escHtml(q.date||'')}</td>`+
+        `<td>${escHtml(q.name||'—')}</td>`+
+        `<td>${escHtml((q.from||'')+(q.to?(' → '+q.to):''))||'—'}</td>`+
+        `<td>${escHtml(q.total||'—')}</td>`+
+        `<td style="padding-right:26px"><div class="seg" data-seg-i="${i}">`+
+          `<button type="button" class="seg-btn${st==='bekleme'?' active':''}" data-status="bekleme" data-i="${i}" title="Beklemede">Beklemede</button>`+
+          `<button type="button" class="seg-btn${st==='alindi'?' active':''}" data-status="alindi" data-i="${i}" title="Sipariş Alındı">✅ Alındı</button>`+
+          `<button type="button" class="seg-btn${st==='red'?' active':''}" data-status="red" data-i="${i}" title="Reddedildi">❌ Red</button>`+
+        `</div></td>`+
+        `<td style="padding-left:24px"><div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:nowrap">`+
+          `<button class="btn" style="padding:6px 10px;font-size:12px;white-space:nowrap" data-ykgoto="${i}" title="Bu teklifin hacim/ağırlığıyla Yük Kontrol'e git">📦 Yük Kontrol</button>`+
+          `<button class="cc-del" data-del="${i}" title="Sil" aria-label="Sil">×</button>`+
+        `</div></td>`+
+      `</tr>`;
+    }).join('');
+    cont.innerHTML=`<div class="cust-table-wrap"><table class="cust-table"><thead><tr><th>Teklif No</th><th>Tarih</th><th>Müşteri</th><th>Rota</th><th>Genel Toplam</th><th>Durum</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  }
+  const c=el('quoteCount'); if(c) c.textContent=list.length?'('+list.length+')':'';
+  document.querySelectorAll('#quoteList .quote-row').forEach(r=>r.addEventListener('click',()=>loadQuote(+r.dataset.i)));
+  document.querySelectorAll('#quoteList .cc-del').forEach(btn=>btn.addEventListener('click',e=>{ e.stopPropagation(); const l=loadQuotes(); l.splice(+btn.dataset.del,1); saveQuotes(l); renderQuotes(); }));
+  document.querySelectorAll('#quoteList [data-ykgoto]').forEach(btn=>btn.addEventListener('click',e=>{ e.stopPropagation(); const q=loadQuotes()[+btn.dataset.ykgoto]; if(q) ykGotoFromQuote(q); }));
+  document.querySelectorAll('#quoteList .seg-btn').forEach(btn=>btn.addEventListener('click',e=>{ e.stopPropagation(); setQuoteStatus(+btn.dataset.i, btn.dataset.status); }));
+}
+// Teklifin durumunu (Beklemede / Sipariş Alındı / Reddedildi) günceller ve kaydeder
+function setQuoteStatus(i, status){
+  const list=loadQuotes(); if(!list[i]) return;
+  list[i].durum=status; saveQuotes(list);
+  if(currentOpenQuoteIndex===i){ currentOpenQuote=list[i]; syncQuoteDetailSeg(); }
+  renderQuotes();
+}
+function syncQuoteDetailSeg(){
+  const st=(currentOpenQuote&&currentOpenQuote.durum)||'bekleme';
+  document.querySelectorAll('#quoteDetailSeg .seg-btn').forEach(b=>b.classList.toggle('active', b.dataset.status===st));
+}
+// Teklifi "Verilen Teklifler" sayfasının İÇİNDE açar (tamamını gösterir)
+let currentOpenQuote=null, currentOpenQuoteIndex=null;
+function loadQuote(i){
+  const q=loadQuotes()[i]; if(!q) return;
+  currentOpenQuote=q; currentOpenQuoteIndex=i;
+  el('quoteLetter').innerHTML = q.letterHtml || '<div class="cust-empty">Bu teklifin mektubu kaydedilmemiş.</div>';
+  el('view-quotes').querySelector('.cust-page-head').style.display='none';
+  el('quoteList').style.display='none';
+  el('quoteDetail').style.display='block';
+  syncQuoteDetailSeg();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showQuotesList(){
+  el('quoteDetail').style.display='none';
+  el('view-quotes').querySelector('.cust-page-head').style.display='';
+  el('quoteList').style.display='';
+}
+el('quoteBack').addEventListener('click',showQuotesList);
+el('quoteYkBtn').addEventListener('click',()=>{ if(currentOpenQuote) ykGotoFromQuote(currentOpenQuote); });
+document.querySelectorAll('#quoteDetailSeg .seg-btn').forEach(btn=>btn.addEventListener('click',()=>{ if(currentOpenQuoteIndex!=null) setQuoteStatus(currentOpenQuoteIndex, btn.dataset.status); }));
+// Teklifteki hacim/ağırlık bilgisiyle Yük Kontrol sekmesine geçer ve "Teklifte Verilen" alanlarını doldurur
+function ykGotoFromQuote(q){
+  const tabBtn=document.querySelector('.tab[data-view="yukkontrol"]');
+  if(tabBtn) tabBtn.click();
+  setTimeout(()=>{
+    if(el('ykKod')) el('ykKod').value = q.no || '';
+    if(el('ykTeklifHacim')) el('ykTeklifHacim').value = q.vM3 || '';
+    if(el('ykTeklifAgirlik')) el('ykTeklifAgirlik').value = q.wKg || '';
+    if(el('ykKod')) el('ykKod').focus();
+  }, 30);
+}
+el('quotePrint').addEventListener('click',()=>{
+  const orig=document.title;
+  document.title='VECTA LOJİSTİK - Teklif';
+  el('letter').innerHTML=el('quoteLetter').innerHTML; // yazdırma canlı mektup alanını kullanır
+  window.print();
+  setTimeout(()=>{ document.title=orig; },600);
+});
+function saveQuote(){
+  const q=currentQuote(); const list=loadQuotes();
+  const idx = q.no ? list.findIndex(x=>x.no===q.no) : -1;
+  if(idx>=0){ q.durum=list[idx].durum||'bekleme'; list[idx]=q; } else{ q.durum='bekleme'; list.unshift(q); }
+  const ok=saveQuotes(list);
+  if(ok) renderQuotes();
+  return ok ? q : null; // başarılıysa kaydedilen teklif nesnesini döndür (Drive'a göndermek için)
+}
+// ===== Google Drive / Sheets Entegrasyonu =====
+const GAS_KEY='vecta_gas_settings';
+function loadGasSettings(){
+  try{
+    const s=JSON.parse(localStorage.getItem(GAS_KEY)||'{}');
+    if(el('gasUrl')) el('gasUrl').value=s.url||'';
+    if(el('gasAuto')) el('gasAuto').checked = s.auto!==false; // varsayılan: açık
+  }catch(e){}
+}
+function getGasSettings(){ try{ return JSON.parse(localStorage.getItem(GAS_KEY)||'{}'); }catch(e){ return {}; } }
+function saveGasSettings(){
+  const s={ url:(el('gasUrl').value||'').trim(), auto: el('gasAuto').checked };
+  try{ localStorage.setItem(GAS_KEY, JSON.stringify(s)); }catch(e){}
+  return s;
+}
+if(el('gasSaveBtn')) el('gasSaveBtn').addEventListener('click',()=>{
+  saveGasSettings();
+  const m=el('gasMsg');
+  if(m){ m.style.color='var(--good)'; m.textContent='✓ Bağlantı ayarları kaydedildi.'; setTimeout(()=>{ m.textContent=''; },3000); }
+});
+if(el('gasTestBtn')) el('gasTestBtn').addEventListener('click', async ()=>{
+  const {url}=saveGasSettings();
+  const m=el('gasMsg');
+  if(!url){ if(m){ m.style.color='var(--danger)'; m.textContent='⚠ Önce Web App URL girin.'; } return; }
+  if(m){ m.style.color='var(--muted)'; m.textContent='… Bağlantı test ediliyor'; }
+  try{
+    const res=await fetch(url, { method:'GET' });
+    const j=await res.json().catch(()=>null);
+    if(m){
+      if(j && j.ok){ m.style.color='var(--good)'; m.textContent='✓ Bağlantı çalışıyor: '+(j.message||'OK'); }
+      else{ m.style.color='var(--danger)'; m.textContent='⚠ Yanıt alındı ama beklenmeyen biçimde. URL doğru mu kontrol edin.'; }
+    }
+  }catch(err){
+    if(m){ m.style.color='var(--danger)'; m.textContent='⚠ Bağlantı kurulamadı: '+(err&&err.message?err.message:'bilinmeyen hata'); }
+  }
+});
+loadGasSettings();
+// Kaydedilen teklifi Drive'a (PDF) ve Sheets'e (Müşteriler satırı) gönderir — kendi durum mesajını yönetir
+async function sendQuoteToGoogleDrive(q){
+  const s=getGasSettings(); const msg=el('quoteSaveMsg');
+  if(msg){ msg.style.color='var(--muted)'; msg.textContent='☁ Teklif kaydedildi, Google Drive’a gönderiliyor…'; }
+  try{
+    // Drive'a kaydedilen PDF'in ekrandaki mektupla AYNI görünmesi için sayfanın tüm CSS'ini de gönderiyoruz
+    // (letterHtml sadece iç içerik; renk/düzen/tipografi kuralları olmadan PDF dönüşümü çıplak/çirkin metin üretiyordu).
+    const styleTag=document.querySelector('style');
+    const payload=Object.assign({}, q, { styleCss: styleTag ? styleTag.textContent : '' });
+    const res=await fetch(s.url, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'}, // Apps Script'te CORS preflight'ı önlemek için
+      body: JSON.stringify(payload)
+    });
+    const j=await res.json().catch(()=>null);
+    if(msg){
+      if(j && j.ok){ msg.style.color='var(--good)'; msg.textContent='✓ Teklif kaydedildi ve Google Drive’a gönderildi.'; }
+      else{ msg.style.color='var(--danger)'; msg.textContent='⚠ Teklif yerelde kaydedildi ama Drive’a gönderilemedi. Bağlantı ayarlarını kontrol edin.'; }
+    }
+  }catch(err){
+    if(msg){ msg.style.color='var(--danger)'; msg.textContent='⚠ Teklif yerelde kaydedildi ama Drive’a gönderilemedi (bağlantı hatası).'; }
+  }
+  setTimeout(()=>{ if(msg) msg.textContent=''; },5000);
+}
+// PDF olarak kaydet — teklifi "Verilen Teklifler"e kaydeder, numarayı bir artırır ve
+// bağlantı kuruluysa Google Drive/Sheets'e otomatik gönderir
+el('savePdfBtn').addEventListener('click', async ()=>{
+  const btn=el('savePdfBtn'); const t=btn.textContent; const msg=el('quoteSaveMsg');
+  const savedQuote=saveQuote();
+  if(savedQuote){
+    // Kayıt gerçekten başarılıysa teklif numarasını artır ve bir sonrakine geç
+    el('teklifNo').value=bumpTeklifNo(el('teklifNo').value||''); calc();
+    btn.textContent='✓ Kaydedildi'; btn.style.background=''; btn.style.borderColor='';
+    setTimeout(()=>{ btn.textContent=t; },1500);
+    const gas=getGasSettings();
+    if(gas.url && gas.auto!==false){
+      await sendQuoteToGoogleDrive(savedQuote);
+    }else if(msg){
+      msg.style.color='var(--good)'; msg.textContent='✓ Teklif "Verilen Teklifler"e kaydedildi.';
+      setTimeout(()=>{ msg.textContent=''; },2500);
+    }
+  }else{
+    // Kayıt BAŞARISIZ — teklif numarasını artırma, aynı teklifte kal ki farkında olmadan
+    // başka bir teklif eklemeye devam edilmesin; kullanıcıyı açıkça uyar.
+    btn.textContent='⚠ Kaydedilemedi'; btn.style.background='var(--danger)'; btn.style.borderColor='var(--danger)';
+    if(msg){ msg.style.color='var(--danger)'; msg.textContent='⚠ Teklif kaydedilemedi! Lütfen tekrar deneyin (depolama dolu ya da tarayıcı engelliyor olabilir).'; }
+    setTimeout(()=>{ btn.textContent=t; btn.style.background=''; btn.style.borderColor=''; },2500);
+  }
+});
+
+// ===== Kayıtlı müşteri / teklif listesi =====
+const CUST_KEY='vecta_customers';
+function escHtml(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function loadCusts(){ try{ return JSON.parse(localStorage.getItem(CUST_KEY)||'[]'); }catch(e){ return []; } }
+function saveCusts(list){ try{ localStorage.setItem(CUST_KEY, JSON.stringify(list)); }catch(e){} }
+// Yalnızca müşteri bilgileri saklanır
+function currentCust(){
+  return {
+    name:el('cName').value||'', vergiD:el('cVergiD').value||'', vergiNo:el('cVergiNo').value||'',
+    contact:el('cContact').value||'', phone:el('cPhone').value||'', email:el('cEmail').value||'', cargo:el('cCargo').value||'',
+    date:new Date().toLocaleDateString('tr-TR')
+  };
+}
+function renderCusts(){
+  const list=loadCusts();
+  const cont=el('custList');
+  if(!list.length){ cont.innerHTML='<div class="cust-empty">Henüz kayıtlı müşteri yok. Hesaplayıcı’da müşteri bilgilerini doldurup “💾 Müşteri Kaydet”e basın.</div>'; }
+  else{
+    const rows=list.map((c,i)=>
+      `<tr class="cust-row" data-i="${i}" title="Bilgileri Hesaplayıcı'ya yüklemek için tıklayın">`+
+        `<td class="cc-name">${escHtml(c.name||'—')}</td>`+
+        `<td>${escHtml(c.contact||'—')}</td>`+
+        `<td>${escHtml(c.phone||'—')}</td>`+
+        `<td>${escHtml(c.email||'—')}</td>`+
+        `<td>${escHtml(c.vergiD||'—')}</td>`+
+        `<td>${escHtml(c.vergiNo||'—')}</td>`+
+        `<td>${escHtml(c.date||'')}</td>`+
+        `<td><button class="cc-del" data-del="${i}" title="Sil" aria-label="Sil">×</button></td>`+
+      `</tr>`
+    ).join('');
+    cont.innerHTML =
+      `<div class="cust-table-wrap"><table class="cust-table"><thead><tr>`+
+      `<th>Müşteri</th><th>İlgili Kişi</th><th>Telefon</th><th>E-posta</th><th>Vergi Dairesi</th><th>Vergi Numarası</th><th>Tarih</th><th></th>`+
+      `</tr></thead><tbody>${rows}</tbody></table></div>`;
+  }
+  const cc=el('custCount'); if(cc) cc.textContent=list.length?'('+list.length+')':'';
+  document.querySelectorAll('#custList .cust-row').forEach(row=>{
+    row.addEventListener('click',()=>loadCust(+row.dataset.i));
+  });
+  document.querySelectorAll('#custList .cc-del').forEach(btn=>{
+    btn.addEventListener('click',e=>{ e.stopPropagation(); const l=loadCusts(); l.splice(+btn.dataset.del,1); saveCusts(l); renderCusts(); });
+  });
+}
+function loadCust(i){
+  const c=loadCusts()[i]; if(!c) return;
+  el('cName').value=c.name||''; el('cVergiD').value=c.vergiD||''; el('cVergiNo').value=c.vergiNo||'';
+  el('cContact').value=c.contact||''; el('cPhone').value=c.phone||''; el('cEmail').value=c.email||''; el('cCargo').value=c.cargo||'';
+  lockCustFields(true);
+  calc();
+  document.querySelector('.tab[data-view="calc"]').click(); // Hesaplayıcı'ya dön
+}
+
+// Kaydedilince müşteri alanlarını kilitle: teklife otomatik işlenir ama
+// elle müdahale edilemez. "Bilgileri Değiştir"e basılana kadar kilitli kalır.
+const CUST_FIELD_IDS=['cName','cContact','cPhone','cEmail','cVergiD','cVergiNo','cCargo'];
+function lockCustFields(locked){
+  CUST_FIELD_IDS.forEach(id=>{ el(id).readOnly=locked; });
+  el('saveCustBtn').style.display = locked ? 'none' : '';
+  el('editCustBtn').style.display = locked ? '' : 'none';
+  el('custLockedHint').style.display = locked ? '' : 'none';
+}
+el('saveCustBtn').addEventListener('click',()=>{
+  const c=currentCust();
+  if(!c.name.trim()){ el('cName').focus(); el('cName').placeholder='Önce müşteri adı girin'; return; }
+  const list=loadCusts();
+  // aynı müşteri adı + vergi no varsa güncelle, yoksa ekle
+  const idx = list.findIndex(x=>x.name===c.name && (x.vergiNo||'')===(c.vergiNo||''));
+  if(idx>=0) list[idx]=c; else list.unshift(c);
+  saveCusts(list); renderCusts();
+  lockCustFields(true);
+  calc(); // teklif mektubundaki müşteri bilgilerini de anında güncelle
+  document.querySelector('.tab[data-view="alicientry"]').click(); // Alıcı Bilgileri'ne geç
+});
+el('editCustBtn').addEventListener('click',()=>{
+  lockCustFields(false);
+  el('cName').focus();
+});
+
+// ===== Alıcı bilgileri: Müşteri panelinin aynısı, ayrıca Kayıtlı
+// Alıcılar listesine kaydedilir, bu teklif için kilitlenir =====
+const ALICI_KEY='vecta_alicis';
+function loadAlicis(){ try{ return JSON.parse(localStorage.getItem(ALICI_KEY)||'[]'); }catch(e){ return []; } }
+function saveAlicis(list){ try{ localStorage.setItem(ALICI_KEY, JSON.stringify(list)); }catch(e){} }
+function currentAlici(){
+  return {
+    name:el('aName').value||'', vergiD:el('aVergiD').value||'', vergiNo:el('aVergiNo').value||'',
+    contact:el('aContact').value||'', phone:el('aPhone').value||'', email:el('aEmail').value||'',
+    date:new Date().toLocaleDateString('tr-TR')
+  };
+}
+function renderAlicis(){
+  const list=loadAlicis();
+  const cont=el('aliciList');
+  if(!list.length){ cont.innerHTML='<div class="cust-empty">Henüz kayıtlı alıcı yok. Hesaplayıcı’da alıcı bilgilerini doldurup “💾 Alıcı Kaydet”e basın.</div>'; }
+  else{
+    const rows=list.map((c,i)=>
+      `<tr class="cust-row" data-i="${i}" title="Bilgileri Hesaplayıcı'ya yüklemek için tıklayın">`+
+        `<td class="cc-name">${escHtml(c.name||'—')}</td>`+
+        `<td>${escHtml(c.contact||'—')}</td>`+
+        `<td>${escHtml(c.phone||'—')}</td>`+
+        `<td>${escHtml(c.email||'—')}</td>`+
+        `<td>${escHtml(c.vergiD||'—')}</td>`+
+        `<td>${escHtml(c.vergiNo||'—')}</td>`+
+        `<td>${escHtml(c.date||'')}</td>`+
+        `<td><button class="cc-del" data-del="${i}" title="Sil" aria-label="Sil">×</button></td>`+
+      `</tr>`
+    ).join('');
+    cont.innerHTML =
+      `<div class="cust-table-wrap"><table class="cust-table"><thead><tr>`+
+      `<th>Alıcı</th><th>İlgili Kişi</th><th>Telefon</th><th>E-posta</th><th>Vergi Dairesi</th><th>Vergi Numarası</th><th>Tarih</th><th></th>`+
+      `</tr></thead><tbody>${rows}</tbody></table></div>`;
+  }
+  const ac=el('aliciCount'); if(ac) ac.textContent=list.length?'('+list.length+')':'';
+  document.querySelectorAll('#aliciList .cust-row').forEach(row=>{
+    row.addEventListener('click',()=>loadAlici(+row.dataset.i));
+  });
+  document.querySelectorAll('#aliciList .cc-del').forEach(btn=>{
+    btn.addEventListener('click',e=>{ e.stopPropagation(); const l=loadAlicis(); l.splice(+btn.dataset.del,1); saveAlicis(l); renderAlicis(); });
+  });
+}
+function loadAlici(i){
+  const c=loadAlicis()[i]; if(!c) return;
+  el('aName').value=c.name||''; el('aVergiD').value=c.vergiD||''; el('aVergiNo').value=c.vergiNo||'';
+  el('aContact').value=c.contact||''; el('aPhone').value=c.phone||''; el('aEmail').value=c.email||'';
+  lockAliciFields(true);
+  calc();
+  document.querySelector('.tab[data-view="calc"]').click(); // Hesaplayıcı'ya dön
+}
+
+const ALICI_FIELD_IDS=['aName','aContact','aPhone','aEmail','aVergiD','aVergiNo'];
+function lockAliciFields(locked){
+  ALICI_FIELD_IDS.forEach(id=>{ el(id).readOnly=locked; });
+  el('saveAliciBtn').style.display = locked ? 'none' : '';
+  el('editAliciBtn').style.display = locked ? '' : 'none';
+  el('aliciLockedHint').style.display = locked ? '' : 'none';
+}
+el('saveAliciBtn').addEventListener('click',()=>{
+  const c=currentAlici();
+  if(!c.name.trim()){ el('aName').focus(); el('aName').placeholder='Önce alıcı adı girin'; return; }
+  const list=loadAlicis();
+  // aynı alıcı adı + vergi no varsa güncelle, yoksa ekle
+  const idx = list.findIndex(x=>x.name===c.name && (x.vergiNo||'')===(c.vergiNo||''));
+  if(idx>=0) list[idx]=c; else list.unshift(c);
+  saveAlicis(list); renderAlicis();
+  lockAliciFields(true);
+  calc(); // teklif mektubundaki alıcı bilgilerini de anında güncelle
+  document.querySelector('.tab[data-view="calc"]').click(); // Hesaplayıcı'ya geç
+});
+el('editAliciBtn').addEventListener('click',()=>{
+  lockAliciFields(false);
+  el('aName').focus();
+});
+
+
+// ===== Yük Kontrol =====
+function ykLoadScript(src){
+  return new Promise((resolve,reject)=>{
+    const s=document.createElement('script');
+    s.src=src; s.onload=()=>resolve(); s.onerror=()=>reject(new Error('Script yüklenemedi: '+src));
+    document.head.appendChild(s);
+  });
+}
+// Telefon kamerasından gelen büyük fotoğrafları hem Firebase'e hem Drive'a hızlı ve sorunsuz
+// yüklenebilsin diye küçültür (uzun kenar en fazla maxDim px, JPEG kalite q).
+function ykCompressImage_(file, maxDim, q){
+  return new Promise((resolve)=>{
+    const img=new Image();
+    const url=URL.createObjectURL(file);
+    img.onload=()=>{
+      let w=img.naturalWidth, h=img.naturalHeight;
+      if(!w||!h){ URL.revokeObjectURL(url); resolve(file); return; }
+      if(w>maxDim||h>maxDim){ const s=maxDim/Math.max(w,h); w=Math.round(w*s); h=Math.round(h*s); }
+      const canvas=document.createElement('canvas');
+      canvas.width=w; canvas.height=h;
+      const ctx=canvas.getContext('2d');
+      ctx.drawImage(img,0,0,w,h);
+      canvas.toBlob((blob)=>{ URL.revokeObjectURL(url); resolve(blob||file); }, 'image/jpeg', q);
+    };
+    img.onerror=()=>{ URL.revokeObjectURL(url); resolve(file); };
+    img.src=url;
+  });
+}
+// Bir File/Blob'u Google Apps Script'e JSON içinde gönderebilmek için base64'e çevirir (data: ön ekini atar)
+function ykFileToBase64_(blob){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>{ const r=reader.result||''; const i=String(r).indexOf(','); resolve(i>=0?r.slice(i+1):r); };
+    reader.onerror=reject;
+    reader.readAsDataURL(blob);
+  });
+}
+async function ykInit(){
+  try{
+    await ykLoadScript('https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js');
+    await ykLoadScript('https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js');
+    await ykLoadScript('https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js');
+    if(typeof firebase==='undefined') throw new Error('firebase tanımsız kaldı (script engellenmiş olabilir)');
+    ykStart();
+  }catch(err){
+    console.error(err);
+    const hl=el('ykHistoryList');
+    if(hl) hl.innerHTML='<div class="cust-empty">Firebase yüklenemedi: '+err.message+'. İnternet bağlantınızı veya sitenizin script/CSP izinlerini (www.gstatic.com adresine izin verilmeli) kontrol edin.</div>';
+    const fe=el('ykFormError');
+    if(fe) fe.textContent='Sistem bağlantısı kurulamadı, sayfayı yenileyin.';
+  }
+}
+function ykStart(){
+  // Yük Kontrol paneliyle AYNI Firebase proje bilgileri (aynı sitenin parçası)
+  const ykFirebaseConfig = {
+    apiKey: "AIzaSyAGEdGOcgDDR2jTeX0FsnmGmT5iy44Nst4",
+    authDomain: "aractakip-252d3.firebaseapp.com",
+    databaseURL: "https://aractakip-252d3-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "aractakip-252d3",
+    storageBucket: "aractakip-252d3.firebasestorage.app",
+    messagingSenderId: "988984484156",
+    appId: "1:988984484156:web:4d8693379ef502613d7e39"
+  };
+  if(!firebase.apps.length) firebase.initializeApp(ykFirebaseConfig);
+  const ykDb=firebase.database();
+  const ykStorage=firebase.storage();
+
+  const ykEn=el('ykEn'), ykBoy=el('ykBoy'), ykYuk=el('ykYukseklik');
+  const ykHesaplananHacim=el('ykHesaplananHacim');
+  const ykPhotoInput=el('ykPhotoInput');
+  const ykPhotoPreview=el('ykPhotoPreview');
+  const ykForm=el('ykForm');
+  const ykSubmitBtn=el('ykSubmitBtn');
+  const ykFormError=el('ykFormError');
+  const ykFormOk=el('ykFormOk');
+
+  let ykSelectedFile=null;
+
+  function ykCurrentHacim(){
+    const e=parseFloat(ykEn.value), b=parseFloat(ykBoy.value), y=parseFloat(ykYuk.value);
+    if(!e||!b||!y) return null;
+    return (e*b*y)/1000000; // cm3 -> m3
+  }
+  function ykRefreshHacim(){
+    const h=ykCurrentHacim();
+    ykHesaplananHacim.textContent = h!==null ? h.toFixed(3)+' m³' : '— m³';
+  }
+  [ykEn,ykBoy,ykYuk].forEach(i=>i.addEventListener('input', ykRefreshHacim));
+
+  ykPhotoInput.addEventListener('change', async ()=>{
+    const file=ykPhotoInput.files && ykPhotoInput.files[0];
+    if(!file){ ykSelectedFile=null; ykPhotoPreview.innerHTML='📷'; return; }
+    ykPhotoPreview.innerHTML='⏳';
+    ykSelectedFile = await ykCompressImage_(file, 1600, 0.82); // hem Firebase hem Drive için küçültülmüş kopya
+    const reader=new FileReader();
+    reader.onload=(e)=>{ ykPhotoPreview.innerHTML='<img src="'+e.target.result+'">'; };
+    reader.readAsDataURL(ykSelectedFile);
+  });
+
+  function ykBadgeFor(farkYuzde, tolerans){
+    const abs=Math.abs(farkYuzde);
+    if(abs<=tolerans) return { cls:'yk-ok', text:'Uyumlu ('+(farkYuzde>=0?'+':'')+farkYuzde.toFixed(1)+'%)' };
+    if(abs<=tolerans*2) return { cls:'yk-warn', text:'Sınırda ('+(farkYuzde>=0?'+':'')+farkYuzde.toFixed(1)+'%)' };
+    return { cls:'yk-bad', text:'Fark var ('+(farkYuzde>=0?'+':'')+farkYuzde.toFixed(1)+'%)' };
+  }
+
+  function ykShowResult(teklifHacim, olculenHacim, teklifAgirlik, olculenAgirlik, tolerans){
+    const hacimFark=((olculenHacim-teklifHacim)/teklifHacim)*100;
+    const agirlikFark=((olculenAgirlik-teklifAgirlik)/teklifAgirlik)*100;
+
+    el('ykResHacimTeklif').textContent=teklifHacim.toFixed(3)+' m³';
+    el('ykResHacimOlculen').textContent=olculenHacim.toFixed(3)+' m³';
+    const hb=ykBadgeFor(hacimFark, tolerans);
+    el('ykResHacimBadge').className='yk-badge '+hb.cls;
+    el('ykResHacimBadge').textContent=hb.text;
+
+    el('ykResAgirlikTeklif').textContent=teklifAgirlik.toFixed(1)+' kg';
+    el('ykResAgirlikOlculen').textContent=olculenAgirlik.toFixed(1)+' kg';
+    const ab=ykBadgeFor(agirlikFark, tolerans);
+    el('ykResAgirlikBadge').className='yk-badge '+ab.cls;
+    el('ykResAgirlikBadge').textContent=ab.text;
+
+    el('ykResultCard').style.display='block';
+    return { hacimFark, agirlikFark, hacimUyumlu: Math.abs(hacimFark)<=tolerans, agirlikUyumlu: Math.abs(agirlikFark)<=tolerans };
+  }
+
+  ykForm.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    ykFormError.textContent=''; ykFormOk.textContent='';
+
+    const kod=el('ykKod').value.trim().replace(/\s+/g,'');
+    const teklifHacim=parseFloat(el('ykTeklifHacim').value);
+    const teklifAgirlik=parseFloat(el('ykTeklifAgirlik').value);
+    const olculenAgirlik=parseFloat(el('ykOlculenAgirlik').value);
+    const olculenHacim=ykCurrentHacim();
+    const tolerans=parseFloat(el('ykTolerans').value)||0;
+
+    if(!kod){ ykFormError.textContent='Lütfen sipariş kodu / plaka girin.'; return; }
+    if(!teklifHacim || !teklifAgirlik){ ykFormError.textContent='Lütfen teklifte verilen hacim ve ağırlığı girin.'; return; }
+    if(!olculenHacim){ ykFormError.textContent='Lütfen en / boy / yükseklik girin (hacim hesaplanamadı).'; return; }
+    if(!olculenAgirlik){ ykFormError.textContent='Lütfen tartılan ağırlığı girin.'; return; }
+
+    ykSubmitBtn.disabled=true;
+    ykSubmitBtn.textContent='Kaydediliyor...';
+
+    const cmp=ykShowResult(teklifHacim, olculenHacim, teklifAgirlik, olculenAgirlik, tolerans);
+
+    try{
+      const newRef=ykDb.ref('yukKontrol').push();
+      let fotoUrl=null;
+
+      if(ykSelectedFile){
+        try{
+          const sref=ykStorage.ref('yukKontrol/'+newRef.key+'.jpg');
+          await sref.put(ykSelectedFile);
+          fotoUrl=await sref.getDownloadURL();
+        }catch(photoErr){
+          console.error('Fotoğraf yüklenemedi:', photoErr);
+          ykFormOk.textContent='Kayıt oluşturuldu, ancak fotoğraf yüklenemedi.';
+        }
+      }
+
+      await newRef.set({
+        kod: kod,
+        tarih: Date.now(),
+        teklifHacim, teklifAgirlik,
+        olculenEn: parseFloat(ykEn.value), olculenBoy: parseFloat(ykBoy.value), olculenYukseklik: parseFloat(ykYuk.value),
+        olculenHacim, olculenAgirlik,
+        tolerans,
+        hacimFarkYuzde: cmp.hacimFark, agirlikFarkYuzde: cmp.agirlikFark,
+        hacimUyumlu: cmp.hacimUyumlu, agirlikUyumlu: cmp.agirlikUyumlu,
+        fotoUrl
+      });
+
+      if(!ykFormOk.textContent) ykFormOk.textContent='Kayıt başarıyla eklendi.';
+
+      // Bağlantı kuruluysa (Teklifler ile aynı Google Apps Script ayarı) fotoğraf ve ölçüm
+      // bilgilerini de Google Drive'a / E-Tablo'ya gönder — Firebase'e kayıt zaten yapıldı,
+      // bu başarısız olsa bile yukarıdaki Firebase kaydı kalıcı olarak duruyor.
+      const gas=getGasSettings();
+      if(gas.url && gas.auto!==false){
+        ykFormOk.textContent += ' ☁ Drive’a gönderiliyor…';
+        try{
+          let fotoBase64=null, fotoMime=null;
+          if(ykSelectedFile){
+            fotoBase64=await ykFileToBase64_(ykSelectedFile);
+            fotoMime=ykSelectedFile.type||'image/jpeg';
+          }
+          const res=await fetch(gas.url,{
+            method:'POST',
+            headers:{'Content-Type':'text/plain;charset=utf-8'},
+            body: JSON.stringify({
+              type:'yukKontrol', kod,
+              teklifHacim, teklifAgirlik,
+              olculenEn: parseFloat(ykEn.value), olculenBoy: parseFloat(ykBoy.value), olculenYukseklik: parseFloat(ykYuk.value),
+              olculenHacim, olculenAgirlik, tolerans,
+              hacimFarkYuzde: cmp.hacimFark, agirlikFarkYuzde: cmp.agirlikFark,
+              hacimUyumlu: cmp.hacimUyumlu, agirlikUyumlu: cmp.agirlikUyumlu,
+              fotoBase64, fotoMime
+            })
+          });
+          const j=await res.json().catch(()=>null);
+          ykFormOk.textContent = (j && j.ok) ? 'Kayıt eklendi ve Google Drive’a gönderildi.' : 'Kayıt eklendi, ancak Drive’a gönderilemedi. Bağlantı ayarlarını kontrol edin.';
+        }catch(gasErr){
+          console.error('Yük Kontrol Drive gönderimi başarısız:', gasErr);
+          ykFormOk.textContent='Kayıt eklendi, ancak Drive’a gönderilemedi (bağlantı hatası).';
+        }
+      }
+
+      ykForm.reset();
+      ykSelectedFile=null;
+      ykPhotoPreview.innerHTML='📷';
+      ykRefreshHacim();
+      el('ykTolerans').value=5;
+    }catch(err){
+      console.error(err);
+      ykFormError.textContent='Kaydedilemedi: '+(err && err.message ? err.message : 'bilinmeyen hata');
+    }finally{
+      ykSubmitBtn.disabled=false;
+      ykSubmitBtn.textContent='Kaydet ve Karşılaştır';
+    }
+  });
+
+  // ---- Geçmiş liste ----
+  const ykHistoryList=el('ykHistoryList');
+  const ykSearchInput=el('ykSearchInput');
+  let ykAllRecords=[];
+
+  function ykFmtDate(ts){
+    if(!ts) return '';
+    return new Date(ts).toLocaleString('tr-TR');
+  }
+
+  function ykRenderHistory(){
+    const q=(ykSearchInput.value||'').trim().toLowerCase();
+    const filtered = q ? ykAllRecords.filter(r=>(r.kod||'').toLowerCase().includes(q)) : ykAllRecords;
+
+    if(!filtered.length){
+      ykHistoryList.innerHTML='<div class="cust-empty">Henüz kayıt yok.</div>';
+      return;
+    }
+
+    ykHistoryList.innerHTML = filtered.map(r=>{
+      const hb=ykBadgeFor(r.hacimFarkYuzde||0, r.tolerans||5);
+      const ab=ykBadgeFor(r.agirlikFarkYuzde||0, r.tolerans||5);
+      const thumb = r.fotoUrl ? '<img src="'+r.fotoUrl+'">' : '📦';
+      return (
+        '<div class="yk-history-item">'+
+          '<div class="yk-history-thumb">'+thumb+'</div>'+
+          '<div class="yk-history-body">'+
+            '<div class="yk-history-top">'+
+              '<span class="yk-history-kod">'+escHtml(r.kod||'—')+'</span>'+
+              '<span class="yk-history-date">'+ykFmtDate(r.tarih)+'</span>'+
+            '</div>'+
+            '<div class="yk-history-line">Hacim: '+(r.teklifHacim ?? '—')+' m³ → '+(r.olculenHacim!=null ? r.olculenHacim.toFixed(3) : '—')+' m³</div>'+
+            '<div class="yk-history-line">Ağırlık: '+(r.teklifAgirlik ?? '—')+' kg → '+(r.olculenAgirlik ?? '—')+' kg</div>'+
+            '<div class="yk-history-badges">'+
+              '<span class="yk-badge '+hb.cls+'">Hacim: '+hb.text+'</span>'+
+              '<span class="yk-badge '+ab.cls+'">Ağırlık: '+ab.text+'</span>'+
+            '</div>'+
+            '<button class="yk-del-btn" data-key="'+r._key+'">Kaydı sil</button>'+
+          '</div>'+
+        '</div>'
+      );
+    }).join('');
+
+    ykHistoryList.querySelectorAll('.yk-del-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const key=btn.getAttribute('data-key');
+        if(confirm('Bu kaydı silmek istediğinize emin misiniz?')){
+          ykDb.ref('yukKontrol/'+key).remove();
+        }
+      });
+    });
+  }
+
+  ykSearchInput.addEventListener('input', ykRenderHistory);
+
+  ykDb.ref('yukKontrol').orderByChild('tarih').limitToLast(300).on('value', (snap)=>{
+    const val=snap.val() || {};
+    ykAllRecords = Object.keys(val).map(k=>({ _key:k, ...val[k] })).sort((a,b)=>(b.tarih||0)-(a.tarih||0));
+    ykRenderHistory();
+    const c=el('ykCount'); if(c) c.textContent = ykAllRecords.length ? '('+ykAllRecords.length+')' : '';
+  }, (err)=>{
+    ykHistoryList.innerHTML='<div class="cust-empty">Kayıtlar yüklenemedi: '+err.message+'</div>';
+  });
+}
+// tabs
+document.querySelectorAll('.tab').forEach(tb=>{
+  tb.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    tb.classList.add('active');
+    const v=tb.dataset.view;
+    document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+    el('view-'+v).classList.add('active');
+    if(v==='quotes') showQuotesList(); // her girişte listeyi göster
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+// init
+loadParams(); // kaydedilmiş değerler varsa yükle
+buildParams();
+calc();
+renderCusts(); // kayıtlı müşteriler tablosu
+renderAlicis(); // kayıtlı alıcılar tablosu
+renderQuotes(); // verilen teklifler tablosu
+ykInit(); // Yük Kontrol paneli
+</script>
+</body>
+</html>

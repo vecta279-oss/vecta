@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>VECTA — Araç Konum Gönderici</title>
+<meta name="theme-color" content="#474C53">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAzQElEQVR42u2deZxcVZn3f88599bW1fuadMhCFiEhYQkCMkiHRcWFV1S6nRlHGVwAUVBRR5SlugKOMqAOKrsj48K8Y9eoqIyi4CStOAQkLIGEAJ2EdJJOpzud7vRS253nPO8fdatzu9Ld6fSSBN7z/XzuJ52qW7fO8pznPM9znnMKMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMhsPj/wGJd1Q+59xRxgAAAABJRU5ErkJggg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --orange:#F58220; --orange-deep:#D96A00;
+    --black:#474C53; --black-2:#383C42; --black-3:#2C3037;
+    --ink-light:#F1F2F4; --ink-mid:#9AA0A8;
+    --err:#c0392b;
+    --font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --ease:cubic-bezier(.2,.7,.25,1);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0; min-height: 100vh;
+    font-family: var(--font);
+    background: var(--black-3); color: var(--ink-light);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 24px;
+  }
+  .brand {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 28px;
+  }
+  .brand .bar { width: 26px; height: 2px; background: var(--orange); border-radius: 2px; }
+  @keyframes beat { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+  .status-dot {
+    width: 16px; height: 16px; border-radius: 50%;
+    display: inline-block; margin-right: 10px;
+    background: var(--ink-mid); transition: background .3s;
+  }
+  .status-dot.ok { background: var(--orange); box-shadow: 0 0 14px rgba(245,130,32,.85); animation: beat 2.2s infinite; }
+  .status-dot.err { background: var(--err); box-shadow: 0 0 14px rgba(192,57,43,.7); }
+  .status-dot.wait { background: var(--ink-mid); }
+  h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -.01em; margin: 0 0 4px; color: var(--ink-light); }
+  .plaka { font-size: 2.4rem; font-weight: 800; letter-spacing: .04em; margin: 12px 0; color: var(--orange); }
+  .row { font-size: 1.05rem; margin: 6px 0; color: var(--ink-mid); }
+  .big-status { font-size: 1.15rem; margin: 18px 0 6px; display: flex; align-items: center; color: var(--ink-light); }
+  .coords { font-family: ui-monospace, Menlo, monospace; font-size: 1.05rem; color: var(--ink-mid); margin-top: 8px; }
+  .setup { margin-top: 10px; }
+  input {
+    font-family: var(--font); font-size: 1.05rem; padding: 12px 16px; border-radius: 12px;
+    border: 1.5px solid rgba(255,255,255,.16); background: rgba(255,255,255,.06); color: #fff;
+    text-align: center; width: 230px; transition: .18s var(--ease);
+  }
+  input:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; border-color: var(--orange); }
+  button {
+    font-family: var(--font); font-weight: 600; font-size: 1rem; padding: 12px 24px;
+    border-radius: 12px; border: none; background: var(--orange); color: #fff;
+    margin-left: 8px; cursor: pointer; transition: .22s var(--ease);
+    box-shadow: 0 14px 30px -14px rgba(245,130,32,.9);
+  }
+  button:hover { background: var(--orange-deep); transform: translateY(-2px); }
+  button:active { background: var(--orange-deep); transform: translateY(0); }
+  .hint { font-size: .85rem; color: var(--ink-mid); opacity: .8; margin-top: 30px; max-width: 480px; }
+  .change-link { margin-top: 22px; font-size: .85rem; color: var(--ink-mid); text-decoration: underline; cursor: pointer; }
+  .change-link:hover { color: var(--orange); }
+  #pinForm { display: flex; justify-content: center; }
+  #pinInput { width: 160px; letter-spacing: .3em; }
+
+  .orders-box {
+    margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12);
+    width: 100%; max-width: 360px;
+  }
+  .orders-box h2 { font-size: .95rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-mid); margin: 0 0 12px; }
+  .order-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px; padding: 10px 14px; margin-bottom: 8px;
+  }
+  .order-row .kod { font-weight: 700; letter-spacing: .03em; color: var(--ink-light); }
+  .order-row .deliver-btn {
+    font-size: .85rem; padding: 7px 14px; margin-left: 0;
+    background: rgba(245,130,32,.14); color: var(--orange); box-shadow: none;
+  }
+  .order-row .deliver-btn:hover { background: var(--orange); color: #fff; transform: none; }
+  .no-orders { font-size: .9rem; color: var(--ink-mid); opacity: .7; margin: 4px 0 14px; }
+  #addOrderForm { display: flex; gap: 8px; margin-top: 6px; }
+  #addOrderForm input { width: auto; flex: 1; font-size: .95rem; padding: 10px 14px; }
+  #addOrderForm button { font-size: .9rem; padding: 10px 16px; margin-left: 0; }
+  #orderMsg { font-size: .8rem; min-height: 1.1em; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+  <div class="brand"><span class="bar"></span>VECTA Taşımacılık &amp; Lojistik</div>
+
+  <div id="setupScreen" class="setup">
+    <h1>Tablet Girişi</h1>
+
+    <div id="signedOutBox">
+      <p class="row">Devam etmek için tablet şifresini girin.</p>
+      <form id="pinForm">
+        <input id="pinInput" type="password" inputmode="numeric" pattern="[0-9]*" placeholder="Şifre" autocomplete="off">
+        <button type="submit">Giriş Yap</button>
+      </form>
+    </div>
+
+    <div id="signedInBox" style="display:none">
+      <p class="row">Giriş yapıldı.</p>
+      <p class="row">Bu tablet hangi araca ait? (plaka veya sipariş kodu)</p>
+      <div>
+        <input id="vehicleIdInput" placeholder="34 ABC 123">
+        <button onclick="startTracking()">Başlat</button>
+      </div>
+    </div>
+
+    <div class="row" id="loginError" style="color:#c0392b; min-height: 1.2em;"></div>
+  </div>
+
+  <div id="trackingScreen" style="display:none">
+    <div class="plaka" id="plakaLabel"></div>
+    <div class="big-status">
+      <span class="status-dot wait" id="statusDot"></span>
+      <span id="statusText">Konum bekleniyor...</span>
+    </div>
+    <div class="row" id="lastUpdate">Henüz güncelleme yok</div>
+    <div class="coords" id="coords">—</div>
+    <div class="row" id="accuracy"></div>
+
+    <div class="orders-box">
+      <h2>Aktif Siparişler</h2>
+      <div id="ordersList"><p class="no-orders">Yükleniyor...</p></div>
+      <form id="addOrderForm">
+        <input id="newOrderCode" placeholder="Yeni sipariş kodu (örn. VC-104)" autocapitalize="characters">
+        <button type="submit">Ekle</button>
+      </form>
+      <div id="orderMsg"></div>
+    </div>
+
+    <div class="change-link" onclick="resetVehicle()">Araç kimliğini değiştir</div>
+  </div>
+
+  <div class="hint">
+    Bu ekranı kapatmayın ve tableti sürekli şarjda tutun. Ekranın uyumaması ve
+    tarayıcı sekmesinin kapanmaması gerekir. Konum izni istendiğinde "İzin Ver / Her Zaman"
+    seçeneğini onaylayın.
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script>
+  // ---------------------------------------------------------------
+  // 1) Buraya kendi Firebase projenizin bilgilerini yapıştırın.
+  //    Firebase Console > Project settings > General > Your apps > SDK setup
+  // ---------------------------------------------------------------
+  const firebaseConfig = {
+    apiKey: "AIzaSyAGEdGOcgDDR2jTeX0FsnmGmT5iy44Nst4",
+    authDomain: "aractakip-252d3.firebaseapp.com",
+    databaseURL: "https://aractakip-252d3-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "aractakip-252d3",
+    storageBucket: "aractakip-252d3.firebasestorage.app",
+    messagingSenderId: "988984484156",
+    appId: "1:988984484156:web:4d8693379ef502613d7e39"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const auth = firebase.auth();
+  // Oturumun tablet kapansa/yeniden başlasa bile açık kalması için:
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => {});
+
+  // ===================================================================
+  // GİRİŞ — tüm tabletler tek, ortak bir Firebase hesabıyla
+  // (vectalojistik@gmail.com) giriş yapar. Sürücü sadece kısa bir şifre/PIN
+  // girer; e-posta ekranda görünmez, kod içinde otomatik kullanılır.
+  //
+  // ÖNEMLİ — Firebase e-posta/şifre girişinde şifre en az 6 karakter
+  // olmalıdır; bu yüzden sürücünün girdiği PIN'in başına sabit bir ön ek
+  // eklenip Firebase'e GERÇEK şifre olarak o gönderilir. Sürücü sadece
+  // PIN_PREFIX olmadan kısa PIN'i yazar.
+  //
+  // KURULUM (bir kere, Firebase Console'da yapılır):
+  //   1) Authentication > Sign-in method > Email/Password sağlayıcısını etkinleştirin.
+  //   2) Authentication > Users > "Add user" ile şu bilgilerle kullanıcı oluşturun:
+  //        E-posta:  vectalojistik@gmail.com
+  //        Şifre:    VECTA-1112   (aşağıdaki PIN_PREFIX + sürücünün gireceği PIN)
+  //   3) Google ile giriş sağlayıcısına artık ihtiyaç yoksa Authentication >
+  //      Sign-in method içinden Google sağlayıcısını kapatabilirsiniz.
+  //   4) Realtime Database > Rules bölümüne, bu dosyayla birlikte verilen
+  //      database.rules.json içeriğini uygulayın.
+  //
+  // PIN'i değiştirmek isterseniz: sadece Firebase Console'da bu kullanıcının
+  // şifresini "VECTA-<yeni PIN>" olarak güncelleyin; sürücüler de yeni PIN'i
+  // girsin.
+  // ===================================================================
+  const VECTA_FIXED_EMAIL = "vectalojistik@gmail.com";
+  const VECTA_PIN_PREFIX = "VECTA-";
+
+  function pinToPassword(pin) {
+    return VECTA_PIN_PREFIX + pin;
+  }
+
+  // Firebase Realtime Database anahtarlarında ".", "#", "$", "[", "]" ve "/"
+  // karakterleri sorun çıkarır; kullanıcıdan gelen araç/sipariş kodlarını
+  // her zaman bu karakterlerden arındırıyoruz. Ayrıca büyük/küçük harf ve
+  // ardışık boşluk farklarını da normalize ediyoruz — aksi halde "34ABC123"
+  // ve "34 abc 123" gibi aslında AYNI aracı temsil eden iki farklı yazım,
+  // Firebase'de İKİ AYRI kayıt (iki farklı anahtar) olarak açılabilir; bu da
+  // müşteri sayfasında aracın "yanlış yerde" veya "hareket etmiyormuş" gibi
+  // görünmesine yol açar (eski/yanlış anahtardaki durgun veriye bakılır).
+  function safeFirebaseKey(v){
+    return String(v == null ? "" : v)
+      .trim()
+      .replace(/[.#$\[\]\/]/g, "")
+      .replace(/\s+/g, " ")
+      .toUpperCase()
+      .slice(0, 64);
+  }
+
+  let vehicleId = null;
+  let watchId = null;
+  let ordersQuery = null; // watchOrders() ile açılan dinleyicinin tam referansı
+  let lastHistoryPush = 0;
+  const HISTORY_INTERVAL_MS = 15000; // rota geçmişine en fazla 15 saniyede bir nokta eklenir
+
+  function safeGet(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  }
+  function safeSet(key, val) {
+    try { localStorage.setItem(key, val); } catch (e) {}
+  }
+  function safeRemove(key) {
+    try { localStorage.removeItem(key); } catch (e) {}
+  }
+
+  function showLoginError(msg) {
+    document.getElementById("loginError").textContent = msg || "";
+  }
+
+  function resetVehicle() {
+    if (watchId !== null) navigator.geolocation.clearWatch(watchId);
+    watchId = null;
+    if (ordersQuery) ordersQuery.off(); // watchOrders()'ın açtığı tam sorguyu kapat
+    ordersQuery = null;
+    vehicleId = null;
+    safeRemove("vehicleId");
+    auth.signOut();
+    document.getElementById("vehicleIdInput").value = "";
+    document.getElementById("trackingScreen").style.display = "none";
+    document.getElementById("setupScreen").style.display = "block";
+  }
+
+  // ---------------------------------------------------------------
+  // SİPARİŞLER: her sipariş kodu bir araca ve bir duruma (aktif/teslim_edildi)
+  // bağlıdır. Müşteriye plaka değil, burada eklediğiniz kod verilir.
+  // ---------------------------------------------------------------
+  function watchOrders() {
+    if (ordersQuery) ordersQuery.off(); // varsa önceki dinleyiciyi kapat, yinelenmesin
+    ordersQuery = db.ref("siparisler").orderByChild("arac").equalTo(vehicleId);
+    ordersQuery.on("value", (snap) => {
+      const list = document.getElementById("ordersList");
+      const val = snap.val() || {};
+      const aktifler = Object.entries(val).filter(([, o]) => o && o.durum !== "teslim_edildi");
+
+      if (aktifler.length === 0) {
+        list.innerHTML = '<p class="no-orders">Bu araca ait aktif sipariş yok.</p>';
+        return;
+      }
+      list.innerHTML = "";
+      aktifler.forEach(([kod]) => {
+        const row = document.createElement("div");
+        row.className = "order-row";
+        const span = document.createElement("span");
+        span.className = "kod";
+        span.textContent = kod;
+        const btn = document.createElement("button");
+        btn.className = "deliver-btn";
+        btn.type = "button";
+        btn.textContent = "Teslim Edildi";
+        btn.onclick = () => markDelivered(kod);
+        row.appendChild(span);
+        row.appendChild(btn);
+        list.appendChild(row);
+      });
+    });
+  }
+
+  function markDelivered(kod) {
+    const orderMsg = document.getElementById("orderMsg");
+    db.ref("siparisler/" + kod).update({
+      durum: "teslim_edildi",
+      teslimZamani: Date.now()
+    }).then(() => {
+      orderMsg.style.color = "var(--orange)";
+      orderMsg.textContent = kod + " teslim edildi olarak işaretlendi.";
+    }).catch((err) => {
+      orderMsg.style.color = "#c0392b";
+      orderMsg.textContent = "İşaretlenemedi: " + err.message;
+    });
+  }
+
+  document.getElementById("addOrderForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input = document.getElementById("newOrderCode");
+    const orderMsg = document.getElementById("orderMsg");
+    const kod = safeFirebaseKey((input.value || "").replace(/\s+/g, ""));
+    if (!kod) { input.focus(); return; }
+
+    // transaction() kullanıyoruz ki kod zaten kullanımdaysa (başka bir
+    // siparişe/müşteriye ait olsa bile) üzerine sessizce yazılmasın —
+    // sadece kayıt hiç yoksa oluşturulsun.
+    db.ref("siparisler/" + kod).transaction((current) => {
+      if (current !== null) return; // vazgeç: mevcut kaydı değiştirme
+      return { arac: vehicleId, durum: "aktif", olusturma: Date.now() };
+    }).then((result) => {
+      if (!result.committed) {
+        orderMsg.style.color = "#c0392b";
+        orderMsg.textContent = kod + " kodu zaten kullanımda. Lütfen farklı bir kod girin.";
+        input.focus();
+        return;
+      }
+      input.value = "";
+      orderMsg.style.color = "var(--orange)";
+      orderMsg.textContent = kod + " eklendi. Bu kodu (veya son 3 hanesini) müşteriye verebilirsiniz.";
+    }).catch((err) => {
+      orderMsg.style.color = "#c0392b";
+      orderMsg.textContent = "Eklenemedi: " + err.message;
+    });
+  });
+
+  document.getElementById("pinForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const pinInput = document.getElementById("pinInput");
+    const pin = (pinInput.value || "").trim();
+    if (!pin) { showLoginError("Lütfen şifreyi girin."); pinInput.focus(); return; }
+
+    showLoginError("Giriş yapılıyor...");
+    auth.signInWithEmailAndPassword(VECTA_FIXED_EMAIL, pinToPassword(pin))
+      .then(() => {
+        pinInput.value = "";
+        showLoginError("");
+      })
+      .catch((err) => {
+        if (err && (err.code === "auth/wrong-password" || err.code === "auth/invalid-credential" || err.code === "auth/invalid-login-credentials")) {
+          showLoginError("Şifre hatalı. Lütfen tekrar deneyin.");
+        } else if (err && err.code === "auth/too-many-requests") {
+          showLoginError("Çok fazla hatalı deneme yapıldı. Lütfen biraz sonra tekrar deneyin.");
+        } else if (err && err.code === "auth/user-not-found") {
+          showLoginError("Giriş hesabı henüz oluşturulmamış. Yöneticinizle iletişime geçin.");
+        } else {
+          showLoginError("Giriş başarısız: " + (err && err.message ? err.message : "bilinmeyen hata"));
+        }
+      });
+  });
+
+  async function startTracking() {
+    const vehicleInput = document.getElementById("vehicleIdInput");
+    const id = safeFirebaseKey(vehicleInput.value);
+
+    if (!auth.currentUser) {
+      showLoginError("Önce şifreyle giriş yapmalısınız.");
+      return;
+    }
+    if (!id) { showLoginError("Geçersiz araç kimliği/plaka."); vehicleInput.focus(); return; }
+
+    showLoginError("");
+    vehicleId = id;
+    safeSet("vehicleId", id);
+    document.getElementById("plakaLabel").textContent = id;
+    document.getElementById("setupScreen").style.display = "none";
+    document.getElementById("trackingScreen").style.display = "block";
+    requestWakeLock();
+    beginWatch();
+    watchOrders();
+  }
+
+  async function requestWakeLock() {
+    try {
+      if ("wakeLock" in navigator) {
+        await navigator.wakeLock.request("screen");
+      }
+    } catch (e) { /* wake lock desteklenmiyor olabilir, sorun değil */ }
+  }
+
+  function setStatus(kind, text) {
+    const dot = document.getElementById("statusDot");
+    dot.className = "status-dot " + kind;
+    document.getElementById("statusText").textContent = text;
+  }
+
+  function beginWatch() {
+    if (!("geolocation" in navigator)) {
+      setStatus("err", "Bu tarayıcı konum servisini desteklemiyor");
+      return;
+    }
+    setStatus("wait", "Konum bekleniyor...");
+
+    watchId = navigator.geolocation.watchPosition(
+      (pos) => {
+        const { latitude, longitude, accuracy, speed, heading } = pos.coords;
+        const now = Date.now();
+
+        // "simdi": her güncellemede üzerine yazılan, müşteri sayfasının okuduğu anlık konum.
+        db.ref("araclar/" + vehicleId + "/simdi").set({
+          lat: latitude,
+          lng: longitude,
+          dogruluk: Math.round(accuracy || 0),
+          hiz: speed || 0,
+          yon: heading || 0,
+          zaman: now
+        }).then(() => {
+          setStatus("ok", "Konum gönderiliyor");
+        }).catch((err) => {
+          setStatus("err", "Sunucuya yazılamadı: " + err.message);
+        });
+
+        // "gecmis": rota çizgisi için, en fazla 15 saniyede bir yeni nokta eklenir.
+        if (now - lastHistoryPush >= HISTORY_INTERVAL_MS) {
+          lastHistoryPush = now;
+          db.ref("araclar/" + vehicleId + "/gecmis").push({
+            lat: latitude,
+            lng: longitude,
+            zaman: now
+          }).catch(() => { /* geçmiş noktası yazılamazsa sessizce geç, canlı konumu etkilemesin */ });
+        }
+
+        document.getElementById("lastUpdate").textContent =
+          "Son güncelleme: " + new Date(now).toLocaleTimeString("tr-TR");
+        document.getElementById("coords").textContent =
+          latitude.toFixed(5) + ", " + longitude.toFixed(5);
+        document.getElementById("accuracy").textContent =
+          "Doğruluk: ±" + Math.round(accuracy || 0) + " m";
+      },
+      (err) => {
+        setStatus("err", "Konum hatası: " + err.message);
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 15000
+      }
+    );
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") requestWakeLock();
+  });
+
+  // Sayfa yeniden açıldığında: daha önce giriş yapılmışsa ve araç kimliği kayıtlıysa
+  // login formunu tekrar göstermeden otomatik devam et.
+  auth.onAuthStateChanged((user) => {
+    const saved = safeGet("vehicleId");
+    if (saved) document.getElementById("vehicleIdInput").value = saved;
+
+    if (user) {
+      document.getElementById("signedOutBox").style.display = "none";
+      document.getElementById("signedInBox").style.display = "block";
+      showLoginError("");
+      if (saved) startTracking();
+    } else {
+      document.getElementById("signedOutBox").style.display = "block";
+      document.getElementById("signedInBox").style.display = "none";
+    }
+  });
+</script>
+</body>
+</html>
