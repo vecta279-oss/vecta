@@ -612,6 +612,19 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
       <p>Teslim aldığınız yükün fotoğrafını çekin, gerçek ölçü ve ağırlığını girin; sistem bunu teklifte verilen hacim ve ağırlık bilgisiyle otomatik karşılaştırır. Kayıtlar bu sekmede, "Verilen Teklifler"in hemen yanında tutulur.</p>
     </div>
 
+    <div class="card" id="ykGate" style="margin-bottom:22px">
+      <div class="card-h"><span class="tag">Giriş</span><h2>Yük Kontrol — Giriş Gerekli</h2></div>
+      <div class="card-b">
+        <p class="hint" style="margin:0 0 14px">Bu bölüm, sürücü tabletiyle aynı ortak şifreyle korunur.</p>
+        <form id="ykPinForm" style="display:flex;gap:10px;flex-wrap:wrap">
+          <input type="password" id="ykPinInput" inputmode="numeric" placeholder="Şifre" autocomplete="off" style="max-width:200px">
+          <button type="submit" class="btn primary">Giriş Yap</button>
+        </form>
+        <div id="ykPinError" style="color:var(--danger);font-size:.88rem;min-height:1.2em;margin-top:10px"></div>
+      </div>
+    </div>
+
+    <div id="ykContent" style="display:none">
     <div class="card" style="margin-bottom:22px">
       <div class="card-h"><span class="tag">Yeni</span><h2>Yeni Kontrol Ekle</h2></div>
       <div class="card-b">
@@ -700,6 +713,7 @@ input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
         <div class="field"><input type="text" id="ykSearchInput" placeholder="Sipariş kodu / plaka ile filtrele..."></div>
         <div id="ykHistoryList"><div class="cust-empty">Yükleniyor...</div></div>
       </div>
+    </div>
     </div>
   </section>
   <!-- ============ PARAMETERS ============ -->
@@ -1503,7 +1517,7 @@ async function ykInit(){
   try{
     await ykLoadScript('https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js');
     await ykLoadScript('https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js');
-    await ykLoadScript('https://www.gstatic.com/firebasejs/10.13.0/firebase-storage-compat.js');
+    await ykLoadScript('https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js');
     if(typeof firebase==='undefined') throw new Error('firebase tanımsız kaldı (script engellenmiş olabilir)');
     ykStart();
   }catch(err){
@@ -1527,7 +1541,73 @@ function ykStart(){
   };
   if(!firebase.apps.length) firebase.initializeApp(ykFirebaseConfig);
   const ykDb=firebase.database();
-  const ykStorage=firebase.storage();
+  const ykAuth=firebase.auth();
+  ykAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(()=>{});
+
+  // ===================================================================
+  // GİRİŞ — Yük Kontrol, tablet.html ile AYNI ortak Firebase hesabını
+  // (vectalojistik@gmail.com) ve AYNI PIN'i (örn. 1112) kullanır. "yukKontrol"
+  // düğümü artık database.rules.json içinde sadece giriş yapmış kullanıcıya
+  // açık olduğundan, buradaki okuma/yazma işlemleri önce giriş yapılmadan
+  // ÇALIŞMAZ — bu yüzden bu bölüm ayrı bir PIN ekranıyla korunuyor (ana
+  // sayfadaki "Yetkili Girişi" kutusu sadece görsel bir kısayoldur, gerçek
+  // yetkilendirme burada, Firebase üzerinden yapılır).
+  const YK_FIXED_EMAIL="vectalojistik@gmail.com";
+  const YK_PIN_PREFIX="VECTA-";
+  function ykPinToPassword(pin){ return YK_PIN_PREFIX+pin; }
+  function ykSafeGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function ykSafeSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function ykSafeRemove(k){ try{ localStorage.removeItem(k); }catch(e){} }
+
+  const ykGate=el('ykGate'), ykContent=el('ykContent'), ykPinForm=el('ykPinForm'),
+        ykPinInput=el('ykPinInput'), ykPinError=el('ykPinError');
+  let ykHistoryStarted=false; // geçmiş listesi dinleyicisini sadece bir kez başlat
+
+  function ykShowGate(msg){
+    if(ykGate) ykGate.style.display='block';
+    if(ykContent) ykContent.style.display='none';
+    if(ykPinError) ykPinError.textContent=msg||'';
+  }
+  function ykShowContent(){
+    if(ykGate) ykGate.style.display='none';
+    if(ykContent) ykContent.style.display='block';
+    if(!ykHistoryStarted){ ykHistoryStarted=true; ykWatchHistory(); }
+  }
+
+  if(ykPinForm) ykPinForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const pin=(ykPinInput.value||'').trim();
+    if(!pin){ if(ykPinError) ykPinError.textContent='Lütfen şifreyi girin.'; return; }
+    if(ykPinError) ykPinError.textContent='Giriş yapılıyor...';
+    ykAuth.signInWithEmailAndPassword(YK_FIXED_EMAIL, ykPinToPassword(pin)).then(()=>{
+      ykSafeSet('ykPin', pin); // bu tarayıcıda hatırla, bir daha sorma
+      if(ykPinInput) ykPinInput.value='';
+    }).catch((err)=>{
+      const code=err&&err.code;
+      if(code==='auth/wrong-password'||code==='auth/invalid-credential'||code==='auth/invalid-login-credentials'){
+        ykShowGate('Şifre hatalı. Lütfen tekrar deneyin.');
+      }else if(code==='auth/too-many-requests'){
+        ykShowGate('Çok fazla hatalı deneme yapıldı. Lütfen biraz sonra tekrar deneyin.');
+      }else{
+        ykShowGate('Giriş başarısız: '+(err&&err.message?err.message:'bilinmeyen hata'));
+      }
+    });
+  });
+
+  ykAuth.onAuthStateChanged((user)=>{
+    if(user){ ykShowContent(); }
+    else{
+      const saved=ykSafeGet('ykPin');
+      if(saved){
+        ykAuth.signInWithEmailAndPassword(YK_FIXED_EMAIL, ykPinToPassword(saved)).catch(()=>{
+          ykSafeRemove('ykPin');
+          ykShowGate('Kayıtlı giriş artık geçerli değil. Şifreyi tekrar girin.');
+        });
+      }else{
+        ykShowGate('');
+      }
+    }
+  });
 
   const ykEn=el('ykEn'), ykBoy=el('ykBoy'), ykYuk=el('ykYukseklik');
   const ykHesaplananHacim=el('ykHesaplananHacim');
@@ -1592,6 +1672,8 @@ function ykStart(){
     e.preventDefault();
     ykFormError.textContent=''; ykFormOk.textContent='';
 
+    if(!ykAuth.currentUser){ ykFormError.textContent='Oturumunuz sona ermiş görünüyor, lütfen sayfayı yenileyip tekrar giriş yapın.'; return; }
+
     const kod=el('ykKod').value.trim().replace(/\s+/g,'');
     const teklifHacim=parseFloat(el('ykTeklifHacim').value);
     const teklifAgirlik=parseFloat(el('ykTeklifAgirlik').value);
@@ -1611,18 +1693,13 @@ function ykStart(){
 
     try{
       const newRef=ykDb.ref('yukKontrol').push();
+      // Not: fotoğraflar Firebase Storage'a değil, aşağıdaki Google Apps Script
+      // bağlantısı üzerinden doğrudan Google Drive'a gönderilir (ücretsiz).
+      // Firebase Storage kullanmak Blaze (ücretli) plan gerektirdiği için
+      // bilinçli olarak devre dışı bırakıldı; buradaki kayıtta fotoğraf
+      // linki tutulmaz, fotoğrafı Drive'daki "Yük Kontrol Fotoğrafları"
+      // klasöründen bulabilirsiniz.
       let fotoUrl=null;
-
-      if(ykSelectedFile){
-        try{
-          const sref=ykStorage.ref('yukKontrol/'+newRef.key+'.jpg');
-          await sref.put(ykSelectedFile);
-          fotoUrl=await sref.getDownloadURL();
-        }catch(photoErr){
-          console.error('Fotoğraf yüklenemedi:', photoErr);
-          ykFormOk.textContent='Kayıt oluşturuldu, ancak fotoğraf yüklenemedi.';
-        }
-      }
 
       await newRef.set({
         kod: kod,
@@ -1642,6 +1719,12 @@ function ykStart(){
       // bilgilerini de Google Drive'a / E-Tablo'ya gönder — Firebase'e kayıt zaten yapıldı,
       // bu başarısız olsa bile yukarıdaki Firebase kaydı kalıcı olarak duruyor.
       const gas=getGasSettings();
+      if(ykSelectedFile && (!gas.url || gas.auto===false)){
+        // Fotoğraf seçildi ama Drive bağlantısı kurulu/aktif değil — fotoğraf artık
+        // hiçbir yere kaydedilmiyor (Firebase Storage bilinçli olarak kapatıldı,
+        // bkz. yukarıdaki not). Kullanıcı yanılmasın diye açıkça belirtiyoruz.
+        ykFormOk.textContent += ' ⚠ Fotoğraf hiçbir yere kaydedilmedi — Parametreler sekmesinden Google Drive bağlantısını kurup etkinleştirin.';
+      }
       if(gas.url && gas.auto!==false){
         ykFormOk.textContent += ' ☁ Drive’a gönderiliyor…';
         try{
@@ -1743,14 +1826,20 @@ function ykStart(){
 
   ykSearchInput.addEventListener('input', ykRenderHistory);
 
-  ykDb.ref('yukKontrol').orderByChild('tarih').limitToLast(300).on('value', (snap)=>{
-    const val=snap.val() || {};
-    ykAllRecords = Object.keys(val).map(k=>({ _key:k, ...val[k] })).sort((a,b)=>(b.tarih||0)-(a.tarih||0));
-    ykRenderHistory();
-    const c=el('ykCount'); if(c) c.textContent = ykAllRecords.length ? '('+ykAllRecords.length+')' : '';
-  }, (err)=>{
-    ykHistoryList.innerHTML='<div class="cust-empty">Kayıtlar yüklenemedi: '+err.message+'</div>';
-  });
+  // Giriş yapılmadan bu dinleyiciyi açmıyoruz — "yukKontrol" artık sadece
+  // giriş yapmış kullanıcıya açık (bkz. database.rules.json), erken açılırsa
+  // sadece izin hatası (permission_denied) alınır. ykShowContent() (üstte)
+  // giriş başarılı olur olmaz bunu bir kez çağırır.
+  function ykWatchHistory(){
+    ykDb.ref('yukKontrol').orderByChild('tarih').limitToLast(300).on('value', (snap)=>{
+      const val=snap.val() || {};
+      ykAllRecords = Object.keys(val).map(k=>({ _key:k, ...val[k] })).sort((a,b)=>(b.tarih||0)-(a.tarih||0));
+      ykRenderHistory();
+      const c=el('ykCount'); if(c) c.textContent = ykAllRecords.length ? '('+ykAllRecords.length+')' : '';
+    }, (err)=>{
+      ykHistoryList.innerHTML='<div class="cust-empty">Kayıtlar yüklenemedi: '+err.message+'</div>';
+    });
+  }
 }
 // tabs
 document.querySelectorAll('.tab').forEach(tb=>{
